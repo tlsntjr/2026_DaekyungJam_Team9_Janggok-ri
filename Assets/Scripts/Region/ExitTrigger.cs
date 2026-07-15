@@ -10,6 +10,7 @@ public class ExitTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        Debug.Log("[Test] Exit Activated!");
         haunt.CompleteHaunt();
     }
 }

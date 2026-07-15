@@ -160,7 +160,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 3153589877191176158}
   cacheVersion: 131860
-  cacheTime: 639196438328242955
+  cacheTime: 639197235724707482
   SerializableEventsDict:
   - key: event:/Leaves-Footstep
     index: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639196438328242955
+  lastModified: 639197235724707482
   FileSizes:
   - Name: Desktop
     Value: 1016
@@ -207,7 +207,7 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639196438328232907
+  lastModified: 639197235724702409
   FileSizes:
   - Name: Desktop
     Value: 49504
