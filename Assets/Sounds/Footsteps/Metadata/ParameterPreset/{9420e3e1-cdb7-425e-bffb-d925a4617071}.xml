@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{9420e3e1-cdb7-425e-bffb-d925a4617071}">
+		<property name="name">
+			<value>Contamination</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6fbe0ba6-8ec1-444c-adb7-63da7f0f2d8d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c26146f8-8f87-4026-8c0c-9673aa6414eb}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c26146f8-8f87-4026-8c0c-9673aa6414eb}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

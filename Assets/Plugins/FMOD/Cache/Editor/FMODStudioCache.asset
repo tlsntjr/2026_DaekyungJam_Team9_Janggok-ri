@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9090489953648091939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ContaminationSound
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/ContaminationSound
+  Guid:
+    Data1: -341640745
+    Data2: 1313333416
+    Data3: -590935404
+    Data4: -1241881184
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 1707109930198073786}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8389807605889275798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +106,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6134599785128210700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ThreatBGM
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/ThreatBGM
+  Guid:
+    Data1: -1737699231
+    Data2: 1326657993
+    Data3: -1002787446
+    Data4: -1822480994
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5769495766074702477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +187,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2915468246131967074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Hallucination-1
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Hallucination-1
+  Guid:
+    Data1: 196439143
+    Data2: 1116164357
+    Data3: 237393286
+    Data4: -1234819919
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,14 +235,19 @@ MonoBehaviour:
   - {fileID: -8389807605889275798}
   - {fileID: -6251351669122484593}
   - {fileID: 6870773569884404773}
+  - {fileID: 6036392273618277020}
+  - {fileID: -6134599785128210700}
+  - {fileID: -2915468246131967074}
+  - {fileID: -9090489953648091939}
   EditorParameters:
   - {fileID: -7578561036783033408}
+  - {fileID: 8199899234646706326}
   MasterBanks:
   - {fileID: 6033385355981452395}
   StringsBanks:
   - {fileID: 3153589877191176158}
   cacheVersion: 131860
-  cacheTime: 639196438328242955
+  cacheTime: 639197446135383548
   SerializableEventsDict:
   - key: event:/Leaves-Footstep
     index: 0
@@ -172,6 +259,38 @@ MonoBehaviour:
     index: 3
   - key: event:/Wood-Footstep
     index: 4
+  - key: event:/Hallucination-2
+    index: 5
+  - key: event:/ThreatBGM
+    index: 6
+  - key: event:/Hallucination-1
+    index: 7
+  - key: event:/ContaminationSound
+    index: 8
+--- !u!114 &1707109930198073786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ContaminationSound/Contamination
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Contamination
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 307117488
+    data2: 2988803297
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &3153589877191176158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +306,10 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639196438328242955
+  lastModified: 639197446135383548
   FileSizes:
   - Name: Desktop
-    Value: 1016
+    Value: 1252
   Exists: 1
 --- !u!114 &6033385355981452395
 MonoBehaviour:
@@ -207,11 +326,38 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639196438328232907
+  lastModified: 639197446135363546
   FileSizes:
   - Name: Desktop
-    Value: 49504
+    Value: 365760
   Exists: 1
+--- !u!114 &6036392273618277020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Hallucination-2
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Hallucination-2
+  Guid:
+    Data1: -188144104
+    Data2: 1092271407
+    Data3: 1677680311
+    Data4: -1979628407
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6870773569884404773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,3 +385,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &8199899234646706326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Contamination
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Contamination
+  StudioPath: parameter:/Contamination
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 307117488
+    data2: 2988803297
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
