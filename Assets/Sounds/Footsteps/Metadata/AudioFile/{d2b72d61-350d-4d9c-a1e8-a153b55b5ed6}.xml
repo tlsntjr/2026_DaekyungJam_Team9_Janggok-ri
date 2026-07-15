@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{d2b72d61-350d-4d9c-a1e8-a153b55b5ed6}">
+		<property name="assetPath">
+			<value>gravel.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.70390022675736963</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{47760c97-4d07-429b-a251-1c7a78593d1a}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerReturn" id="{d66c0c43-218e-4d07-a7c2-29af96cde16f}">
+		<property name="overridingInputFormat">
+			<value>2</value>
+		</property>
+		<property name="name">
+			<value>Reverb</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{ba8377f0-ac98-4e6e-92db-4d963b9633b5}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{b5419d6b-19b7-4299-87be-94d8b407c48c}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{f22a5433-f987-4adb-ac5e-e66899fc2393}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{ba8377f0-ac98-4e6e-92db-4d963b9633b5}">
+		<relationship name="effects">
+			<destination>{d0edfe5d-be8d-4dee-98b4-4eda5ccc198a}</destination>
+			<destination>{062aeba4-f2d1-4fa6-8313-f9496465ccab}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{b5419d6b-19b7-4299-87be-94d8b407c48c}" />
+	<object class="SFXReverbEffect" id="{d0edfe5d-be8d-4dee-98b4-4eda5ccc198a}">
+		<property name="decayTime">
+			<value>2500</value>
+		</property>
+		<property name="earlyDelay">
+			<value>24</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>82</value>
+		</property>
+		<property name="diffusion">
+			<value>94.5</value>
+		</property>
+		<property name="lowShelfFrequency">
+			<value>300</value>
+		</property>
+		<property name="lowShelfGain">
+			<value>4</value>
+		</property>
+		<property name="wetLevel">
+			<value>1.5</value>
+		</property>
+		<property name="dryLevel">
+			<value>-80</value>
+		</property>
+		<relationship name="automators">
+			<destination>{9b672d30-4231-4ceb-9a93-7903826fa2df}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusFader" id="{062aeba4-f2d1-4fa6-8313-f9496465ccab}" />
+	<object class="Automator" id="{9b672d30-4231-4ceb-9a93-7903826fa2df}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>wetLevel</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{39ee1b9c-16b6-4906-b902-92fd434fc685}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{39ee1b9c-16b6-4906-b902-92fd434fc685}">
+		<relationship name="parameter">
+			<destination>{0ca168bc-b8b5-4fc6-b6e7-55b43d43139e}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{1792db30-d2d2-4a1c-9d2b-523fd0e5e810}</destination>
+			<destination>{804b757a-f271-4fe2-aac0-1d707ae8286d}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{1792db30-d2d2-4a1c-9d2b-523fd0e5e810}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>-40</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{804b757a-f271-4fe2-aac0-1d707ae8286d}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>6</value>
+		</property>
+	</object>
+</objects>
