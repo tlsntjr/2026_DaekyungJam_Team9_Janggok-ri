@@ -63,5 +63,12 @@ public class GameManager : MonoBehaviour
 		CurrentState = GameState.Playing;
 		Time.timeScale = 1f;
 	}
+
+	/// <summary>
+	/// </summary>
+	public void SetEnding()
+	{
+		CurrentState = GameState.Ending;
+	}
 }
 
