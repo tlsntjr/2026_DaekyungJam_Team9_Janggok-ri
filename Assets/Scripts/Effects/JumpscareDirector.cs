@@ -8,12 +8,12 @@ using FMODUnity;
 /// </summary>
 public class JumpscareDirector : MonoBehaviour
 {
-    [Header("연출 대상 (없으면 스킵)")]
+    [Header("연출 대상(없으면 스킵)")]
     [SerializeField] private CanvasGroup flashOverlay;
     [SerializeField] private Sprite silhouette;
     [SerializeField] private SpriteRenderer silhouetteRenderer;
 
-    [Header("사운드 (팀장에게 요청 예정, 비워두면 스킵)")]
+    [Header("사운드")]
     [SerializeField] private EventReference jumpscareSfx;
 
     [Header("타이밍")]
@@ -23,8 +23,13 @@ public class JumpscareDirector : MonoBehaviour
     [SerializeField] private float flashDuration = 0.15f;
     [SerializeField] private float silhouetteDuration = 0.3f;
 
+    [Header("3단계 화면 흔들림")]
+    [SerializeField] private float shakeDuration = 0.3f;
+    [SerializeField] private float shakeMagnitude = 0.15f;
+
     private Coroutine loop;
     private int currentStage;
+    private float shakeTimeRemaining;
 
     private void OnEnable()  => EventBus.OnContaminationStageChanged += HandleStageChanged;
     private void OnDisable() => EventBus.OnContaminationStageChanged -= HandleStageChanged;
@@ -65,6 +70,19 @@ public class JumpscareDirector : MonoBehaviour
 
         if (!jumpscareSfx.IsNull)
             SoundManager.Instance.PlayOneShot(jumpscareSfx, Camera.main.transform.position);
+
+        if (currentStage >= 3)
+            shakeTimeRemaining = shakeDuration;
+    }
+
+    // CameraMovement가 FixedUpdate에서 카메라 위치를 잡은 뒤, 그 위에 흔들림을 덧씌운다.
+    private void LateUpdate()
+    {
+        if (shakeTimeRemaining <= 0f) return;
+
+        shakeTimeRemaining -= Time.deltaTime;
+        Vector3 shakeOffset = (Vector3)Random.insideUnitCircle * shakeMagnitude;
+        Camera.main.transform.position += shakeOffset;
     }
 
     private IEnumerator FlashRoutine()

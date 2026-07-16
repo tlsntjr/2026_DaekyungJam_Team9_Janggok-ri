@@ -17,6 +17,7 @@ public class Throwable : MonoBehaviour
     [Header("연출")]
     [SerializeField] private GameObject throwVisualPrefab;
     [SerializeField] private float throwDuration = 0.35f;
+    [SerializeField] private float arcHeight = 1f;
     [SerializeField] private float visualLifetime = 1f;
 
     [Header("사운드")]
@@ -59,7 +60,9 @@ public class Throwable : MonoBehaviour
         {
             t += Time.deltaTime;
             float p = Mathf.Clamp01(t / throwDuration);
-            visual.transform.position = Vector3.Lerp(from, to, p);
+            Vector3 pos = Vector3.Lerp(from, to, p);
+            pos.y += Mathf.Sin(p * Mathf.PI) * arcHeight; // 3/4 아이소메트릭 시점용 포물선 궤적(화면상 Y축으로만 표현)
+            visual.transform.position = pos;
             yield return null;
         }
 
