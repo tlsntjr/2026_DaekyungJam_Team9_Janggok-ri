@@ -1,22 +1,25 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class LitVisibility : MonoBehaviour
 {
-	[Header("ÇÃ·¹ÀÌ¾î ¼ÕÀüµî")]
+	[Header("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
 	[SerializeField] private Transform visionCone;
-	[SerializeField] private float coneAngle	= 45f;			// Light2DÀÇ Outer Spot Angle
-	[SerializeField] private float coneRange	= 7f;			// Light2DÀÇ Outer Radius
+	[SerializeField] private Light2D coneLight;					// ì†ì „ë“± Light2D â€” ê¸€ë¦¬ì¹˜/ì•”ì „ ì‹œ ì‹¤ì œë¡œ êº¼ì¡ŒëŠ”ì§€ íŒì •ìš©
+	[SerializeField] private float litIntensityThreshold = 0.05f;	// ì´ ë¯¸ë§Œì´ë©´ "êº¼ì§"ìœ¼ë¡œ ê°„ì£¼
+	[SerializeField] private float coneAngle	= 45f;			// Light2Dï¿½ï¿½ Outer Spot Angle
+	[SerializeField] private float coneRange	= 7f;			// Light2Dï¿½ï¿½ Outer Radius
 
-	[Header("¹ß¹Ø º¸Á¶±¤")]
+	[Header("ï¿½ß¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
 	[SerializeField] private Transform playerAura;
 	[SerializeField] private float auraRange = 2f;
 
-	[Header("º® ·¹ÀÌ¾î")]
+	[Header("ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½")]
 	[SerializeField] private LayerMask wallMask;
 
-	[Header("·»´õ¸µ")]
-	[SerializeField] private SpriteRenderer[] renderers;		// ¸ó½ºÅÍ º»Ã¼+ºÎ¼Ó ½ºÇÁ¶óÀÌÆ®µé
-	[SerializeField] private float fadeSpeed = 8f;          // ¶Ò ²÷±âÁö ¾Ê°Ô ¾ËÆÄ ÆäÀÌµå
+	[Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+	[SerializeField] private SpriteRenderer[] renderers;		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼+ï¿½Î¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½
+	[SerializeField] private float fadeSpeed = 8f;          // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
 
     private void Start()
 	{
@@ -39,23 +42,26 @@ public class LitVisibility : MonoBehaviour
     private bool IsLit() => InsideCone() || InsideAura();
 
 	/// <summary>
-	/// ÇÃ·¹ÀÌ¾î ½Ã¾ß (visionCone) ³»ºÎ¿¡ µé¾î¿ÍÀÖ´ÂÁö?
+	/// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ã¾ï¿½ (visionCone) ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½?
 	/// </summary>
 	/// <returns></returns>
     private bool InsideCone()
 	{
 		if (visionCone == null) return false;
 
+		// ì†ì „ë“±ì´ ê¸€ë¦¬ì¹˜/ì•”ì „ìœ¼ë¡œ êº¼ì ¸ ìˆìœ¼ë©´ ì‹œì•¼ì½˜ ì•ˆì´ì–´ë„ ì•ˆ ë³´ì„
+		if (coneLight != null && coneLight.intensity < litIntensityThreshold) return false;
+
 		Vector2 to = transform.position - visionCone.position;
 		float dist = to.magnitude;
 		if (dist > coneRange) return false;
-		if (Vector2.Angle(visionCone.up, to) > coneAngle * 0.5f) return false;   // up = ¼ÕÀüµî Á¶ÁØ ¹æÇâ
+		if (Vector2.Angle(visionCone.up, to) > coneAngle * 0.5f) return false;   // up = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (Physics2D.Raycast(visionCone.position, to.normalized, dist, wallMask)) return false;
 		return true;
 	}
 
 	/// <summary>
-	/// ÇÃ·¹ÀÌ¾îÀÇ ±âº» ¹İ°æ ³»¿¡ µé¾î¿ÍÀÖ´ÂÁö?
+	/// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½âº» ï¿½İ°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½?
 	/// </summary>
 	/// <returns></returns>
     private bool InsideAura()
@@ -70,7 +76,7 @@ public class LitVisibility : MonoBehaviour
 	}
 
 	/// <summary>
-	/// °á°ú¿¡ µû¸¥ ¸ó½ºÅÍ ¾ËÆÄ
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
 	/// <param name="a"></param>
     private void SetAlpha(float a)

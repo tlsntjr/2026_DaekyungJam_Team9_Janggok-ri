@@ -6,6 +6,9 @@ public class VisionAim : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private float visionTurnSpeed = 720f;
 
+    [Header("Vision")]
+    [SerializeField] private Transform lightTransform;
+
     // 메인 카메라 리셋
     private void Reset() => cam = Camera.main;
 
@@ -13,7 +16,7 @@ public class VisionAim : MonoBehaviour
     private void Update()
     {
         Vector3 m = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (Vector2)(m - transform.position);
+        Vector2 dir = (Vector2)(m - lightTransform.position);
 
         // 작은 변화는 무시
         if (dir.sqrMagnitude < 0.001f) return;
@@ -22,11 +25,11 @@ public class VisionAim : MonoBehaviour
         float target = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
 
         float z = Mathf.MoveTowardsAngle(
-            transform.eulerAngles.z,
+            lightTransform.eulerAngles.z,
             target,
             visionTurnSpeed * Time.deltaTime);
 
-        transform.rotation = Quaternion.Euler(0, 0, z);
+        lightTransform.rotation = Quaternion.Euler(0, 0, z);
     }
 
 }

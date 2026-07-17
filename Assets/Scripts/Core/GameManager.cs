@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public enum GameState { Playing, Paused, Dead, Ending }
 
 /// <summary>
-/// Àü¿ª »óÅÂ Á¤µµ¸¸ °ü¸®ÇÏ´Â ÃÖ¼Ò ¸Å´ÏÀú
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ö¼ï¿½ ï¿½Å´ï¿½ï¿½ï¿½
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     private void HandleDeath()	=> CurrentState = GameState.Dead;
 
 	/// <summary>
-	/// ¾À º¹¿ø ÀÌÈÄ ÇÃ·¹À× ½ºÅ×ÀÌÆ® À¯Áö
+	/// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
 	/// <param name="scene"></param>
 	/// <param name="mode"></param>
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// °ÔÀÓ ÀÏ½Ã Á¤Áö
+	/// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
     public void Pause()
 	{
@@ -56,12 +56,20 @@ public class GameManager : MonoBehaviour
 
 
 	/// <summary>
-	/// ÀÏ½ÃÁ¤Áö ÇØÁ¦ ¹× °ÔÀÓ Àç°³
+	/// ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ç°³
 	/// </summary>
 	public void Resume()
 	{
 		CurrentState = GameState.Playing;
 		Time.timeScale = 1f;
+	}
+
+	/// <summary>
+	/// ì—”ë”© ì—°ì¶œ ì§„ì… ì‹œ ìƒíƒœ ì „í™˜
+	/// </summary>
+	public void SetEnding()
+	{
+		CurrentState = GameState.Ending;
 	}
 }
 
