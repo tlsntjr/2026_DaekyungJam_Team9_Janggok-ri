@@ -7,25 +7,41 @@ public class TimingMinigame : MonoBehaviour, IMinigame
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject uiPanel;
 
+    [Header("성공 영역 UI 지정")]
+    [SerializeField] private RectTransform hitZoneUI;
+
     [Header("설정")]
-    // [SerializeField]를 붙여야 인스펙터에서 변수값이 바인딩됩니다.
     [SerializeField] private float speed = 2f;
-    [SerializeField] private float safeZoneMin = 0.4f;
-    [SerializeField] private float safeZoneMax = 0.6f;
     [SerializeField] private int targetSuccessCount = 2;
+
+    private float safeZoneMin;
+    private float safeZoneMax;
 
     public int SuccessCount { get; private set; }
     public bool IsComplete => SuccessCount >= targetSuccessCount;
 
-    // 외부에서 완료를 감지할 수 있도록 이벤트 추가
     public event System.Action OnMinigameComplete;
 
     private bool isPlaying = false;
+
+    public void SetTargetSuccessCount(int count)
+    {
+        targetSuccessCount = count;
+    }
+
+    public void ResetMinigame()
+    {
+        SuccessCount = 0;
+        if (slider != null) slider.value = 0f;
+    }
 
     public void StartOrResume()
     {
         isPlaying = true;
         if (uiPanel != null) uiPanel.SetActive(true);
+
+        RandomizeHitZonePosition();
+        CalculateSafeZoneBounds();
     }
 
     public void Interrupt()
@@ -38,15 +54,55 @@ public class TimingMinigame : MonoBehaviour, IMinigame
     {
         if (!isPlaying || IsComplete) return;
 
-        // 이제 speed 변수를 정상적으로 찾을 수 있습니다.
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Interrupt();
+            return;
+        }
+
         slider.value = Mathf.PingPong(Time.time * speed, 1f);
 
         if (Input.GetKeyDown(KeyCode.Space)) CheckTiming();
     }
 
+    private void RandomizeHitZonePosition()
+    {
+        if (slider == null || hitZoneUI == null) return;
+
+        RectTransform sliderRect = slider.GetComponent<RectTransform>();
+        float sliderWidth = sliderRect.rect.width;
+        float hitZoneWidth = hitZoneUI.rect.width * hitZoneUI.localScale.x;
+
+        float maxMovableRange = (sliderWidth * 0.5f) - (hitZoneWidth * 0.5f);
+        float randomX = Random.Range(-maxMovableRange, maxMovableRange);
+
+        hitZoneUI.anchoredPosition = new Vector2(randomX, hitZoneUI.anchoredPosition.y);
+    }
+
+    private void CalculateSafeZoneBounds()
+    {
+        if (slider == null || hitZoneUI == null)
+        {
+            safeZoneMin = 0.4f;
+            safeZoneMax = 0.6f;
+            return;
+        }
+
+        RectTransform sliderRect = slider.GetComponent<RectTransform>();
+        float sliderWidth = sliderRect.rect.width;
+        float hitZoneLocalX = hitZoneUI.anchoredPosition.x;
+        float hitZoneWidth = hitZoneUI.rect.width * hitZoneUI.localScale.x;
+
+        float leftEdgeOfHitZone = (sliderWidth * 0.5f) + hitZoneLocalX - (hitZoneWidth * 0.5f);
+
+        safeZoneMin = Mathf.Clamp01(leftEdgeOfHitZone / sliderWidth);
+        safeZoneMax = Mathf.Clamp01((leftEdgeOfHitZone + hitZoneWidth) / sliderWidth);
+    }
+
     private void CheckTiming()
     {
-        // 이제 safeZoneMin, safeZoneMax 변수를 정상적으로 찾을 수 있습니다.
+        CalculateSafeZoneBounds();
+
         if (slider.value >= safeZoneMin && slider.value <= safeZoneMax)
         {
             SuccessCount++;
@@ -55,12 +111,13 @@ public class TimingMinigame : MonoBehaviour, IMinigame
             if (IsComplete)
             {
                 Interrupt();
-                OnMinigameComplete?.Invoke(); // 완료 알림 발행
+                OnMinigameComplete?.Invoke();
             }
-        }
-        else
-        {
-            Debug.Log("실패!");
+            else
+            {
+                RandomizeHitZonePosition();
+                CalculateSafeZoneBounds();
+            }
         }
     }
 }
