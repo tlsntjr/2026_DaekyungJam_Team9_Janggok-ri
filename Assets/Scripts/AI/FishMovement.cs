@@ -24,6 +24,16 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float chaseSpeed = 5.5f;
     [SerializeField] private float berserkSpeed = 2f;
 
+    [Header("광폭화 돌진 패턴")]
+    [SerializeField] private float dashSpeed = 12f;
+    [SerializeField] private float chargeWaitTime = 0.8f; // 괴성 후 조준 시간
+    [SerializeField] private float dashDuration = 1.5f;   // 돌진 시간
+    [SerializeField] private float cooldownTime = 2.0f;   // 돌진 후 쿨타임
+
+    private Vector3 dashTarget;
+    private bool isDashing = false;
+    private bool isCoolingDown = false;
+
     [SerializeField] private bool isMovingActive = false;
     private Vector3 targetNoisePosition;
     private Coroutine berserkTimerCoroutine;
@@ -117,19 +127,55 @@ public class FishMovement : MonoBehaviour
 
     private void ExecuteBerserkMovement()
     {
-        berserkDirectionTimer += Time.deltaTime;
-        if (berserkDirectionTimer >= 0.3f)
+        if (isDashing)
         {
-            berserkDirectionTimer = 0f;
-            berserkRandomOffset = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f);
+            // [돌진 중] 고정된 목표를 향해 일직선 돌진
+            transform.position = Vector3.MoveTowards(transform.position, dashTarget, dashSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, dashTarget) < 0.5f)
+            {
+                StartCoroutine(BerserkCooldownRoutine());
+            }
         }
+        else if (!isCoolingDown)
+        {
+            // [대기 및 조준] 괴성 연출 및 돌진 방향 조준
+            StartCoroutine(BerserkDashRoutine());
+        }
+    }
 
-        Vector3 berserkTargetPos = playerTransform.position + berserkRandomOffset;
+    private IEnumerator BerserkDashRoutine()
+    {
+        isCoolingDown = true; // 대기 시작
 
-        transform.position = Vector3.MoveTowards(transform.position, berserkTargetPos, berserkSpeed * Time.deltaTime);
-        LookAtTarget(berserkTargetPos);
+        // 1. 괴성 연출 (여기에 SoundManager.Instance.PlayOneShot(...) 호출)
+        Debug.Log("인면어가 괴성을 지릅니다! (준비)");
 
-        Debug.DrawLine(transform.position, playerTransform.position, Color.red);
+        // 2. 조준 (플레이어 위치 확인)
+        dashTarget = playerTransform.position;
+        LookAtTarget(dashTarget);
+
+        yield return new WaitForSeconds(chargeWaitTime);
+
+        // 3. 돌진 개시
+        isDashing = true;
+        isCoolingDown = false;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        // 시간 초과 시에도 돌진 멈춤
+        if (isDashing) StartCoroutine(BerserkCooldownRoutine());
+    }
+
+    private IEnumerator BerserkCooldownRoutine()
+    {
+        isDashing = false;
+        isCoolingDown = true;
+        Debug.Log("인면어가 돌진 후 숨을 고릅니다. (쿨타임)");
+
+        yield return new WaitForSeconds(cooldownTime);
+
+        isCoolingDown = false; // 다시 돌진 준비
     }
 
     public void SetState(BehaviorState newState)
@@ -238,4 +284,6 @@ public class FishMovement : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+
 }

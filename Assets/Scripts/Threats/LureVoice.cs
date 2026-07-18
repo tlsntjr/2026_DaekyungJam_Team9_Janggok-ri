@@ -23,27 +23,24 @@ public class LureVoice : MonoBehaviour, IThreatBehavior
 
         if (DialogueSystem.Instance == null)
         {
-            Debug.LogWarning("<color=orange>[LureVoice]</color> DialogueSystem.Instance가 씬에 없습니다! 가짜 통과 처리를 수행합니다.");
             if (rule != null) rule.MarkSatisfied();
             return;
         }
-        Debug.Log($"<color=cyan>[LureVoice 대사 {currentLineIndex + 1}/{promptLines.Length}]</color> <b>{promptLines[currentLineIndex]}</b>");
+
         if (useRapidPrompt)
         {
-            // 3페이즈: 연속 팝업 모드
+            // 3페이즈 모드일 때는 루프 출력만 수행
             foreach (var line in promptLines)
             {
-                Debug.Log($"<color=cyan>[LureVoice Rapid]</color> <b>{line}</b>");
-                DialogueSystem.Instance.ShowRapidPrompt(
-                    rapidTimeout,
-                    onSurvive: () => { if (rule != null) rule.MarkSatisfied(); },
-                    onFail: () => { if (rule != null) rule.MarkViolated(); });
+                Debug.Log($"<color=cyan>[LureVoice 모드]</color> 대기 중: {line}");
             }
+            // 필요하다면 여기서 RunRapidPrompts() 같은 코루틴을 시작하세요.
         }
         else
         {
-            // 1, 2페이즈: 순차적 선택지 모드
-            ShowNextChoice();
+            // 일반 모드일 때만 첫 대사를 출력
+            Debug.Log($"<color=cyan>[LureVoice 대사 {currentLineIndex + 1}/{promptLines.Length}]</color> <b>{promptLines[currentLineIndex]}</b>");
+            ShowNextChoice(); // 다음 선택지로 넘어가는 로직
         }
     }
 
