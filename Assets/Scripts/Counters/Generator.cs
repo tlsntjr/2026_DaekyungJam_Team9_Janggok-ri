@@ -60,6 +60,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
     private void Update()
     {
+        Debug.Log($"{gameObject.name}의 현재 상태: {IsSatisfied}");
         if (generatorID != 2 || isPowerOn) return;
 
         if (fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Chase && !isInterrupted)
