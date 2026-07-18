@@ -10,6 +10,7 @@ public class IngameHUD : MonoBehaviour
 	[Header("상호작용 프롬프트")]
 	[SerializeField] private GameObject promptPanel;
 	[SerializeField] private TMP_Text promptText;
+	[SerializeField] private TMP_Text interactKey;
 	[SerializeField] private PlayerInteractor interactor;
 
 	private void OnEnable()		=> EventBus.OnContaminationChanged		+= HandleContaminationChanged;
@@ -23,7 +24,10 @@ public class IngameHUD : MonoBehaviour
 	private void Update()
 	{
 		string prompt = interactor.CurrentPrompt;
+		string interactKey = interactor.CurrentInteractKey;
+
 		promptPanel.SetActive(!string.IsNullOrEmpty(prompt));
-		if (!string.IsNullOrEmpty(prompt)) promptText.text = prompt;
+		if (!string.IsNullOrEmpty(prompt))			promptText.text			= prompt;
+		if (!string.IsNullOrEmpty(interactKey))		this.interactKey.text		= interactKey;
 	}
 }

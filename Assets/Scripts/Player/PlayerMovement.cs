@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-	[Header("�⺻ �÷��̾� ����")]
+	[Header("캐릭터 움직임")]
 	[SerializeField] private float moveSpeed							= 5f;
 	[SerializeField] private float contaminationSpeedMultiplier	= 0.7f; // ������ ����
 
