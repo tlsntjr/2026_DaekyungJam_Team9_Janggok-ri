@@ -12,6 +12,9 @@ public class GhostPatrol : MonoBehaviour
     private GhostState currentState = GhostState.Patrol;
     private Coroutine waitCoroutine;
 
+    [Header("AI 설정")]
+    [SerializeField] private float hearRadius = 10f; // 귀신의 청각 범위
+
     private void OnEnable() => EventBus.OnNoiseEmitted += HandleNoise;
     private void OnDisable() => EventBus.OnNoiseEmitted -= HandleNoise;
 
@@ -38,10 +41,22 @@ public class GhostPatrol : MonoBehaviour
 
     private void HandleNoise(Vector2 noisePos, float radius)
     {
-        // 이미 멈춰있거나 소음 지점으로 이동 중일 수 있으니 상태 갱신
-        if (waitCoroutine != null) StopCoroutine(waitCoroutine);
+        // 1. 귀신과 소음 발생 지점 사이의 거리 계산
+        float distance = Vector2.Distance(transform.position, noisePos);
 
-        StartCoroutine(DistractionRoutine(noisePos));
+        // 2. 청각 범위 내에 있을 때만 반응
+        if (distance <= hearRadius)
+        {
+            Debug.Log($"<color=cyan>[Ghost]</color> 소음 감지! 거리: {distance:F2}");
+
+            if (waitCoroutine != null) StopCoroutine(waitCoroutine);
+            waitCoroutine = StartCoroutine(DistractionRoutine(noisePos));
+        }
+        else
+        {
+            // 범위 밖이면 무시
+            Debug.Log($"<color=gray>[Ghost]</color> 너무 먼 소리라 무시함. 거리: {distance:F2}");
+        }
     }
 
     private IEnumerator DistractionRoutine(Vector2 targetPos)
