@@ -25,11 +25,15 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _ClearRadius: 0.22
+    - _ClearSoftness: 0.14
+    - _ClearStrength: 0.95
     - _Contrast: 1.6
-    - _Density: 0.165
+    - _Density: 0
     - _FlowSpeed: 0.3
     - _NoiseScale: 3
     m_Colors:
+    - _ClearCenter: {r: 0.50055623, g: 0.477497, b: 0, a: 0}
     - _FogColor: {r: 0.58, g: 0.63, b: 0.56999993, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

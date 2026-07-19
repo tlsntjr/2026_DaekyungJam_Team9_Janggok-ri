@@ -25,7 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Aberration: 0.012
+    - _Aberration: 0.0095
     - _Desaturation: 0.6
     - _GrainAmount: 0.18
     - _Intensity: 0

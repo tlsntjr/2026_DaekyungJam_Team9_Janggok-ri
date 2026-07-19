@@ -12,6 +12,12 @@ Shader "Janggokri/Fullscreen/ContaminationFog"
         _NoiseScale ("Noise Scale", Float)            = 3.0
         _FlowSpeed  ("Flow Speed", Float)             = 0.04
         _Contrast   ("Noise Contrast", Range(0.5, 4)) = 1.6
+
+        // 플레이어 주변 시야 구멍 — FogDirector가 매 프레임 갱신 (radius 0이면 구멍 없음)
+        _ClearCenter   ("Clear Center (viewport UV)", Vector)             = (0.5, 0.5, 0, 0)
+        _ClearRadius   ("Clear Radius (screen-height ratio)", Range(0, 1)) = 0
+        _ClearSoftness ("Clear Softness", Range(0.01, 0.5))               = 0.12
+        _ClearStrength ("Clear Strength (1=완전히 걷힘)", Range(0, 1))     = 0.85
     }
 
     SubShader
@@ -34,6 +40,10 @@ Shader "Janggokri/Fullscreen/ContaminationFog"
             float _NoiseScale;
             float _FlowSpeed;
             float _Contrast;
+            float4 _ClearCenter;
+            float _ClearRadius;
+            float _ClearSoftness;
+            float _ClearStrength;
 
             float Hash21(float2 p)
             {
@@ -92,6 +102,14 @@ Shader "Janggokri/Fullscreen/ContaminationFog"
                 float fog = saturate(n * _Density * 1.4);
                 // 고밀도에선 노이즈 골짜기도 최소한 이만큼은 덮이도록 바닥값 보장
                 fog = max(fog, _Density * _Density * 0.35);
+
+                // 플레이어 주변 시야 구멍 — 중심에선 안개를 걷어내고 가장자리는 부드럽게 복귀
+                if (_ClearRadius > 0.0 && _ClearStrength > 0.0)
+                {
+                    float2 holePos = (uv - _ClearCenter.xy) * float2(aspect, 1.0);
+                    float hole = smoothstep(_ClearRadius, _ClearRadius + _ClearSoftness, length(holePos));
+                    fog *= lerp(1.0 - _ClearStrength, 1.0, hole);
+                }
 
                 col.rgb = lerp(col.rgb, _FogColor.rgb, fog);
                 return col;

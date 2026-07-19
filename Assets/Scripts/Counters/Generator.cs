@@ -10,11 +10,6 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
     private bool isPowerOn = false;
     public bool IsSatisfied => isPowerOn;
     public string Prompt => isPowerOn ? "이미 가동됨" : "발전기 가동";
-
-    /// <summary>
-    /// 인터페이스 수정으로 인한 추가 반영
-    /// 0718 이순재
-    /// </summary>
     public string InteractKey => "E";
 
     [Header("발전기 설정")]
@@ -66,6 +61,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
     private void Update()
     {
+        Debug.Log($"{gameObject.name}의 현재 상태: {IsSatisfied}");
         if (generatorID != 2 || isPowerOn) return;
 
         if (fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Chase && !isInterrupted)

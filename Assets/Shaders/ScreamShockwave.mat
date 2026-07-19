@@ -27,11 +27,11 @@ Material:
     m_Floats:
     - _Aberration: 0
     - _Intensity: 0
-    - _Radius: 1.29
+    - _Radius: 0
     - _RingTint: 0.138
     - _Strength: 0.017
     - _Width: 0.204
     m_Colors:
-    - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Center: {r: 0.9164783, g: 0.4592575, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
