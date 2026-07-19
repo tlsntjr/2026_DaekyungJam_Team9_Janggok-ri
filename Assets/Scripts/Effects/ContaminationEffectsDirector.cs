@@ -16,10 +16,17 @@ public class ContaminationEffectsDirector : MonoBehaviour
     [SerializeField] private Material distortionMaterial;
     [SerializeField] private float maxDistortion = 1f;
 
+    [Header("뿌연 시야 (없으면 스킵, 화면을 덮는 반투명 흰색 오버레이 CanvasGroup)")]
+    [SerializeField] private CanvasGroup hazeOverlay;
+    [SerializeField] private float maxHazeAlpha = 0.6f;
+
     [Header("Vignette / 색보정 (씬의 Global Volume, 없으면 스킵)")]
     [SerializeField] private Volume volume;
     [SerializeField] private float maxVignetteIntensity = 0.5f;
     [SerializeField] private float minSaturation = -60f;
+
+    [Header("강도 곡선 (1보다 크면 3단계 근처에서 더 가파르게 강해짐)")]
+    [SerializeField] private float intensityCurvePower = 1.5f;
 
     private Vignette vignette;
     private ColorAdjustments colorAdjustments;
@@ -42,19 +49,25 @@ public class ContaminationEffectsDirector : MonoBehaviour
 
     private void HandleContaminationChanged(float value)
     {
+        // 낮은 오염도에선 약하게, 3단계(0.9~1.0) 근처에선 훨씬 가파르게 강해지는 곡선
+        float intensity = Mathf.Pow(value, intensityCurvePower);
+
         if (fogParticles != null)
         {
             var emission = fogParticles.emission;
-            emission.rateOverTimeMultiplier = fogMaxRateOverTime * value;
+            emission.rateOverTimeMultiplier = fogMaxRateOverTime * intensity;
         }
 
         if (distortionMaterial != null)
-            distortionMaterial.SetFloat("_Distortion", value * maxDistortion);
+            distortionMaterial.SetFloat("_Distortion", intensity * maxDistortion);
+
+        if (hazeOverlay != null)
+            hazeOverlay.alpha = intensity * maxHazeAlpha;
 
         if (vignette != null)
-            vignette.intensity.value = value * maxVignetteIntensity;
+            vignette.intensity.value = intensity * maxVignetteIntensity;
 
         if (colorAdjustments != null)
-            colorAdjustments.saturation.value = Mathf.Lerp(0f, minSaturation, value);
+            colorAdjustments.saturation.value = Mathf.Lerp(0f, minSaturation, intensity);
     }
 }
