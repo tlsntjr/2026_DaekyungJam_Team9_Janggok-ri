@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class TimingMinigame : MonoBehaviour, IMinigame
 {
@@ -13,6 +14,10 @@ public class TimingMinigame : MonoBehaviour, IMinigame
     [Header("설정")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private int targetSuccessCount = 2;
+
+    [Header("사운드 설정")]
+    [SerializeField] private EventReference successSound;
+    [SerializeField] private EventReference failSound;
 
     private float safeZoneMin;
     private float safeZoneMax;
@@ -108,16 +113,38 @@ public class TimingMinigame : MonoBehaviour, IMinigame
             SuccessCount++;
             Debug.Log($"성공! {SuccessCount}/{targetSuccessCount}");
 
+            // [피드백 반영] 성공 사운드 재생 (FMOD 에러 방지용 Null 체크 포함)
+            if (!successSound.IsNull)
+            {
+                SoundManager.Instance.PlayOneShot(successSound, transform.position);
+            }
+
+            // 목표 달성 시 완료 처리
             if (IsComplete)
             {
-                Interrupt();
-                OnMinigameComplete?.Invoke();
+                Interrupt(); // 기존처럼 미니게임을 멈추고(UI 끄기 등)
+                OnMinigameComplete?.Invoke(); // 다음 페이즈로 넘기는 이벤트 발행
             }
             else
             {
+                // 아직 더 맞춰야 하면 다음 목표 지점 세팅
                 RandomizeHitZonePosition();
                 CalculateSafeZoneBounds();
             }
+        }
+        // 2. 타이밍 맞추기 실패 시
+        else
+        {
+            Debug.Log("실패! 카운트가 초기화됩니다.");
+
+            // [피드백 반영] 실패 사운드 재생
+            if (!failSound.IsNull)
+            {
+                SoundManager.Instance.PlayOneShot(failSound, transform.position);
+            }
+
+            // 실패 시 카운트 초기화 (기존 스크립트의 ResetMinigame 활용)
+            //ResetMinigame();
         }
     }
 }

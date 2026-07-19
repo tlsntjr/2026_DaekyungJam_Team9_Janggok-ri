@@ -129,7 +129,7 @@ public class FishMovement : MonoBehaviour
     {
         if (isDashing)
         {
-            // [돌진 중] 고정된 목표를 향해 일직선 돌진
+
             transform.position = Vector3.MoveTowards(transform.position, dashTarget, dashSpeed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, dashTarget) < 0.5f)
@@ -139,7 +139,6 @@ public class FishMovement : MonoBehaviour
         }
         else if (!isCoolingDown)
         {
-            // [대기 및 조준] 괴성 연출 및 돌진 방향 조준
             StartCoroutine(BerserkDashRoutine());
         }
     }
@@ -148,22 +147,19 @@ public class FishMovement : MonoBehaviour
     {
         isCoolingDown = true; // 대기 시작
 
-        // 1. 괴성 연출 (여기에 SoundManager.Instance.PlayOneShot(...) 호출)
         Debug.Log("인면어가 괴성을 지릅니다! (준비)");
+        EventBus.RaiseMonsterScreamed(transform.position);
 
-        // 2. 조준 (플레이어 위치 확인)
         dashTarget = playerTransform.position;
         LookAtTarget(dashTarget);
 
         yield return new WaitForSeconds(chargeWaitTime);
 
-        // 3. 돌진 개시
         isDashing = true;
         isCoolingDown = false;
 
         yield return new WaitForSeconds(dashDuration);
 
-        // 시간 초과 시에도 돌진 멈춤
         if (isDashing) StartCoroutine(BerserkCooldownRoutine());
     }
 
@@ -175,7 +171,7 @@ public class FishMovement : MonoBehaviour
 
         yield return new WaitForSeconds(cooldownTime);
 
-        isCoolingDown = false; // 다시 돌진 준비
+        isCoolingDown = false;
     }
 
     public void SetState(BehaviorState newState)
