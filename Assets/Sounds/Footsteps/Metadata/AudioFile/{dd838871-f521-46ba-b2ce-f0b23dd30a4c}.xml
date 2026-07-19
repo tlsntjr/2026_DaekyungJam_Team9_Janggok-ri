@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{dd838871-f521-46ba-b2ce-f0b23dd30a4c}">
+		<property name="assetPath">
+			<value>mudflat-environment-1.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>87.408000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{47760c97-4d07-429b-a251-1c7a78593d1a}</destination>
+		</relationship>
+	</object>
+</objects>
