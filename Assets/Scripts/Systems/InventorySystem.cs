@@ -14,37 +14,37 @@ public class InventorySystem : MonoBehaviour, IInventory
 
     public event Action OnChanged;
 
-    void Awake()
-    {
-        if (Instance != null) { Destroy(gameObject); return; }
-        Instance = this;
-    }
+	void Awake()
+	{
+		if (Instance != null) { Destroy(gameObject); return; }
+		Instance = this;
+	}
 
-    ItemDefinition Find(string id) => itemCatalog.FirstOrDefault(d => d.itemId == id);
+	ItemDefinition Find(string id) => itemCatalog.FirstOrDefault(d => d.itemId == id);
 
-    public bool Has(string itemId) =>
-        keyItems.Contains(itemId) || (consumables.TryGetValue(itemId, out int n) && n > 0);
+	public bool Has(string itemId) =>
+		keyItems.Contains(itemId) || (consumables.TryGetValue(itemId, out int n) && n > 0);
 
-    public void Add(string itemId)
-    {
-        var def = Find(itemId);
-        if (def == null) { Debug.LogWarning($"[Inventory] ¹Ìµî·Ï ¾ÆÀÌÅÛ: {itemId}"); return; }
+	public void Add(string itemId)
+	{
+		var def = Find(itemId);
+		if (def == null) { Debug.LogWarning($"[Inventory] ¹Ìµî·Ï ¾ÆÀÌÅÛ: {itemId}"); return; }
 
-        if (def.isKeyItem)
-        {
-            if (!keyItems.Add(itemId)) return;  // ¿­¼èÅÛ Áßº¹ È¹µæÀº ¹«½Ã
-        }
-        else
-        {
-            consumables.TryGetValue(itemId, out int n);
-            consumables[itemId] = n + 1;
-        }
-        OnChanged?.Invoke();
-    }
+		if (def.isKeyItem)
+		{
+			if (!keyItems.Add(itemId)) return;  // ¿­¼èÅÛ Áßº¹ È¹µæÀº ¹«½Ã
+		}
+		else
+		{
+			consumables.TryGetValue(itemId, out int n);
+			consumables[itemId] = n + 1;
+		}
+		OnChanged?.Invoke();
+	}
 
-    public void Remove(string itemId)
-    {
-        if (keyItems.Remove(itemId)) { OnChanged?.Invoke(); return; }
+	public void Remove(string itemId)
+	{
+		if (keyItems.Remove(itemId)) { OnChanged?.Invoke(); return; }
 
         if (consumables.TryGetValue(itemId, out int n) && n > 0)
         {

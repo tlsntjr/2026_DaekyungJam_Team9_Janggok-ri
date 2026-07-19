@@ -27,7 +27,14 @@ public class DistractionCounter : MonoBehaviour, ICounterCondition
 	{
 		if (Vector2.Distance(transform.position, pos) > hearRadius) return;
 		count++;
-	}
+
+        Debug.Log($"<color=orange>[DistractionCounter]</color> {gameObject.name}가 소음을 감지했습니다! 현재 카운트: {count}/{requiredCount}");
+
+        if (count >= requiredCount)
+        {
+            Debug.Log($"<color=green>[DistractionCounter]</color> {gameObject.name} 파훼 조건 충족 완료 (IsSatisfied = true)!");
+        }
+    }
 
 	/// <summary>
 	/// 카운트 리셋

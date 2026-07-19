@@ -65,7 +65,9 @@ public class HauntController : MonoBehaviour
 	{
 		State = HauntState.Threatened;
 
-		foreach (var t in Current.Threats)
+        Debug.Log($"<color=magenta>[HauntController]</color> <b>====== {CurrentPhaseIndex + 1} 페이즈 (인덱스: {CurrentPhaseIndex}) 시작! ======</b>");
+
+        foreach (var t in Current.Threats)
 			t.Activate();
 
 		// 타이머 페이즈 -> 타이머 가동
