@@ -11,8 +11,8 @@ public class Pickup : MonoBehaviour, IInteractable
     [Header("마지막 구역으로 진입하기 위한 아이템일 경우 연결")]
     [SerializeField] private HauntController haunt;   // 이 아이템이 구역 마무리 목표물일 때만 연결
 
-    public string Prompt => "E: 줍기";
-
+    public string Prompt => "줍기";
+    public string InteractKey => "E";
     /// <summary>
     /// 아이템 상호작용
     /// </summary>

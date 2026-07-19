@@ -19,6 +19,11 @@ public class ObjectiveSystem : MonoBehaviour, IObjective
         Instance = this;
     }
 
+    // 구역 클리어 시 huntId("mudflat" 등)가 그대로 플래그로 저장됨
+    // — EndingCondition의 requiredFlags가 이 값을 참조해 엔딩 판정
+    void OnEnable()  => EventBus.OnHauntCleared += SetFlag;
+    void OnDisable() => EventBus.OnHauntCleared -= SetFlag;
+
     public bool HasFlag(string id) => flags.Contains(id);
 
     public void SetFlag(string id)

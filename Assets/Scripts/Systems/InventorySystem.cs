@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class InventorySystem : MonoBehaviour, IInventory
 {
-	public static InventorySystem Instance { get; private set; }
+    public static InventorySystem Instance { get; private set; }
 
-	[SerializeField] ItemDefinition[] itemCatalog;  // 전체 아이템 정의
+    [SerializeField] ItemDefinition[] itemCatalog;  // 전체 아이템 정의(레시피 포함)
 
-	readonly HashSet<string>    keyItems				= new();              // 열쇠템: 영구, 중복 없음
-	readonly Dictionary<string, int> consumables		= new();   // 소모품: 개수 스택
+    readonly HashSet<string> keyItems = new();              // 열쇠템: 영구, 중복 없음
+    readonly Dictionary<string, int> consumables = new();   // 소모품: 개수 스택
 
-	public event Action OnChanged;
+    public event Action OnChanged;
 
 	void Awake()
 	{
@@ -46,10 +46,10 @@ public class InventorySystem : MonoBehaviour, IInventory
 	{
 		if (keyItems.Remove(itemId)) { OnChanged?.Invoke(); return; }
 
-		if (consumables.TryGetValue(itemId, out int n) && n > 0)
-		{
-			consumables[itemId] = n - 1;
-			OnChanged?.Invoke();
-		}
-	}
+        if (consumables.TryGetValue(itemId, out int n) && n > 0)
+        {
+            consumables[itemId] = n - 1;
+            OnChanged?.Invoke();
+        }
+    }
 }

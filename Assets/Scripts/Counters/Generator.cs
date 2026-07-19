@@ -9,7 +9,8 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
     private bool isPowerOn = false;
     public bool IsSatisfied => isPowerOn;
-    public string Prompt => isPowerOn ? "이미 가동됨" : "E: 발전기 가동";
+    public string Prompt => isPowerOn ? "이미 가동됨" : "발전기 가동";
+    public string InteractKey => "E";
 
     [Header("발전기 설정")]
     [SerializeField] private int generatorID = 1;

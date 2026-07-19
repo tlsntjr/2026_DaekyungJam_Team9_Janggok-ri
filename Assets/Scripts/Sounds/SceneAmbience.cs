@@ -1,0 +1,39 @@
+using FMOD.Studio;
+using FMODUnity;
+using UnityEngine;
+
+/// <summary>
+/// 배경 환경음 루프 재생기. 두 가지 용도로 사용:
+///
+/// 1) 씬 전체 앰비언스 — 씬에 하나 배치 (갯벌 바람/파도, 양식장 물소리 등).
+///    FMOD 이벤트를 2D(스페이셜라이저 없음)로 만들 것.
+/// 2) 지점 음원 — 소리 나는 오브젝트에 부착 (발전기 웅웅거림, 물 새는 소리 등).
+///    FMOD 이벤트를 3D로 만들면 거리·방향감이 자동 적용됨.
+///
+/// 씬 전환/오브젝트 파괴 시 자동으로 페이드아웃 정지
+/// (페이드 길이는 FMOD 이벤트 Master 트랙의 AHDSR Release로 조절).
+/// </summary>
+public class SceneAmbience : MonoBehaviour
+{
+    [Header("환경음 (루프 이벤트)")]
+    [SerializeField] private EventReference ambience;
+
+    private EventInstance instance;
+    private bool playing;
+
+    private void Start()
+    {
+        if (ambience.IsNull) return;
+
+        instance = SoundManager.Instance.PlayLoop(ambience, transform);
+        playing = true;
+    }
+
+    private void OnDestroy()
+    {
+        if (!playing) return;
+        if (SoundManager.Instance == null) return;   // 앱 종료 시 파괴 순서 대비
+
+        SoundManager.Instance.StopLoop(instance, immediate: false);
+    }
+}

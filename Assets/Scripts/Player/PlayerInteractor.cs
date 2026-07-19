@@ -8,6 +8,7 @@ public class PlayerInteractor : MonoBehaviour
 	[SerializeField] private LayerMask interactableMask;
 
 	public string CurrentPrompt						{ get; private set; }
+	public string CurrentInteractKey					{ get; private set; }
 	public Transform CurrentTargetTransform		{ get; private set; }
 
 	private IInteractable current;
@@ -16,6 +17,7 @@ public class PlayerInteractor : MonoBehaviour
 	{
 		current						= FindNearest(out Transform targetTransform);
 		CurrentPrompt				= current?.Prompt;
+		CurrentInteractKey			= current?.InteractKey;
 		CurrentTargetTransform	= targetTransform;
 
 		if (current != null && Input.GetKeyDown(interactKey))

@@ -4,71 +4,71 @@ using UnityEngine.SceneManagement;
 public enum GameState { Playing, Paused, Dead, Ending }
 
 /// <summary>
-/// Àü¿ª »óÅÂ Á¤µµ¸¸ °ü¸®ÇÏ´Â ÃÖ¼Ò ¸Å´ÏÀú
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ö¼ï¿½ ï¿½Å´ï¿½ï¿½ï¿½
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-	public static GameManager Instance	{ get; private set; }
-	public GameState CurrentState			{ get; private set; } = GameState.Playing;
+    public static GameManager Instance { get; private set; }
+    public GameState CurrentState { get; private set; } = GameState.Playing;
 
     private void Awake()
-	{
-		if (Instance != null)	{ Destroy(gameObject); return; }
+    {
+        if (Instance != null) { Destroy(gameObject); return; }
 
-		Instance = this;
-		DontDestroyOnLoad(gameObject);
-	}
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
 
-	private void OnEnable()
-	{
-		EventBus.OnPlayerDeath			+= HandleDeath;
-		SceneManager.sceneLoaded	+= HandleSceneLoaded;
+    private void OnEnable()
+    {
+        EventBus.OnPlayerDeath += HandleDeath;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
 
     }
 
-	private void OnDisable()
-	{
-		EventBus.OnPlayerDeath			-= HandleDeath;
-        SceneManager.sceneLoaded	-= HandleSceneLoaded;
+    private void OnDisable()
+    {
+        EventBus.OnPlayerDeath -= HandleDeath;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
-    private void HandleDeath()	=> CurrentState = GameState.Dead;
+    private void HandleDeath() => CurrentState = GameState.Dead;
 
-	/// <summary>
-	/// ¾À º¹¿ø ÀÌÈÄ ÇÃ·¹À× ½ºÅ×ÀÌÆ® À¯Áö
-	/// </summary>
-	/// <param name="scene"></param>
-	/// <param name="mode"></param>
-	private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
-	{
-		CurrentState = GameState.Playing;
-		Time.timeScale = 1f;
-	}
+    /// <summary>
+    /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CurrentState = GameState.Playing;
+        Time.timeScale = 1f;
+    }
 
-	/// <summary>
-	/// °ÔÀÓ ÀÏ½Ã Á¤Áö
-	/// </summary>
+    /// <summary>
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    /// </summary>
     public void Pause()
-	{
-		CurrentState = GameState.Paused;
-		Time.timeScale = 0f;
-	}
+    {
+        CurrentState = GameState.Paused;
+        Time.timeScale = 0f;
+    }
 
 
-	/// <summary>
-	/// ÀÏ½ÃÁ¤Áö ÇØÁ¦ ¹× °ÔÀÓ Àç°³
-	/// </summary>
-	public void Resume()
-	{
-		CurrentState = GameState.Playing;
-		Time.timeScale = 1f;
-	}
+    /// <summary>
+    /// ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ç°³
+    /// </summary>
+    public void Resume()
+    {
+        CurrentState = GameState.Playing;
+        Time.timeScale = 1f;
+    }
 
-	/// <summary>
-	/// </summary>
-	public void SetEnding()
-	{
-		CurrentState = GameState.Ending;
-	}
+    /// <summary>
+    /// ì—”ë”© ì—°ì¶œ ì§„ì… ì‹œ ìƒíƒœ ì „í™˜
+    /// </summary>
+    public void SetEnding()
+    {
+        CurrentState = GameState.Ending;
+    }
 }
-
