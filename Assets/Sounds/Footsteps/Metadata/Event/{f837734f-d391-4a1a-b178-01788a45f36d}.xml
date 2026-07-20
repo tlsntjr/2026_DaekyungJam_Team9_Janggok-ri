@@ -5,7 +5,7 @@
 			<value>Leaves-Footstep</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{41309c3b-f3ea-40a2-88c1-2df560dcd69a}">
 		<relationship name="effects">
 			<destination>{132f14cf-2336-48d7-884d-f35951f31b73}</destination>
+			<destination>{81f3d17b-12ee-42b7-9a85-aa61f1a4c192}</destination>
 			<destination>{4663b057-970a-4c53-b087-fca96c696c8d}</destination>
 			<destination>{8eac9e02-f3fd-4531-8a76-1208404af0fc}</destination>
 		</relationship>
@@ -128,13 +129,14 @@
 			<value>-27.4137936</value>
 		</property>
 	</object>
+	<object class="SpatialiserEffect" id="{81f3d17b-12ee-42b7-9a85-aa61f1a4c192}" />
 	<object class="MixerBusFader" id="{4663b057-970a-4c53-b087-fca96c696c8d}" />
 	<object class="MixerSend" id="{8eac9e02-f3fd-4531-8a76-1208404af0fc}">
 		<property name="level">
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>

@@ -6,24 +6,32 @@ public class AudioParamBridge : MonoBehaviour
 	{
 		EventBus.OnContaminationChanged			+= HandleContamination;
 		EventBus.OnThreatStateChanged				+= HandleThreatState;
-		
+		EventBus.OnPlayerDeath						+= HandleDeath;
 	}
 
 	void OnDisable()
 	{
 		EventBus.OnContaminationChanged			-= HandleContamination;
         EventBus.OnThreatStateChanged				-= HandleThreatState;
+		EventBus.OnPlayerDeath						-= HandleDeath;
 	}
 
 	/// <summary>
-	/// ¿À¿°µµ(0~1) ½ÉÀå¹Úµ¿ ¹× È¯Ã» µî È¿°úÀ½¿¡ ´ëÇÑ ºí·»µù¿ë
+	/// ì‚¬ë§ ì‹œ ìœ„í˜‘ íŒŒë¼ë¯¸í„° ì›ë³µ â€” ì•ˆ í•˜ë©´ ì”¬ ë¦¬ë¡œë“œ í›„ì—ë„ ThreatState=2ê°€ ë‚¨ì•„
+	/// ì¬ì‹œì‘ ì§í›„ë¶€í„° ì‹¬ì¥ë°•ë™/ê¸´ì¥ ë¯¹ìŠ¤ê°€ ì¼œì§„ ì±„ ì‹œì‘ë¨
+	/// </summary>
+	void HandleDeath()
+		=> SoundManager.Instance.SetGlobalParam("ThreatState", 0);
+
+	/// <summary>
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(0~1) ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ È¯Ã» ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
 	void HandleContamination(float value)
 		=> SoundManager.Instance.SetGlobalParam("Contamination", value);
 
 
 	/// <summary>
-	/// À§Çù »óÅÂ¿¡ µû¸¥ ¹è°æÀ½ Àç»ı
+	/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	/// </summary>
 	void HandleThreatState(string huntId, int state)
 		=> SoundManager.Instance.SetGlobalParam("ThreatState", state);

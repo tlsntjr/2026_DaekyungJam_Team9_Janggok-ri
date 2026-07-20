@@ -1,158 +1,203 @@
 using UnityEngine;
 using System.Collections;
+using FMODUnity;
 
 [RequireComponent(typeof(TimingMinigame))]
 public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 {
-    private IMinigame minigame;
-    private TimingMinigame timingMinigame;
+	private IMinigame minigame;
+	private TimingMinigame timingMinigame;
 
-    private bool isPowerOn = false;
-    public bool IsSatisfied => isPowerOn;
-    public string Prompt => isPowerOn ? "ÀÌ¹Ì °¡µ¿µÊ" : "¹ßÀü±â °¡µ¿";
-    public string InteractKey => "E";
+	private bool isPowerOn = false;
+	public bool IsSatisfied => isPowerOn;
+	public string Prompt => isPowerOn ? "ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
+	public string InteractKey => "E";
 
-    [Header("¹ßÀü±â ¼³Á¤")]
-    [SerializeField] private int generatorID = 1;
-    [SerializeField] private float noiseRadius = 15f;
-    [SerializeField] private float distractionDuration = 10f;
+	[Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+	[SerializeField] private int generatorID = 1;
+	[SerializeField] private float noiseRadius = 15f;
+	[SerializeField] private float distractionDuration = 10f;
 
-    [Header("2¹ø ¹ßÀü±â Àü¿ë ±â¹Í")]
-    [SerializeField] private float hideTimeRequired = 5f;
-    [SerializeField] private FishMovement fishMovement;
+	[Header("Sounds")]
+	[SerializeField] private EventReference generatorSuccess;
+	[SerializeField] private EventReference generatorLoop;
+	[SerializeField] private EventReference generatorFailed;
 
-    private int interruptCount = 0;
-    private bool isInterrupted = false;
-    private bool isWorking = false;
-    private Coroutine concealmentCheckCoroutine;
+	[Header("2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½")]
+	[SerializeField] private float hideTimeRequired = 5f;
+	[SerializeField] private FishMovement fishMovement;
 
-    private void Awake()
-    {
-        minigame = GetComponent<IMinigame>();
-        timingMinigame = GetComponent<TimingMinigame>();
+	[Header("ì´ë™ ì‹œ ë¯¸ë‹ˆê²Œì„ ì·¨ì†Œ")]
+	[SerializeField] private PlayerMovement playerMovement;   // ë¹„ìš°ë©´ Player íƒœê·¸ë¡œ ìë™ íƒìƒ‰
+	[SerializeField] private float moveCancelGrace = 0.15f;   // ì´ë™í•˜ë©° Eë¥¼ ëˆ„ë¥¸ ì§í›„ ì¦‰ì‹œ ì·¨ì†Œë˜ëŠ” ê²ƒ ë°©ì§€ ìœ ì˜ˆ
+	private float minigameStartTime;
 
-        if (timingMinigame != null)
-        {
-            timingMinigame.OnMinigameComplete += StartGeneratorSequence;
-            int requiredCount = (generatorID == 1) ? 2 : 4;
-            timingMinigame.SetTargetSuccessCount(requiredCount);
-        }
-    }
+	private int interruptCount = 0;
+	private bool isInterrupted = false;
+	private bool isWorking = false;
+	private Coroutine concealmentCheckCoroutine;
 
-    private void OnDisable()
-    {
-        if (timingMinigame != null)
-            timingMinigame.OnMinigameComplete -= StartGeneratorSequence;
-    }
+	private void Awake()
+	{
+		minigame			= GetComponent<IMinigame>();
+		timingMinigame	= GetComponent<TimingMinigame>();
 
-    public void Interact()
-    {
-        if (isPowerOn || isWorking || isInterrupted)
-        {
-            Debug.LogWarning($"[Generator] »óÈ£ÀÛ¿ë ºÒ°¡ »óÅÂ. PowerOn:{isPowerOn}, Working:{isWorking}, Interrupted:{isInterrupted}");
-            return;
-        }
+		if (timingMinigame != null)
+		{
+			timingMinigame.OnMinigameComplete		+= StartGeneratorSequence;
+			int requiredCount									= (generatorID == 1) ? 2 : 4;
+			timingMinigame.SetTargetSuccessCount(requiredCount);
+		}
 
-        if (minigame != null)
-        {
-            minigame.StartOrResume();
-        }
-    }
+		if (playerMovement == null)
+		{
+			GameObject playerObj = GameObject.FindWithTag("Player");
+			if (playerObj != null) 
+				playerMovement = playerObj.GetComponent<PlayerMovement>();
+		}
+	}
 
-    private void Update()
-    {
-        Debug.Log($"{gameObject.name}ÀÇ ÇöÀç »óÅÂ: {IsSatisfied}");
-        if (generatorID != 2 || isPowerOn) return;
+	private void OnDisable()
+	{
+		if (timingMinigame != null)
+			timingMinigame.OnMinigameComplete -= StartGeneratorSequence;
+	}
 
-        if (fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Chase && !isInterrupted)
-        {
-            TriggerEmergencyInterrupt();
-        }
+	public void Interact()
+	{
+		if (isPowerOn || isWorking || isInterrupted)
+		{
+			Debug.LogWarning($"[Generator] ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½. PowerOn:{isPowerOn}, Working:{isWorking}, Interrupted:{isInterrupted}");
+			return;
+		}
 
-        if (isInterrupted && fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Patrol)
-        {
-            if (concealmentCheckCoroutine != null)
-            {
-                StopCoroutine(concealmentCheckCoroutine);
-                concealmentCheckCoroutine = null;
-            }
+		// ì´ë¯¸ ì§„í–‰ ì¤‘ì¸ë° Eë¥¼ ë˜ ëˆ„ë¥´ë©´ StartOrResumeì´ ì¬ì‹¤í–‰ë˜ì–´
+		// íŒì • ì¡´ì´ ê³„ì† ì¬ë°°ì¹˜ë˜ëŠ” ë²„ê·¸ ë°©ì§€ â€” ì§„í–‰ ì¤‘ì—” ë¬´ì‹œ (íƒ€ì´ë° íŒì • í‚¤ëŠ” Space)
+		if (timingMinigame != null && timingMinigame.IsPlaying) return;
 
-            isInterrupted = false;
-            Debug.Log("<color=green>[Generator 2 ÇØÁ¦ ¼º°ø]</color> ÀÎ¸é¾î°¡ ¼øÂû(Patrol) »óÅÂÀÎ °ÍÀÌ È®ÀÎµÇ¾î ¹æÇØ ¶ôÀ» ¾ÈÀüÇÏ°Ô ÇØÁ¦ÇÕ´Ï´Ù.");
+		if (minigame != null)
+		{
+			minigame.StartOrResume();
+			minigameStartTime = Time.time;
+		}
+	}
 
-            if (DialogueSystem.Instance != null)
-            {
-                DialogueSystem.Instance.Show("À§±â°¡ ³Ñ¾î°£ °Í °°´Ù. ¹ßÀü±â¸¦ ´Ù½Ã °¡µ¿ÇÏÀÚ.");
-            }
-        }
-    }
+	private void Update()
+	{
+		CheckMoveCancel();   // ëª¨ë“  ë°œì „ê¸° ê³µí†µ â€” ì•„ë˜ 2ë²ˆ ë°œì „ê¸° ì „ìš© early returnë³´ë‹¤ ë¨¼ì €
 
-    private void TriggerEmergencyInterrupt()
-    {
-        isInterrupted = true;
-        interruptCount++;
+		if (generatorID != 2 || isPowerOn) return;
 
-        if (timingMinigame != null)
-        {
-            timingMinigame.Interrupt();
-        }
+		if (fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Chase && !isInterrupted)
+		{
+			TriggerEmergencyInterrupt();
+		}
 
-        Debug.Log($"<color=red>[Generator 2 ÀÎÅÍ·´Æ® °¡µ¿]</color> ÀÎ¸é¾î ¹ß°¢! ÁøÇà Ä«¿îÆ®¸¦ º¸Á¸ÇÏ°í Àº½Å Å¸ÀÌ¸Ó¸¦ ÄÕ´Ï´Ù. ({interruptCount}/2)");
+		if (isInterrupted && fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Patrol)
+		{
+			if (concealmentCheckCoroutine != null)
+			{
+				StopCoroutine(concealmentCheckCoroutine);
+				concealmentCheckCoroutine = null;
+			}
 
-        if (DialogueSystem.Instance != null)
-        {
-            DialogueSystem.Instance.Show("ÀÎ¸é¾îÀÇ ½Ã¼±ÀÌ ÀÌÂÊÀ» ÇâÇß´Ù! »¡¸® »óÀÚ µÚ·Î ¼û¾î¶ó!");
-        }
+			isInterrupted = false;
+			Debug.Log("<color=green>[Generator 2 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½]</color> ï¿½Î¸ï¿½î°¡ ï¿½ï¿½ï¿½ï¿½(Patrol) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ÎµÇ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 
-        if (concealmentCheckCoroutine != null) StopCoroutine(concealmentCheckCoroutine);
-        concealmentCheckCoroutine = StartCoroutine(ConcealmentCheckRoutine());
-    }
+			if (DialogueSystem.Instance != null)
+			{
+				DialogueSystem.Instance.Show("ï¿½ï¿½ï¿½â°¡ ï¿½Ñ¾î°£ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½â¸¦ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.");
+			}
+		}
+	}
 
-    private IEnumerator ConcealmentCheckRoutine()
-    {
-        float satisfiedTimer = 0f;
+	/// <summary>
+	/// ë¯¸ë‹ˆê²Œì„ ì§„í–‰ ì¤‘ í”Œë ˆì´ì–´ê°€ ì´ë™í•˜ë©´ ì·¨ì†Œ.
+	/// (ìˆ˜ë¦¬í•˜ëŠ” ë™ì•ˆì€ ìë¦¬ì— ë¬¶ì„ = ë¬´ë°©ë¹„ â€” ë°œì „ê¸° ì†ŒìŒì´ ìœ„í˜‘ì„ ë¶€ë¥´ëŠ” ê¸´ì¥ êµ¬ì¡°ì™€ ë§ë¬¼ë¦¼.
+	///  ê±°ë¦¬ ê¸°ë°˜ ì·¨ì†Œë³´ë‹¤ ì—„ê²©: ë©€ì–´ì§€ë ¤ë©´ ì–´ì°¨í”¼ ì›€ì§ì—¬ì•¼ í•˜ë¯€ë¡œ ì´ë™ ê°ì§€ê°€ ê±°ë¦¬ ì·¨ì†Œë¥¼ í¬í•¨í•¨)
+	/// ì§„í–‰ë„(SuccessCount)ëŠ” ìœ ì§€ë˜ë¯€ë¡œ ë‹¤ì‹œ ìƒí˜¸ì‘ìš©í•˜ë©´ ì´ì–´ì„œ ì§„í–‰.
+	/// </summary>
+	private void CheckMoveCancel()
+	{
+		if (timingMinigame == null || !timingMinigame.IsPlaying) return;
+		if (Time.time - minigameStartTime < moveCancelGrace) return;   // ì´ë™í•˜ë©° E ëˆ„ë¥¸ ì§í›„ ë³´í˜¸
+		if (playerMovement == null || !playerMovement.IsMoving) return;
 
-        while (satisfiedTimer < hideTimeRequired)
-        {
-            if (Concealment.IsPlayerConcealed)
-            {
-                satisfiedTimer += Time.deltaTime;
+		timingMinigame.Interrupt();
+		Debug.Log("<color=yellow>[Generator]</color> ì´ë™ì´ ê°ì§€ë˜ì–´ ë¯¸ë‹ˆê²Œì„ì„ ì·¨ì†Œí–ˆìŠµë‹ˆë‹¤.");
 
-                if (fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Chase)
-                {
-                    fishMovement.SetState(FishMovement.BehaviorState.Patrol);
-                }
-            }
-            else
-            {
-                satisfiedTimer = 0f;
-            }
-            yield return null;
-        }
+		if (DialogueSystem.Instance != null)
+		{
+			DialogueSystem.Instance.Show("ì›€ì§ì´ë©´ì„œ ê³ ì¹  ìˆ˜ëŠ” ì—†ë‹¤. ìë¦¬ì— ì„œì„œ ì§‘ì¤‘í•˜ì.");
+		}
+	}
 
-        if (fishMovement != null)
-        {
-            Debug.Log("<color=cyan>[Concealment Timer Complete]</color> 5ÃÊ ¿¬¼Ó Àº½Å ¿Ï·á. ÀÎ¸é¾î¸¦ Patrol·Î ÀüÀÌ½ÃÅµ´Ï´Ù.");
-            fishMovement.SetState(FishMovement.BehaviorState.Patrol);
-        }
+	private void TriggerEmergencyInterrupt()
+	{
+		isInterrupted = true;
+		interruptCount++;
 
-        yield return new WaitForEndOfFrame();
-    }
+		if (timingMinigame != null)
+		{
+			timingMinigame.Interrupt();
+		}
 
-    private void StartGeneratorSequence()
-    {
-        if (isWorking) return;
-        StartCoroutine(GeneratorWorkingRoutine());
-    }
+		Debug.Log($"<color=red>[Generator 2 ï¿½ï¿½ï¿½Í·ï¿½Æ® ï¿½ï¿½ï¿½ï¿½]</color> ï¿½Î¸ï¿½ï¿½ ï¿½ß°ï¿½! ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸Ó¸ï¿½ ï¿½Õ´Ï´ï¿½. ({interruptCount}/2)");
 
-    private IEnumerator GeneratorWorkingRoutine()
-    {
-        isWorking = true;
-        EventBus.RaiseNoiseEmitted((Vector2)transform.position, noiseRadius);
+		if (DialogueSystem.Instance != null)
+		{
+			DialogueSystem.Instance.Show("ï¿½Î¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½! ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½!");
+		}
 
-        yield return new WaitForSeconds(distractionDuration);
+		if (concealmentCheckCoroutine != null) StopCoroutine(concealmentCheckCoroutine);
+		concealmentCheckCoroutine = StartCoroutine(ConcealmentCheckRoutine());
+	}
 
-        isPowerOn = true;
-        isWorking = false;
-    }
+	private IEnumerator ConcealmentCheckRoutine()
+	{
+		float satisfiedTimer = 0f;
+
+		while (satisfiedTimer < hideTimeRequired)
+		{
+			if (Concealment.IsPlayerConcealed)
+			{
+				satisfiedTimer += Time.deltaTime;
+
+				if (fishMovement != null && fishMovement.CurrentState == FishMovement.BehaviorState.Chase)
+				{
+					fishMovement.SetState(FishMovement.BehaviorState.Patrol);
+				}
+			}
+			else
+			{
+				satisfiedTimer = 0f;
+			}
+			yield return null;
+		}
+
+		if (fishMovement != null)
+		{
+			Debug.Log("<color=cyan>[Concealment Timer Complete]</color> 5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½. ï¿½Î¸ï¿½î¸¦ Patrolï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½Åµï¿½Ï´ï¿½.");
+			fishMovement.SetState(FishMovement.BehaviorState.Patrol);
+		}
+
+		yield return new WaitForEndOfFrame();
+	}
+
+	private void StartGeneratorSequence()
+	{
+		if (isWorking) return;
+		StartCoroutine(GeneratorWorkingRoutine());
+	}
+
+	private IEnumerator GeneratorWorkingRoutine()
+	{
+		isWorking = true;
+		EventBus.RaiseNoiseEmitted((Vector2)transform.position, noiseRadius);
+
+		yield return new WaitForSeconds(distractionDuration);
+
+		isPowerOn = true;
+		isWorking = false;
+	}
 }

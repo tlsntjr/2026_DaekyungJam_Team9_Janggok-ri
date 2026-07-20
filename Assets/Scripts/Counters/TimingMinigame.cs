@@ -1,24 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class TimingMinigame : MonoBehaviour, IMinigame
 {
-    [Header("UI ����")]
+    [Header("UI ����")]
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject uiPanel;
 
-    [Header("���� ���� UI ����")]
+    [Header("���� ���� UI ����")]
     [SerializeField] private RectTransform hitZoneUI;
 
-    [Header("����")]
+    [Header("����")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private int targetSuccessCount = 2;
+
+    [Header("���� ����")]
+    [SerializeField] private EventReference successSound;
+    [SerializeField] private EventReference failSound;
 
     private float safeZoneMin;
     private float safeZoneMax;
 
     public int SuccessCount { get; private set; }
     public bool IsComplete => SuccessCount >= targetSuccessCount;
+    public bool IsPlaying => isPlaying;   // 외부(Generator 등)에서 진행 중 여부 확인용
 
     public event System.Action OnMinigameComplete;
 
@@ -106,18 +112,40 @@ public class TimingMinigame : MonoBehaviour, IMinigame
         if (slider.value >= safeZoneMin && slider.value <= safeZoneMax)
         {
             SuccessCount++;
-            Debug.Log($"����! {SuccessCount}/{targetSuccessCount}");
+            Debug.Log($"미니게임 성공! {SuccessCount}/{targetSuccessCount}");
 
+            // [�ǵ�� �ݿ�] ���� ���� ��� (FMOD ���� ������ Null üũ ����)
+            if (!successSound.IsNull)
+            {
+                SoundManager.Instance.PlayOneShot(successSound, transform.position);
+            }
+
+            // ��ǥ �޼� �� �Ϸ� ó��
             if (IsComplete)
             {
-                Interrupt();
-                OnMinigameComplete?.Invoke();
+                Interrupt(); // ����ó�� �̴ϰ����� ���߰�(UI ���� ��)
+                OnMinigameComplete?.Invoke(); // ���� ������� �ѱ�� �̺�Ʈ ����
             }
             else
             {
+                // ���� �� ����� �ϸ� ���� ��ǥ ���� ����
                 RandomizeHitZonePosition();
                 CalculateSafeZoneBounds();
             }
+        }
+        // 2. Ÿ�̹� ���߱� ���� ��
+        else
+        {
+            Debug.Log("미니게임 실패");
+
+            // [�ǵ�� �ݿ�] ���� ���� ���
+            if (!failSound.IsNull)
+            {
+                SoundManager.Instance.PlayOneShot(failSound, transform.position);
+            }
+
+            // ���� �� ī��Ʈ �ʱ�ȭ (���� ��ũ��Ʈ�� ResetMinigame Ȱ��)
+            //ResetMinigame();
         }
     }
 }

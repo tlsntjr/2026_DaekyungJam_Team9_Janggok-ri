@@ -5,7 +5,7 @@
 			<value>Sudden-Scare</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{f2c94923-38ef-4501-8f1f-16ac5dd91356}">
 		<relationship name="effects">
 			<destination>{c330a008-9c2c-4194-8890-3dd317c5ccb0}</destination>
+			<destination>{db51f8a8-a1a0-48e2-b381-3a7d5e9ae8fe}</destination>
 			<destination>{1a02c78b-95f8-41ae-a24c-76b4cedd6918}</destination>
 		</relationship>
 	</object>
@@ -107,12 +108,13 @@
 	</object>
 	<object class="MixerBusFader" id="{8a73501b-ae7e-4e93-8f8c-e1c25ae966b3}" />
 	<object class="MixerBusFader" id="{c330a008-9c2c-4194-8890-3dd317c5ccb0}" />
+	<object class="SpatialiserEffect" id="{db51f8a8-a1a0-48e2-b381-3a7d5e9ae8fe}" />
 	<object class="MixerSend" id="{1a02c78b-95f8-41ae-a24c-76b4cedd6918}">
 		<property name="level">
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>

@@ -5,7 +5,7 @@
 			<value>Ghost</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{4a107376-f8f3-40aa-baac-1a34797b76bd}">
 		<relationship name="effects">
 			<destination>{a7256816-d79e-46bd-adbf-b5bfdc662902}</destination>
+			<destination>{ef78aea1-51d2-45d5-8bcc-39a94e506d3c}</destination>
 			<destination>{889db3b0-b4d2-43a4-b55d-e4c8f4d978b7}</destination>
 		</relationship>
 	</object>
@@ -107,12 +108,13 @@
 	</object>
 	<object class="MixerBusFader" id="{edae5697-19f8-4ff0-817c-be95604ceb8a}" />
 	<object class="MixerBusFader" id="{a7256816-d79e-46bd-adbf-b5bfdc662902}" />
+	<object class="SpatialiserEffect" id="{ef78aea1-51d2-45d5-8bcc-39a94e506d3c}" />
 	<object class="MixerSend" id="{889db3b0-b4d2-43a4-b55d-e4c8f4d978b7}">
 		<property name="level">
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>

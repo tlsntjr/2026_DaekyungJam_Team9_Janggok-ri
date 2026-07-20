@@ -11,54 +11,56 @@ using UnityEngine;
 /// </summary>
 public class ChaseMusicController : MonoBehaviour
 {
-    [Header("추격 BGM (FMOD 이벤트 — 2D/루프로 제작할 것)")]
-    [SerializeField] private EventReference chaseMusic;
+	[Header("추격 BGM")]
+	[SerializeField] private EventReference chaseMusic;
 
-    // 현재 추격 중인 위협들의 huntId. 하나라도 있으면 음악 유지
-    private readonly HashSet<string> chasing = new();
-    private EventInstance instance;
-    private bool playing;
+	[Header("심장박동")]
 
-    private void OnEnable()
-    {
-        EventBus.OnThreatStateChanged += HandleThreatState;
-        EventBus.OnPlayerDeath        += HandleDeath;
-    }
+	// 현재 추격 중인 위협들의 huntId. 하나라도 있으면 음악 유지
+	private readonly HashSet<string> chasing = new();
+	private EventInstance instance;
+	private bool playing;
 
-    private void OnDisable()
-    {
-        EventBus.OnThreatStateChanged -= HandleThreatState;
-        EventBus.OnPlayerDeath        -= HandleDeath;
-    }
+	private void OnEnable()
+	{
+		EventBus.OnThreatStateChanged	+= HandleThreatState;
+		EventBus.OnPlayerDeath				+= HandleDeath;
+	}
 
-    private void HandleThreatState(string huntId, int state)
-    {
-        if (state >= 2) chasing.Add(huntId);
-        else            chasing.Remove(huntId);
+	private void OnDisable()
+	{
+		EventBus.OnThreatStateChanged	-= HandleThreatState;
+		EventBus.OnPlayerDeath				-= HandleDeath;
+	}
 
-        if (chasing.Count > 0 && !playing)
-            StartMusic();
-        else if (chasing.Count == 0 && playing)
-            StopMusic(immediate: false);   // 페이드아웃 (길이는 FMOD 이벤트의 AHDSR Release로 조절)
-    }
+	private void HandleThreatState(string huntId, int state)
+	{
+		if (state >= 2)	chasing.Add(huntId);
+		else				chasing.Remove(huntId);
 
-    // 사망 시엔 여운 없이 즉시 컷 (사망 연출/스팅에게 자리를 비켜줌)
-    private void HandleDeath()
-    {
-        chasing.Clear();
-        if (playing) StopMusic(immediate: true);
-    }
+		if (chasing.Count > 0 && !playing)
+			StartMusic();
+		else if (chasing.Count == 0 && playing)
+			StopMusic(immediate: false);   // 페이드아웃 (길이는 FMOD 이벤트의 AHDSR Release로 조절)
+	}
 
-    private void StartMusic()
-    {
-        if (chaseMusic.IsNull) return;
-        instance = SoundManager.Instance.PlayLoop(chaseMusic, transform);
-        playing = true;
-    }
+	// 사망 시엔 여운 없이 즉시 컷 (사망 연출/스팅에게 자리를 비켜줌)
+	private void HandleDeath()
+	{
+		chasing.Clear();
+		if (playing) StopMusic(immediate: true);
+	}
 
-    private void StopMusic(bool immediate)
-    {
-        SoundManager.Instance.StopLoop(instance, immediate);
-        playing = false;
-    }
+	private void StartMusic()
+	{
+		if (chaseMusic.IsNull) return;
+		instance		= SoundManager.Instance.PlayLoop(chaseMusic, transform);
+		playing		= true;
+	}
+
+	private void StopMusic(bool immediate)
+	{
+		SoundManager.Instance.StopLoop(instance, immediate);
+		playing = false;
+	}
 }

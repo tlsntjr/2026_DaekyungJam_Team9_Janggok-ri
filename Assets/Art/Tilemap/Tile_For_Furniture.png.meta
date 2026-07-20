@@ -1,0 +1,1161 @@
+fileFormatVersion: 2
+guid: fd6380e34cefd0d46a8a13a3c561618d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6680134546260652736
+    second: House_tile1_0
+  - first:
+      213: -1312415177337778839
+    second: House_tile1_1
+  - first:
+      213: -5749173714572296430
+    second: House_tile1_2
+  - first:
+      213: -7087524396939770942
+    second: House_tile1_3
+  - first:
+      213: 5553607488118078607
+    second: House_tile1_4
+  - first:
+      213: 8171072432745991333
+    second: House_tile1_5
+  - first:
+      213: -5056702816159582035
+    second: House_tile1_6
+  - first:
+      213: 5886979086246483671
+    second: House_tile1_7
+  - first:
+      213: 8152348653725486498
+    second: House_tile1_8
+  - first:
+      213: -7494154097083005198
+    second: House_tile1_9
+  - first:
+      213: 7132952132815202962
+    second: House_tile1_10
+  - first:
+      213: 8923577355907197541
+    second: House_tile1_11
+  - first:
+      213: -5795561214365890754
+    second: House_tile1_12
+  - first:
+      213: -4003893898179602131
+    second: House_tile1_13
+  - first:
+      213: 8926314338851685697
+    second: House_tile1_14
+  - first:
+      213: 2439357318981897833
+    second: House_tile1_15
+  - first:
+      213: 8794274183195014429
+    second: House_tile1_16
+  - first:
+      213: 4035514681905061928
+    second: House_tile1_17
+  - first:
+      213: 3438853107519458588
+    second: House_tile1_18
+  - first:
+      213: 5866792119958345400
+    second: House_tile1_19
+  - first:
+      213: -3751326805373769505
+    second: House_tile1_20
+  - first:
+      213: 6958950768179720909
+    second: House_tile1_21
+  - first:
+      213: -4417654878041252111
+    second: House_tile1_22
+  - first:
+      213: -3804483557754688357
+    second: House_tile1_23
+  - first:
+      213: -8011825679628951934
+    second: House_tile1_24
+  - first:
+      213: 8162579311235088105
+    second: House_tile1_25
+  - first:
+      213: -4574928429203013153
+    second: House_tile1_26
+  - first:
+      213: 1925752624247845498
+    second: House_tile1_27
+  - first:
+      213: -4525354480423388133
+    second: House_tile1_28
+  - first:
+      213: 3904869093101570010
+    second: House_tile1_29
+  - first:
+      213: 1638496548811637701
+    second: House_tile1_30
+  - first:
+      213: 1970221073950144472
+    second: House_tile1_31
+  - first:
+      213: -7813814957901069236
+    second: House_tile1_32
+  - first:
+      213: -4568715598123805932
+    second: House_tile1_33
+  - first:
+      213: -7024450891404983105
+    second: House_tile1_34
+  - first:
+      213: -1022689269564097534
+    second: House_tile1_35
+  - first:
+      213: 2390833173620784493
+    second: House_tile1_36
+  - first:
+      213: -6376749959670462580
+    second: House_tile1_37
+  - first:
+      213: -6166012200142513920
+    second: House_tile1_38
+  - first:
+      213: -3820409897094967212
+    second: House_tile1_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tile_For_Furniture_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 96
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3c4b36a40f8964eb9b94c804ec2398
+      internalID: -345750207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 96
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac5bb9718f83164eb6856e52a7d69f1
+      internalID: 156935381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 672
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c97e2db99025bb4428c25ec642a375a0
+      internalID: -388225053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 672
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38bb8b44b815b274cabe94b2d6bfefc9
+      internalID: 1436174781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 672
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a4e192bd75fab243ac98f6e9cc89f05
+      internalID: 791612791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 704
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7854203ddd6df88468233564d09de032
+      internalID: -967789147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_6
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 608
+        width: 96
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45a0cbae257be6f4591b7b709d074b26
+      internalID: 1650544470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_7
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e00758618dc6fc4d89361f14825a584
+      internalID: -685712393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_8
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c4655d6d5720d43ba194ffdcb04443
+      internalID: -161166669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_9
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c03ffcd58ce7584b8e7593a02ec7245
+      internalID: 236190750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_10
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 624
+        width: 77
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c62d87a7d328d5e4993ff0efbcb219b4
+      internalID: -1407196785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_11
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 612
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e783a0f443f6814c995d6e7be6b00e9
+      internalID: 740262310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 479
+        width: 96
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9715c295744c774d96b9291789cd5e2
+      internalID: -1299788673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 479
+        width: 96
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd4bd5233fe0d8b42bc506d1d25709c7
+      internalID: -1680958656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_14
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 548
+        width: 9
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f141d3ee1c0d4fe408ed54e13deea18f
+      internalID: -1311706383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_15
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 514
+        width: 48
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79369626179930b47a3c0bda618a6b0b
+      internalID: -2104161753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_16
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 521
+        width: 62
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c40de3c3d672948b5a0f897a7b9e39
+      internalID: -122226124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_17
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 447
+        width: 40
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 842ca893281d6de45800e89354e91cbc
+      internalID: 289978814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 448
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec73b38e176b404499da83524990825
+      internalID: -977498104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_19
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 495
+        width: 97
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab9934112c6bf2b4eba48ad3898073e1
+      internalID: -1005999762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_20
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 482
+        width: 29
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5adc6524b31d69d4d8ba7e5c7c0ee7bb
+      internalID: 1833337428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 97
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abd2f1fef3d0cfe419d21c85a4483bc6
+      internalID: -278533422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 96
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7acd2bf0cc90773418f89c00c8c3bb08
+      internalID: -514740018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_23
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 256
+        width: 75
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07320099cf7d3e343bb7f8a88587f53a
+      internalID: 1422016379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_24
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 401
+        width: 143
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5df1fc0af6aa39f4796c44c65601bdd5
+      internalID: 1122519832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_25
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 255
+        width: 64
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bff2885fb76fafb459ebda4fb7d76a4b
+      internalID: 2090009750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_26
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 256
+        width: 93
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d4e9423a02f8c844a3cd4f17399d4fc
+      internalID: 274919052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_27
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 320
+        width: 132
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd674e88fbf99a643b71e3326ba98310
+      internalID: -367156299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_28
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 284
+        width: 78
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 916818dba0d62b447a54a0a035c3ba6a
+      internalID: 231627015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_29
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 160
+        width: 79
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa039ff89d29d2408b64b42703099d9
+      internalID: 1220185046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_30
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 172
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d83430d9a7290e418cc92e824bf62a7
+      internalID: 1631007879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_32
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 30
+        width: 128
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 835e12ecb31e69e41a438db01203e1d0
+      internalID: -1983679665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_33
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 32
+        width: 96
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4528057d453c58428cb444ddcfa10ed
+      internalID: -1423155031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_34
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 160
+        width: 128
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f1d877979c892488caee7f17adc427
+      internalID: -1001242528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_35
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 32
+        width: 96
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 741110d25bf9e454fb7bfc50237e0704
+      internalID: -94324761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_37
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 190
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0385a0e318fb141924de2b31943a72
+      internalID: -920743771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_38
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 113
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f364816fd75d3c42be66c4a09035219
+      internalID: 325539415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_39
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 32
+        width: 128
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f442472e09ba83f4eb6d849b2a2ad600
+      internalID: -650748649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_40
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 160
+        width: 78
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90a4527ee4ad5724999b2c09245a885e
+      internalID: -1074657172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tile_For_Furniture_41
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 246
+        width: 132
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f67eebc717253448a88fb5e343c096b
+      internalID: -718027604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 360e3c169aeda2147ae817d4e6c07228
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Tile_For_Furniture_0: -345750207
+      Tile_For_Furniture_1: 156935381
+      Tile_For_Furniture_10: -1407196785
+      Tile_For_Furniture_11: 740262310
+      Tile_For_Furniture_12: -1299788673
+      Tile_For_Furniture_13: -1680958656
+      Tile_For_Furniture_14: -1311706383
+      Tile_For_Furniture_15: -2104161753
+      Tile_For_Furniture_16: -122226124
+      Tile_For_Furniture_17: 289978814
+      Tile_For_Furniture_18: -977498104
+      Tile_For_Furniture_19: -1005999762
+      Tile_For_Furniture_2: -388225053
+      Tile_For_Furniture_20: 1833337428
+      Tile_For_Furniture_21: -278533422
+      Tile_For_Furniture_22: -514740018
+      Tile_For_Furniture_23: 1422016379
+      Tile_For_Furniture_24: 1122519832
+      Tile_For_Furniture_25: 2090009750
+      Tile_For_Furniture_26: 274919052
+      Tile_For_Furniture_27: -367156299
+      Tile_For_Furniture_28: 231627015
+      Tile_For_Furniture_29: 1220185046
+      Tile_For_Furniture_3: 1436174781
+      Tile_For_Furniture_30: 1631007879
+      Tile_For_Furniture_31: -1789639029
+      Tile_For_Furniture_32: -1983679665
+      Tile_For_Furniture_33: -1423155031
+      Tile_For_Furniture_34: -1001242528
+      Tile_For_Furniture_35: -94324761
+      Tile_For_Furniture_36: -2110033416
+      Tile_For_Furniture_37: -920743771
+      Tile_For_Furniture_38: 325539415
+      Tile_For_Furniture_39: -650748649
+      Tile_For_Furniture_4: 791612791
+      Tile_For_Furniture_40: -1074657172
+      Tile_For_Furniture_41: -718027604
+      Tile_For_Furniture_5: -967789147
+      Tile_For_Furniture_6: 1650544470
+      Tile_For_Furniture_7: -685712393
+      Tile_For_Furniture_8: -161166669
+      Tile_For_Furniture_9: 236190750
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

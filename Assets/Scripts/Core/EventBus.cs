@@ -14,7 +14,7 @@ public static class EventBus
 	// ===== AI 및 소음 =====
 	public static event Action<string, int> OnThreatStateChanged;			// 플레이어 위험 상태 체크 (string -> 괴담 id, int -> 경계 레벨 0/1/2)
 	public static event Action<Vector2, float> OnNoiseEmitted;				// 던지기, 뛰기, 발전기 발동 등 소음 발생 (Vector2 -> 발생 위치, float -> radius)
-	public static event Action<Vector2> OnMonsterScreamed;					// 크리쳐 괴성 -> 인식할 범위 필요 없음
+	public static event Action<Vector2, bool> OnMonsterScreamed;			// 크리쳐 괴성 (Vector2 -> 발원지, bool -> 대형 괴성 여부: 광폭 진입 등 1회성 연출)
 
 	// ===== 목표 진행 =====
 	public static event Action<string> OnObjectiveFlagSet;						// 목표 달성을 위한 오브젝트 획득 (string -> 목표 id)
@@ -36,5 +36,5 @@ public static class EventBus
 	public static void RaiseNoiseEmitted(Vector2 pos, float r)		=> OnNoiseEmitted?.Invoke(pos, r);
 	public static void RaiseObjectiveFlagSet(string id)					=> OnObjectiveFlagSet?.Invoke(id);
 	public static void RaisePlayerDeath()									=> OnPlayerDeath?.Invoke();
-	public static void RaiseMonsterScreamed(Vector2 pos)			=> OnMonsterScreamed?.Invoke(pos);
+	public static void RaiseMonsterScreamed(Vector2 pos, bool isMajor = false)	=> OnMonsterScreamed?.Invoke(pos, isMajor);	// 기본값 false — 기존 호출부(매 돌진 텔레그래프)는 그대로 동작
 }

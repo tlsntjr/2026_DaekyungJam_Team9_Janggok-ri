@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161be8577af1e824ab86885fe995783e, type: 3}
   m_Name: Mudflat_Haunt
   m_EditorClassIdentifier: Assembly-CSharp::HauntDefinition
-  huntId: mudflat
+  huntId: Mudflat
   regionLabel: 
