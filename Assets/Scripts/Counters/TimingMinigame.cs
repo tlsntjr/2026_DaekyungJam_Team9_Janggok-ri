@@ -4,18 +4,18 @@ using FMODUnity;
 
 public class TimingMinigame : MonoBehaviour, IMinigame
 {
-    [Header("UI ¿¬°á")]
+    [Header("UI ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject uiPanel;
 
-    [Header("¼º°ø ¿µ¿ª UI ÁöÁ¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private RectTransform hitZoneUI;
 
-    [Header("¼³Á¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private int targetSuccessCount = 2;
 
-    [Header("»ç¿îµå ¼³Á¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private EventReference successSound;
     [SerializeField] private EventReference failSound;
 
@@ -24,6 +24,7 @@ public class TimingMinigame : MonoBehaviour, IMinigame
 
     public int SuccessCount { get; private set; }
     public bool IsComplete => SuccessCount >= targetSuccessCount;
+    public bool IsPlaying => isPlaying;   // ì™¸ë¶€(Generator ë“±)ì—ì„œ ì§„í–‰ ì¤‘ ì—¬ë¶€ í™•ì¸ìš©
 
     public event System.Action OnMinigameComplete;
 
@@ -111,39 +112,39 @@ public class TimingMinigame : MonoBehaviour, IMinigame
         if (slider.value >= safeZoneMin && slider.value <= safeZoneMax)
         {
             SuccessCount++;
-            Debug.Log($"¼º°ø! {SuccessCount}/{targetSuccessCount}");
+            Debug.Log($"ë¯¸ë‹ˆê²Œìž„ ì„±ê³µ! {SuccessCount}/{targetSuccessCount}");
 
-            // [ÇÇµå¹é ¹Ý¿µ] ¼º°ø »ç¿îµå Àç»ý (FMOD ¿¡·¯ ¹æÁö¿ë Null Ã¼Å© Æ÷ÇÔ)
+            // [ï¿½Çµï¿½ï¿½ ï¿½Ý¿ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (FMOD ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Null Ã¼Å© ï¿½ï¿½ï¿½ï¿½)
             if (!successSound.IsNull)
             {
                 SoundManager.Instance.PlayOneShot(successSound, transform.position);
             }
 
-            // ¸ñÇ¥ ´Þ¼º ½Ã ¿Ï·á Ã³¸®
+            // ï¿½ï¿½Ç¥ ï¿½Þ¼ï¿½ ï¿½ï¿½ ï¿½Ï·ï¿½ Ã³ï¿½ï¿½
             if (IsComplete)
             {
-                Interrupt(); // ±âÁ¸Ã³·³ ¹Ì´Ï°ÔÀÓÀ» ¸ØÃß°í(UI ²ô±â µî)
-                OnMinigameComplete?.Invoke(); // ´ÙÀ½ ÆäÀÌÁî·Î ³Ñ±â´Â ÀÌº¥Æ® ¹ßÇà
+                Interrupt(); // ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½Ì´Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß°ï¿½(UI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
+                OnMinigameComplete?.Invoke(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
             }
             else
             {
-                // ¾ÆÁ÷ ´õ ¸ÂÃç¾ß ÇÏ¸é ´ÙÀ½ ¸ñÇ¥ ÁöÁ¡ ¼¼ÆÃ
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 RandomizeHitZonePosition();
                 CalculateSafeZoneBounds();
             }
         }
-        // 2. Å¸ÀÌ¹Ö ¸ÂÃß±â ½ÇÆÐ ½Ã
+        // 2. Å¸ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         else
         {
-            Debug.Log("½ÇÆÐ! Ä«¿îÆ®°¡ ÃÊ±âÈ­µË´Ï´Ù.");
+            Debug.Log("ë¯¸ë‹ˆê²Œìž„ ì‹¤íŒ¨");
 
-            // [ÇÇµå¹é ¹Ý¿µ] ½ÇÆÐ »ç¿îµå Àç»ý
+            // [ï¿½Çµï¿½ï¿½ ï¿½Ý¿ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             if (!failSound.IsNull)
             {
                 SoundManager.Instance.PlayOneShot(failSound, transform.position);
             }
 
-            // ½ÇÆÐ ½Ã Ä«¿îÆ® ÃÊ±âÈ­ (±âÁ¸ ½ºÅ©¸³Æ®ÀÇ ResetMinigame È°¿ë)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ä«ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ResetMinigame È°ï¿½ï¿½)
             //ResetMinigame();
         }
     }

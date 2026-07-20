@@ -5,7 +5,7 @@
 			<value>Mud-Throwable</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,6 +96,8 @@
 	<object class="MixerBusEffectChain" id="{87823793-8827-4eae-b4da-812af05a9a89}">
 		<relationship name="effects">
 			<destination>{e0d99aa3-fdd7-46bb-a64b-9fd7dfeaba9e}</destination>
+			<destination>{bbabe567-6eb1-4e41-9e9e-6039b2f0629d}</destination>
+			<destination>{a9c5b02e-3fad-4aab-8800-7ca68a0a394a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6edbc9a1-e628-47a3-8c1b-bd499cbf7c27}" />
@@ -106,4 +108,16 @@
 	</object>
 	<object class="MixerBusFader" id="{43a2aace-d98a-4c1c-acc4-bca1a09650df}" />
 	<object class="MixerBusFader" id="{e0d99aa3-fdd7-46bb-a64b-9fd7dfeaba9e}" />
+	<object class="SpatialiserEffect" id="{bbabe567-6eb1-4e41-9e9e-6039b2f0629d}" />
+	<object class="MixerSend" id="{a9c5b02e-3fad-4aab-8800-7ca68a0a394a}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>
+		</relationship>
+	</object>
 </objects>

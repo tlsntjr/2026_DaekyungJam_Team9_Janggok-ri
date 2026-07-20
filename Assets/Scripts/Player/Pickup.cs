@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour, IInteractable
@@ -5,19 +6,25 @@ public class Pickup : MonoBehaviour, IInteractable
     [Header("Item id")]
     [SerializeField] private string itemId;
 
-    [Header("ÇÙ½É ¾ÆÀÌÅÛÀÏ °æ¿ì")]
+    [Header("íšë“ ì‚¬ìš´ë“œ (ë¹„ìš°ë©´ ìŠ¤í‚µ â€” FMOD ì´ë²¤íŠ¸ëŠ” 2D ê¶Œìž¥)")]
+    [SerializeField] private EventReference pickupSfx;
+
+    [Header("ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½")]
     [SerializeField] private string objectiveFlagId;
 
-    [Header("¸¶Áö¸· ±¸¿ªÀ¸·Î ÁøÀÔÇÏ±â À§ÇÑ ¾ÆÀÌÅÛÀÏ °æ¿ì ¿¬°á")]
-    [SerializeField] private HauntController haunt;   // ÀÌ ¾ÆÀÌÅÛÀÌ ±¸¿ª ¸¶¹«¸® ¸ñÇ¥¹°ÀÏ ¶§¸¸ ¿¬°á
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    [SerializeField] private HauntController haunt;   // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    public string Prompt => "ÁÝ±â";
+    public string Prompt => "ì¤ê¸°";
     public string InteractKey => "E";
     /// <summary>
-    /// ¾ÆÀÌÅÛ »óÈ£ÀÛ¿ë
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½
     /// </summary>
     public void Interact()
     {
+        if (!pickupSfx.IsNull)
+            SoundManager.Instance.PlayOneShot(pickupSfx, transform.position);
+
         InventorySystem.Instance.Add(itemId);
 
         if (!string.IsNullOrEmpty(objectiveFlagId))

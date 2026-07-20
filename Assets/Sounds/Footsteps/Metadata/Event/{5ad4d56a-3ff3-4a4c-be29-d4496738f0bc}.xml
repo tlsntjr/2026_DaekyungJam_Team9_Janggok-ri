@@ -5,7 +5,7 @@
 			<value>Mudflat-Environment</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -99,6 +99,7 @@
 	<object class="MixerBusEffectChain" id="{b032fb33-4909-40b7-992b-68055d6237ba}">
 		<relationship name="effects">
 			<destination>{f374fbfe-3622-4373-b27a-f9ab18d5c9b3}</destination>
+			<destination>{0ebabf76-bda4-4e22-9f46-8d907a3248a2}</destination>
 			<destination>{69c9b9e4-6992-4b32-940d-c93952596fc5}</destination>
 		</relationship>
 	</object>
@@ -113,6 +114,7 @@
 	</object>
 	<object class="MixerBusFader" id="{e993f0e1-47c8-4960-8ff0-55eee4cf128a}" />
 	<object class="MixerBusFader" id="{f374fbfe-3622-4373-b27a-f9ab18d5c9b3}" />
+	<object class="SpatialiserEffect" id="{0ebabf76-bda4-4e22-9f46-8d907a3248a2}" />
 	<object class="SFXReverbEffect" id="{69c9b9e4-6992-4b32-940d-c93952596fc5}">
 		<property name="decayTime">
 			<value>2000</value>

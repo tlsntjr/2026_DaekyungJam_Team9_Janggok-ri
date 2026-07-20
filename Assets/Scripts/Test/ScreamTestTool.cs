@@ -2,10 +2,11 @@ using UnityEngine;
 
 /// <summary>
 /// 괴성/글리치 연출 테스트용 도구. NoiseTestTool과 같은 방식.
-///   H 키 : 마우스 커서 위치에서 괴성 발생 (OnMonsterScreamed)
-///          → 플레이어 가까이 찍으면 강하게, 멀리 찍으면 약하게/무시 — 거리 감쇠 확인용
-///   J 키 : 패닉 글리치 단발 Pulse
-///   K 키 : 패닉 글리치 지속형 토글 (환청 구간 흉내)
+///   H 키        : 마우스 커서 위치에서 소형 괴성 (돌진 텔레그래프)
+///   Shift + H   : 대형 괴성 (광폭 진입 연출)
+///          → 플레이어 가까이 찍으면 강하게, 멀리 찍으면 시각 연출은 스킵되고 소리만 감쇠되어 들림
+///   J 키        : 패닉 글리치 단발 Pulse
+///   K 키        : 패닉 글리치 지속형 토글 (환청 구간 흉내)
 /// 테스트 끝나면 씬에서 제거할 것.
 /// </summary>
 public class ScreamTestTool : MonoBehaviour
@@ -30,8 +31,9 @@ public class ScreamTestTool : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0f;
 
-            Debug.Log($"<color=red>[ScreamTest]</color> 괴성 발생! 위치: {mousePos} (플레이어와의 거리로 강도 감쇠 확인)");
-            EventBus.RaiseMonsterScreamed(mousePos);
+            bool isMajor = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            Debug.Log($"<color=red>[ScreamTest]</color> {(isMajor ? "대형" : "소형")} 괴성 발생! 위치: {mousePos}");
+            EventBus.RaiseMonsterScreamed(mousePos, isMajor);
         }
 
         // J 키: 글리치 단발

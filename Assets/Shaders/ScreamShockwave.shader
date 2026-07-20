@@ -16,8 +16,8 @@ Shader "Janggokri/Fullscreen/ScreamShockwave"
         _Intensity  ("Intensity (0-1)", Range(0, 1))       = 0
         _Width      ("Ring Width", Range(0.01, 0.5))       = 0.12
         _Strength   ("Distortion Strength", Range(0, 0.2)) = 0.06
-        _Aberration ("Chromatic Aberration", Range(0, 2))  = 0.6
-        _RingTint   ("Ring Brighten", Range(0, 0.5))       = 0.08
+        _Aberration ("Chromatic Aberration", Range(0, 2))  = 0.2
+        _RingTint   ("Ring Brighten", Range(0, 0.5))       = 0
     }
 
     SubShader
@@ -55,11 +55,14 @@ Shader "Janggokri/Fullscreen/ScreamShockwave"
                 float2 pos = (uv - _Center.xy) * float2(aspect, 1.0);
                 float dist = length(pos);
 
-                // _Radius 를 중심으로 한 부드러운 링 마스크
-                float ring = 1.0 - saturate(abs(dist - _Radius) / _Width);
-                ring = ring * ring * (3.0 - 2.0 * ring);   // smoothstep 모양
+                // 파면으로부터의 부호 있는 정규화 거리 (음수=파면 안쪽, 양수=바깥쪽)
+                float x = (dist - _Radius) / max(_Width, 1e-4);
+                float ring = exp(-x * x * 4.0);            // 파면 중심 1, 멀어질수록 0 (가우시안)
 
-                float wave = ring * _Strength * _Intensity;
+                // 유리 렌즈식 S자 굴절: 파면 앞쪽은 바깥으로 밀고 뒤쪽은 안으로 당김(압축-팽창).
+                // 한 방향으로만 밀면 뿌연 띠처럼 보이지만, 부호가 바뀌면 물결이 지나가는 유리 느낌이 남.
+                // 4.7 = 프로파일 피크 정규화 상수 (_Strength가 실제 최대 굴절량이 되도록)
+                float wave = x * ring * _Strength * _Intensity * 4.7;
 
                 float2 dir = dist > 1e-4 ? pos / dist : float2(0.0, 0.0);
                 dir.x /= aspect;                            // uv 공간으로 복귀

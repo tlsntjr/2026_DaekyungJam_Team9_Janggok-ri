@@ -26,14 +26,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _ClearRadius: 0.22
-    - _ClearSoftness: 0.14
+    - _ClearSoftness: 0.149
     - _ClearStrength: 0.95
     - _Contrast: 1.6
     - _Density: 0
-    - _FlowSpeed: 0.3
-    - _NoiseScale: 3
+    - _FlowSpeed: 0.19
+    - _NoiseScale: 2.7
     m_Colors:
-    - _ClearCenter: {r: 0.50055623, g: 0.477497, b: 0, a: 0}
+    - _ClearCenter: {r: 0.48965904, g: 0.44814545, b: 0, a: 0}
     - _FogColor: {r: 0.58, g: 0.63, b: 0.56999993, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

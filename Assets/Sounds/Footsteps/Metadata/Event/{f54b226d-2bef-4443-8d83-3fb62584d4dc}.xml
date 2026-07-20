@@ -5,7 +5,7 @@
 			<value>Stone-Footstep</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{b2a80aef-ea95-4cb3-be0d-6f0ce36ca3c1}">
 		<relationship name="effects">
 			<destination>{64f7ffd4-c540-43ca-90ca-ceb36b106ed7}</destination>
+			<destination>{39e4e38b-a9c5-4f3e-b70f-ae1835a9307c}</destination>
 			<destination>{85a3480e-274f-4182-92b6-ef3daeac190a}</destination>
 			<destination>{1d1185f8-6ec1-457e-967a-e092cd266fe9}</destination>
 		</relationship>
@@ -121,13 +122,14 @@
 			<value>-27.4137936</value>
 		</property>
 	</object>
+	<object class="SpatialiserEffect" id="{39e4e38b-a9c5-4f3e-b70f-ae1835a9307c}" />
 	<object class="MixerBusFader" id="{85a3480e-274f-4182-92b6-ef3daeac190a}" />
 	<object class="MixerSend" id="{1d1185f8-6ec1-457e-967a-e092cd266fe9}">
 		<property name="level">
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>

@@ -5,7 +5,7 @@
 			<value>HF-Fish</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{d294f60f-a7bf-402d-b35f-0b1a89e1411d}">
 		<relationship name="effects">
 			<destination>{6dc5a0bc-e249-4432-8812-826763da2a3a}</destination>
+			<destination>{2a361960-57f7-4f22-a446-2b82e46c1778}</destination>
 			<destination>{c75a17df-ba71-4b8a-acb3-c0d186e869e5}</destination>
 		</relationship>
 	</object>
@@ -107,12 +108,13 @@
 	</object>
 	<object class="MixerBusFader" id="{0f077e5c-529d-4105-88fc-5e8820c6c3a9}" />
 	<object class="MixerBusFader" id="{6dc5a0bc-e249-4432-8812-826763da2a3a}" />
+	<object class="SpatialiserEffect" id="{2a361960-57f7-4f22-a446-2b82e46c1778}" />
 	<object class="MixerSend" id="{c75a17df-ba71-4b8a-acb3-c0d186e869e5}">
 		<property name="level">
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>
