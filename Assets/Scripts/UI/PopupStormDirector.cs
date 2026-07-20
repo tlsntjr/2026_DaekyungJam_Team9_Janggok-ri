@@ -49,6 +49,9 @@ public class PopupStormDirector : MonoBehaviour
     [Header("추격 BGM 연동 — 폭풍 동안 추격 음악·심장이 깔림 (비우면 스킵)")]
     [SerializeField] private string stormHuntId = "popup_storm";   // 가상의 위협 id — 실제 몬스터 huntId와 겹치지만 않으면 됨
 
+    [Header("진짜 팝업 제한시간 — 시간 내 처리(StopStorm) 못 하면 오염도 최대 → 사망 (0이면 무제한)")]
+    [SerializeField] private float finalPopupTimeLimit = 5f;
+
     [Header("패닉 글리치 — 출렁이며 점점 강해짐 (PanicGlitchDirector 없으면 스킵)")]
     [SerializeField, Range(0f, 1f)] private float glitchWobbleMin = 0.08f;   // 요동 하한 (초반)
     [SerializeField, Range(0f, 1f)] private float glitchWobbleMax = 0.45f;   // 요동 상한 (막판)
@@ -60,7 +63,11 @@ public class PopupStormDirector : MonoBehaviour
     private GameObject finalPopup;
     private Coroutine stormCoroutine;
     private Coroutine wobbleCoroutine;
+    private Coroutine finalTimerCoroutine;
     private float stormProgress;   // 0→1, 글리치 요동의 세기 램프
+
+    /// <summary>폭풍 진행 중 여부 (더미 난사 중 or 진짜 팝업 표시 중) — 투척 등 게임플레이 입력 차단 판정용</summary>
+    public bool IsActive => stormCoroutine != null || finalPopup != null || aliveDummies.Count > 0;
 
     // 캐스케이드 상태
     private Vector2 cascadeAnchor;
@@ -113,6 +120,7 @@ public class PopupStormDirector : MonoBehaviour
     {
         if (stormCoroutine != null) { StopCoroutine(stormCoroutine); stormCoroutine = null; }
         if (wobbleCoroutine != null) { StopCoroutine(wobbleCoroutine); wobbleCoroutine = null; }
+        if (finalTimerCoroutine != null) { StopCoroutine(finalTimerCoroutine); finalTimerCoroutine = null; }
     }
 
     private IEnumerator StormRoutine(float duration, Action<GameObject> onFinalPopup)
@@ -250,6 +258,26 @@ public class PopupStormDirector : MonoBehaviour
             PanicGlitchDirector.Instance.Pulse(finalGlitchPulse);   // 등장 순간 화면 강타
 
         onFinalPopup?.Invoke(finalPopup);
+
+        // 제한시간 시작 — 호출자가 시간 내에 StopStorm()을 부르면 타이머도 함께 정지됨
+        if (finalPopupTimeLimit > 0f)
+            finalTimerCoroutine = StartCoroutine(FinalTimeoutRoutine());
+    }
+
+    /// <summary>
+    /// 진짜 팝업 제한시간 초과 — 오염도를 최대로 밀어 사망 체인 발동.
+    /// (ContaminationSystem이 100% 도달 시 OnPlayerDeath를 쏘고, DeathDirector가 사망 모션·사망 타이틀을 처리)
+    /// </summary>
+    private IEnumerator FinalTimeoutRoutine()
+    {
+        yield return new WaitForSeconds(finalPopupTimeLimit);
+
+        Debug.Log("<color=red>[PopupStormDirector]</color> 진짜 팝업 제한시간 초과 — 오염도 최대, 사망 처리");
+
+        Cleanup();   // 화면의 팝업·글리치·BGM부터 정리 (사망 연출에 자리를 비켜줌)
+        finalTimerCoroutine = null;
+
+        ContaminationSystem.Instance.Add(1f);   // 오염도 강제 최대 → OnPlayerDeath → DeathDirector 사망 연출
     }
 
     private void Cleanup()

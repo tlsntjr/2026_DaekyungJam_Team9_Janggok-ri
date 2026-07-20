@@ -31,6 +31,10 @@ public class DialogueUI : MonoBehaviour
 
 	private Action<int> pendingChoiceCallback;
 
+	// 연속 대사(시퀀스) 상태
+	private readonly Queue<string> sequenceLines = new();
+	private Action sequenceCallback;
+
 	// 연속 팝업 발생 시 Queue로 처리
 	private readonly Queue<(float timeout, Action onSurvive, Action onFail)> rapidQueue = new();
 	private bool rapidRunning;
@@ -38,6 +42,7 @@ public class DialogueUI : MonoBehaviour
 	private void OnEnable()
 	{
 		DialogueSystem.Instance.OnShowLine				+= HandleShowLine;
+		DialogueSystem.Instance.OnShowSequence		+= HandleShowSequence;
 		DialogueSystem.Instance.OnShowChoice			+= HandleShowChoice;
 		DialogueSystem.Instance.OnShowRapidPrompt	+= HandleShowRapidPrompt;
         lineClickCatcher.onClick.AddListener(AdvanceLine);
@@ -46,6 +51,7 @@ public class DialogueUI : MonoBehaviour
 	private void OnDisable()
 	{
 		DialogueSystem.Instance.OnShowLine				-= HandleShowLine;
+		DialogueSystem.Instance.OnShowSequence		-= HandleShowSequence;
 		DialogueSystem.Instance.OnShowChoice			-= HandleShowChoice;
 		DialogueSystem.Instance.OnShowRapidPrompt	-= HandleShowRapidPrompt;
         lineClickCatcher.onClick.RemoveListener(AdvanceLine);
@@ -86,7 +92,30 @@ public class DialogueUI : MonoBehaviour
 	}
     
 	/// <summary>
-	/// 대사창 영역 클릭 시 스킵
+	/// 연속 대사 시작 — 첫 줄을 바로 출력하고, 이후 클릭마다 다음 줄로
+	/// </summary>
+	private void HandleShowSequence(string[] lines, Action onComplete)
+	{
+		sequenceLines.Clear();
+		if (lines != null)
+			foreach (var line in lines) sequenceLines.Enqueue(line);
+
+		sequenceCallback = onComplete;
+
+		if (sequenceLines.Count > 0)
+			HandleShowLine(sequenceLines.Dequeue());
+		else
+		{
+			// 빈 시퀀스 방어 — 콜백만 즉시 호출
+			var cb = sequenceCallback;
+			sequenceCallback = null;
+			cb?.Invoke();
+		}
+	}
+
+	/// <summary>
+	/// 대사창 영역 클릭 시: 타이핑 중이면 전체 출력(스킵) →
+	/// 시퀀스에 남은 줄이 있으면 다음 줄 → 다 끝났으면 닫고 완료 콜백
 	/// </summary>
     private void AdvanceLine()
     {
@@ -97,9 +126,17 @@ public class DialogueUI : MonoBehaviour
             lineText.text			= currentFullLine;
             isTyping				= false;
         }
+        else if (sequenceLines.Count > 0)
+        {
+            HandleShowLine(sequenceLines.Dequeue());
+        }
         else
         {
             linePanel.SetActive(false);
+
+            var cb = sequenceCallback;
+            sequenceCallback = null;
+            cb?.Invoke();
         }
     }
 
