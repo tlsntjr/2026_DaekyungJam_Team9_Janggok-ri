@@ -475,7 +475,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 3153589877191176158}
   cacheVersion: 131860
-  cacheTime: 639202717451424951
+  cacheTime: 639202819141348375
   SerializableEventsDict:
   - key: event:/Hallucination-2
     index: 0
@@ -704,7 +704,7 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639202717451424951
+  lastModified: 639202819141348375
   FileSizes:
   - Name: Desktop
     Value: 2156
@@ -884,7 +884,7 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639202717451399913
+  lastModified: 639202819141335880
   FileSizes:
   - Name: Desktop
     Value: 2209824
