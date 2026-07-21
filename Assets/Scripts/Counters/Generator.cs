@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using FMOD.Studio;
 using FMODUnity;
@@ -129,7 +129,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
 			if (DialogueSystem.Instance != null)
 			{
-				DialogueSystem.Instance.Show("���Ⱑ �Ѿ �� ����. �����⸦ �ٽ� ��������.");
+				DialogueSystem.Instance.Show("...지나간 것 같다. 발전기를 다시 돌리자.");
 			}
 		}
 	}
@@ -169,7 +169,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
 		if (DialogueSystem.Instance != null)
 		{
-			DialogueSystem.Instance.Show("�θ���� �ü��� ������ ���ߴ�! ���� ���� �ڷ� �����!");
+			DialogueSystem.Instance.Show("들켰다! 시선을 피해서... 뒤에 숨어야 해!");
 		}
 
 		if (concealmentCheckCoroutine != null) StopCoroutine(concealmentCheckCoroutine);

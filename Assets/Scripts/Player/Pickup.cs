@@ -56,11 +56,8 @@ public class Pickup : MonoBehaviour, IInteractable
             else Debug.LogWarning($"[Pickup] ObjectiveSystem이 씬에 없어 '{objectiveFlagId}' 플래그를 건너뜀");
         }
 
-        foreach (var target in activateOnPickup)
-            if (target != null) target.SetActive(true);
-
-        // 오브젝트 제거(→ItemTriggerCounter 만족 = 페이즈 전환)와 괴담 완료는 대사가 끝난 뒤에 —
-        // 대사 도중에 다음 페이즈(추격 등)가 시작돼 읽기와 위협이 겹치는 것 방지
+        // 오브젝트 제거(→ItemTriggerCounter 만족 = 페이즈 전환)·해금·괴담 완료는 전부 대사가 끝난 뒤에 —
+        // 대사 도중에 다음 페이즈나 연출(팝업 폭풍 등)이 시작돼 읽기와 겹치는 것 방지
         if (flavorLines != null && flavorLines.Length > 0)
             DialogueSystem.Instance.ShowSequence(flavorLines,
                 lineIndex => DialogueLineEffect.ApplyAll(lineEffects, lineIndex, transform.position),
@@ -75,6 +72,9 @@ public class Pickup : MonoBehaviour, IInteractable
     /// </summary>
     private void FinishPickup()
     {
+        foreach (var target in activateOnPickup)
+            if (target != null) target.SetActive(true);
+
         if (haunt != null)
             haunt.CompleteHaunt();
 
