@@ -32,6 +32,6 @@ Material:
     - _Strength: 0.08
     - _Width: 0.204
     m_Colors:
-    - _Center: {r: 0.321719, g: -1.0593535, b: 0, a: 0}
+    - _Center: {r: 0.506773, g: 1.1286337, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
