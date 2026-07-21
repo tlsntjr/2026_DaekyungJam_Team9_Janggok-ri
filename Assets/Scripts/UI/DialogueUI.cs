@@ -42,7 +42,7 @@ public class DialogueUI : MonoBehaviour
 	private void OnEnable()
 	{
 		DialogueSystem.Instance.OnShowLine				+= HandleShowLine;
-		DialogueSystem.Instance.OnShowSequence		+= HandleShowSequence;
+		DialogueSystem.Instance.OnShowSequence			+= HandleShowSequence;
 		DialogueSystem.Instance.OnShowChoice			+= HandleShowChoice;
 		DialogueSystem.Instance.OnShowRapidPrompt	+= HandleShowRapidPrompt;
         lineClickCatcher.onClick.AddListener(AdvanceLine);
@@ -51,7 +51,7 @@ public class DialogueUI : MonoBehaviour
 	private void OnDisable()
 	{
 		DialogueSystem.Instance.OnShowLine				-= HandleShowLine;
-		DialogueSystem.Instance.OnShowSequence		-= HandleShowSequence;
+		DialogueSystem.Instance.OnShowSequence			-= HandleShowSequence;
 		DialogueSystem.Instance.OnShowChoice			-= HandleShowChoice;
 		DialogueSystem.Instance.OnShowRapidPrompt	-= HandleShowRapidPrompt;
         lineClickCatcher.onClick.RemoveListener(AdvanceLine);

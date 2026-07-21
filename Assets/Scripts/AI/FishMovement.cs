@@ -34,6 +34,7 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float suspectSpeed = 3.5f;
     [SerializeField] private float chaseSpeed = 5.5f;
     [SerializeField] private float noiseScreamWindup = 1.0f;      // 소음 반응 시 괴성을 지르며 이만큼 정지한 뒤 달려감
+    [SerializeField] private float noiseArrivalDistance = 1.2f;   // 소음 지점 도착 판정 거리 — 발전기 등 충돌체가 있는 목표는 정확히 겹칠 수 없으므로 여유를 둠(안 두면 벽/오브젝트에 제자리서 계속 밀려붙는 현상 발생)
 
     [Header("추격(Chase) — 1~2페이즈: 발각 시 소형 괴성 1회 후 단순 추격 (파훼는 은신)")]
     [SerializeField] private float chaseScreamCooldown = 6f;      // 발각 괴성 재발화 최소 간격 (시야 경계에서 재발각 스팸 방지)
@@ -158,7 +159,13 @@ public class FishMovement : MonoBehaviour
 
             case BehaviorState.Suspect:
                 if (isNoiseWindup) return;   // 괴성을 지르는 동안 제자리 — "반응했다"는 텔레그래프
-                transform.position = Vector3.MoveTowards(transform.position, targetNoisePosition, suspectSpeed * Time.deltaTime);
+
+                // 목표 지점 근처(noiseArrivalDistance 이내)에 도착했으면 더 밀고 들어가지 않고 그 자리에서 주시만 함 —
+                // 발전기 등 충돌체가 있는 목표는 정확히 겹칠 수 없어서, 여유 없이 계속 MoveTowards하면
+                // 벽/오브젝트에 영구히 밀려붙어 "벽 보고 제자리 이동"하는 것처럼 보이는 문제 방지
+                if (Vector3.Distance(transform.position, targetNoisePosition) > noiseArrivalDistance)
+                    transform.position = Vector3.MoveTowards(transform.position, targetNoisePosition, suspectSpeed * Time.deltaTime);
+
                 LookAtTarget(targetNoisePosition);
                 break;
 

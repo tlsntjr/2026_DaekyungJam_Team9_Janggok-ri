@@ -292,6 +292,16 @@ MonoBehaviour:
         Data3: 2013362353
         Data4: 1844659594
       Path: event:/Leaves-Footstep
+  - layer:
+      serializedVersion: 2
+      m_Bits: 1048576
+    footstepEvent:
+      Guid:
+        Data1: -130583729
+        Data2: 1243272081
+        Data3: 2013362353
+        Data4: 1844659594
+      Path: event:/Leaves-Footstep
   floorMask:
     serializedVersion: 2
     m_Bits: 1572864

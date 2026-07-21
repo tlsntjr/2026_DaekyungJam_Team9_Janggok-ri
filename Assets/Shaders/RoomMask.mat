@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ScreamShockwave
-  m_Shader: {fileID: 4800000, guid: 3d0df91b00358ac4eac23533907fe93d, type: 3}
+  m_Name: RoomMask
+  m_Shader: {fileID: 4800000, guid: 469a9eaf8f6466d4d9d7d8d0edd928b2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,13 +25,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Aberration: 0
     - _Intensity: 0
-    - _Radius: 0
-    - _RingTint: 0
-    - _Strength: 0.08
-    - _Width: 0.204
+    - _Softness: 0.04
     m_Colors:
-    - _Center: {r: 0.8302959, g: 1.670348, b: 0, a: 0}
+    - _MaskColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RoomMax: {r: 0.3567487, g: 0.3611689, b: 0, a: 0}
+    - _RoomMin: {r: 0.3567487, g: 0.3611689, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

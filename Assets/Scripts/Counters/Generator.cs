@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using FMOD.Studio;
 using FMODUnity;
 
 [RequireComponent(typeof(TimingMinigame))]
@@ -36,6 +37,8 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 	private bool isInterrupted = false;
 	private bool isWorking = false;
 	private Coroutine concealmentCheckCoroutine;
+	private EventInstance loopInstance;
+	private bool loopPlaying;
 
 	private void Awake()
 	{
@@ -45,6 +48,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 		if (timingMinigame != null)
 		{
 			timingMinigame.OnMinigameComplete		+= StartGeneratorSequence;
+			timingMinigame.OnFailurePenalty			+= HandleFailurePenalty;
 			int requiredCount									= (generatorID == 1) ? 2 : 4;
 			timingMinigame.SetTargetSuccessCount(requiredCount);
 		}
@@ -52,7 +56,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 		if (playerMovement == null)
 		{
 			GameObject playerObj = GameObject.FindWithTag("Player");
-			if (playerObj != null) 
+			if (playerObj != null)
 				playerMovement = playerObj.GetComponent<PlayerMovement>();
 		}
 	}
@@ -60,7 +64,26 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 	private void OnDisable()
 	{
 		if (timingMinigame != null)
+		{
 			timingMinigame.OnMinigameComplete -= StartGeneratorSequence;
+			timingMinigame.OnFailurePenalty -= HandleFailurePenalty;
+		}
+
+		if (loopPlaying)
+		{
+			SoundManager.Instance.StopLoop(loopInstance, immediate: true);
+			loopPlaying = false;
+		}
+	}
+
+	/// <summary>
+	/// 미니게임 연속 실패 페널티(소음 유발) 발동 시 — 발전기 고유의 "실패" 사운드 재생
+	/// (미니게임의 매 판정 실패음과는 별개로, "발전기가 완전히 틀어졌다"는 신호)
+	/// </summary>
+	private void HandleFailurePenalty()
+	{
+		if (!generatorFailed.IsNull)
+			SoundManager.Instance.PlayOneShot(generatorFailed, transform.position);
 	}
 
 	public void Interact()
@@ -193,11 +216,24 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 	private IEnumerator GeneratorWorkingRoutine()
 	{
 		isWorking = true;
+
+		// 시동 사운드 + 최초 1회 소음 방출 — 위협이 반응하는 건 이 순간뿐
+		if (!generatorSuccess.IsNull)
+			SoundManager.Instance.PlayOneShot(generatorSuccess, transform.position);
+
 		EventBus.RaiseNoiseEmitted((Vector2)transform.position, noiseRadius);
+
+		// 시동 이후로는 계속 웅웅거리는 루프 — 추가 Noise 방출 없이 배경음으로만 재생
+		if (!generatorLoop.IsNull)
+		{
+			loopInstance = SoundManager.Instance.PlayLoop(generatorLoop, transform);
+			loopPlaying = true;
+		}
 
 		yield return new WaitForSeconds(distractionDuration);
 
 		isPowerOn = true;
 		isWorking = false;
+		// 루프는 여기서 정지하지 않음 — 발전기가 켜져 있는 한 계속 재생 (OnDisable에서 정리)
 	}
 }

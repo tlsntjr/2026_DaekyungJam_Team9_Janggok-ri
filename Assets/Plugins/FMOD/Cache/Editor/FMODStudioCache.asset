@@ -463,6 +463,7 @@ MonoBehaviour:
   - {fileID: 194773912964220167}
   - {fileID: 5336897166722871800}
   - {fileID: 1379229619430995201}
+  - {fileID: 6971777344762114951}
   EditorParameters:
   - {fileID: -1067132194200994385}
   - {fileID: 52817568281317721}
@@ -472,7 +473,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 3153589877191176158}
   cacheVersion: 131860
-  cacheTime: 639201268634941410
+  cacheTime: 639201778213205842
   SerializableEventsDict:
   - key: event:/Hallucination-2
     index: 0
@@ -522,6 +523,8 @@ MonoBehaviour:
     index: 22
   - key: event:/Pickup
     index: 23
+  - key: event:/Water-Footstep
+    index: 24
 --- !u!114 &52817568281317721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,10 +671,10 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639201268634941410
+  lastModified: 639201778213205842
   FileSizes:
   - Name: Desktop
-    Value: 2004
+    Value: 2060
   Exists: 1
 --- !u!114 &3433417034891031395
 MonoBehaviour:
@@ -848,11 +851,38 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639201268634906149
+  lastModified: 639201778213175662
   FileSizes:
   - Name: Desktop
-    Value: 1974848
+    Value: 2013088
   Exists: 1
+--- !u!114 &6971777344762114951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Water-Footstep
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Water-Footstep
+  Guid:
+    Data1: -1013663327
+    Data2: 1292077779
+    Data3: 1289738660
+    Data4: -1648503459
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8141125198613858471
 MonoBehaviour:
   m_ObjectHideFlags: 0
