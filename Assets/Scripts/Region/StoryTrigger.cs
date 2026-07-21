@@ -12,6 +12,9 @@ public class StoryTrigger : MonoBehaviour
     [Header("대사 (한 칸 = 한 줄, 클릭으로 다음 줄)")]
     [SerializeField, TextArea(2, 4)] private string[] lines;
 
+    [Header("특정 줄 연출 (줄 번호에 맞춰 셰이크·글리치·효과음 발동 — 비우면 스킵)")]
+    [SerializeField] private DialogueLineEffect[] lineEffects;
+
     [Header("옵션")]
     [SerializeField] private bool once = true;                 // 1회성 (false면 밟을 때마다 재생)
     [SerializeField] private string objectiveFlagId;           // 시퀀스 종료 시 세울 목표 플래그 (비우면 스킵)
@@ -29,12 +32,14 @@ public class StoryTrigger : MonoBehaviour
         fired = true;
         playing = true;
 
-        DialogueSystem.Instance.ShowSequence(lines, () =>
-        {
-            playing = false;
+        DialogueSystem.Instance.ShowSequence(lines,
+            lineIndex => DialogueLineEffect.ApplyAll(lineEffects, lineIndex, transform.position),
+            () =>
+            {
+                playing = false;
 
-            if (!string.IsNullOrEmpty(objectiveFlagId))
-                ObjectiveSystem.Instance.SetFlag(objectiveFlagId);
-        });
+                if (!string.IsNullOrEmpty(objectiveFlagId))
+                    ObjectiveSystem.Instance.SetFlag(objectiveFlagId);
+            });
     }
 }

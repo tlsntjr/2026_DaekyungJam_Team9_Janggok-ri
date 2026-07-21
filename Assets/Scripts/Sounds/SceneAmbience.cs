@@ -23,10 +23,21 @@ public class SceneAmbience : MonoBehaviour
 
     private void Start()
     {
-        if (ambience.IsNull) return;
+        if (ambience.IsNull)
+        {
+            Debug.LogWarning($"[SceneAmbience] {gameObject.name}: 이벤트가 비어 있어 재생을 건너뜁니다");
+            return;
+        }
+
+        if (SoundManager.Instance == null)
+        {
+            Debug.LogError($"[SceneAmbience] {gameObject.name}: SoundManager가 없어 재생 불가");
+            return;
+        }
 
         instance = SoundManager.Instance.PlayLoop(ambience, transform);
         playing = true;
+        Debug.Log($"<color=green>[SceneAmbience]</color> {gameObject.name}: 루프 재생 시작 ({ambience.Path})");
     }
 
     private void OnDestroy()

@@ -62,7 +62,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6195903501559291540}
   - component: {fileID: 2926789955822665991}
   - component: {fileID: 2784725619944256236}
+  - component: {fileID: 2604132480658134850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -294,14 +295,24 @@ MonoBehaviour:
       Path: event:/Leaves-Footstep
   - layer:
       serializedVersion: 2
-      m_Bits: 1048576
+      m_Bits: 33554432
     footstepEvent:
       Guid:
-        Data1: -130583729
-        Data2: 1243272081
-        Data3: 2013362353
-        Data4: 1844659594
-      Path: event:/Leaves-Footstep
+        Data1: -1013663327
+        Data2: 1292077779
+        Data3: 1289738660
+        Data4: -1648503459
+      Path: event:/Water-Footstep
+  - layer:
+      serializedVersion: 2
+      m_Bits: 8388608
+    footstepEvent:
+      Guid:
+        Data1: -1923651670
+        Data2: 1158634044
+        Data3: 254921400
+        Data4: -1411546845
+      Path: event:/Mud-Footstep
   floorMask:
     serializedVersion: 2
     m_Bits: 1572864
@@ -419,6 +430,26 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.38, y: 0.21000004}
   m_EdgeRadius: 0
+--- !u!114 &2604132480658134850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7776010480498012879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9407a1b9c61de124db04616973a561ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MudTerrainSlow
+  mudMask:
+    serializedVersion: 2
+    m_Bits: 8388608
+  exemptMask:
+    serializedVersion: 2
+    m_Bits: 2621440
+  mudMultiplier: 0.7
+  blendSpeed: 5
 --- !u!1 &7888905074087445946
 GameObject:
   m_ObjectHideFlags: 0

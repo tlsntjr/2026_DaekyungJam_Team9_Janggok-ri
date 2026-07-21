@@ -10,8 +10,14 @@ public class ObjectiveSystem : MonoBehaviour, IObjective
 {
     public static ObjectiveSystem Instance { get; private set; }
 
-    readonly HashSet<string> flags = new();
+    // static — 컴포넌트는 씬-로컬이지만 플래그 데이터는 씬 전환을 넘어 유지됨.
+    // (집에서 세운 스토리 플래그가 엔딩 씬의 EndingEvaluator까지 도달해야 하므로)
+    // 새 게임 시작 시엔 ClearAll()을 호출해 초기화할 것.
+    static readonly HashSet<string> flags = new();
     public event Action<string> OnFlagChanged;
+
+    /// <summary>모든 플래그 초기화 — 새 게임 시작(메인 로비 → 시작) 시 호출</summary>
+    public static void ClearAll() => flags.Clear();
 
     void Awake()
     {

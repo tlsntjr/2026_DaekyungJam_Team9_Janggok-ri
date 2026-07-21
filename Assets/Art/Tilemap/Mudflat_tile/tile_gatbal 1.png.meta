@@ -1,0 +1,2251 @@
+fileFormatVersion: 2
+guid: 2697e76d7fb17d94eb082ab7f2726e20
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 934747069347875365
+    second: tile_gatbal_0
+  - first:
+      213: -4034424326960838698
+    second: tile_gatbal_1
+  - first:
+      213: 8945941431334268134
+    second: tile_gatbal_2
+  - first:
+      213: 5938833082830134551
+    second: tile_gatbal_3
+  - first:
+      213: -4400876488191615278
+    second: tile_gatbal_4
+  - first:
+      213: 1120122803221964274
+    second: tile_gatbal_5
+  - first:
+      213: -7765153256905848217
+    second: tile_gatbal_6
+  - first:
+      213: 7030537077177259708
+    second: tile_gatbal_7
+  - first:
+      213: 6402235636262313835
+    second: tile_gatbal_8
+  - first:
+      213: -4043450257350586631
+    second: tile_gatbal_9
+  - first:
+      213: -7739521030154272244
+    second: tile_gatbal_10
+  - first:
+      213: 493157089790409991
+    second: tile_gatbal_11
+  - first:
+      213: 6519019027217051384
+    second: tile_gatbal_12
+  - first:
+      213: 7112186497710734121
+    second: tile_gatbal_13
+  - first:
+      213: -8065948990198374911
+    second: tile_gatbal_14
+  - first:
+      213: -3009317133126776143
+    second: tile_gatbal_15
+  - first:
+      213: 9197343795018071426
+    second: tile_gatbal_16
+  - first:
+      213: -9199224019540396250
+    second: tile_gatbal_17
+  - first:
+      213: 930195886367285180
+    second: tile_gatbal_18
+  - first:
+      213: -1103402492191347768
+    second: tile_gatbal_19
+  - first:
+      213: 5481714938553032027
+    second: tile_gatbal_20
+  - first:
+      213: -2856852844239184572
+    second: tile_gatbal_21
+  - first:
+      213: 3451656679453916076
+    second: tile_gatbal_22
+  - first:
+      213: 1479526444904312239
+    second: tile_gatbal_23
+  - first:
+      213: 7952752916058835095
+    second: tile_gatbal_24
+  - first:
+      213: -1051430925698597903
+    second: tile_gatbal_25
+  - first:
+      213: -5523673997108549511
+    second: tile_gatbal_26
+  - first:
+      213: -701526646205233130
+    second: tile_gatbal_27
+  - first:
+      213: -8690119062332127222
+    second: tile_gatbal_28
+  - first:
+      213: 2650731937312862266
+    second: tile_gatbal_29
+  - first:
+      213: -8002730335091122559
+    second: tile_gatbal_30
+  - first:
+      213: -5785899944977041085
+    second: tile_gatbal_31
+  - first:
+      213: -6645329645213312893
+    second: tile_gatbal_32
+  - first:
+      213: -208084587671429841
+    second: tile_gatbal_33
+  - first:
+      213: -5456055718794503548
+    second: tile_gatbal_34
+  - first:
+      213: 7090862832814552040
+    second: tile_gatbal_35
+  - first:
+      213: -7353772285275361514
+    second: tile_gatbal_36
+  - first:
+      213: -4921860779309121690
+    second: tile_gatbal_37
+  - first:
+      213: -6767661626457886272
+    second: tile_gatbal_38
+  - first:
+      213: -2565190075241477026
+    second: tile_gatbal_39
+  - first:
+      213: -3509415023889718749
+    second: tile_gatbal_40
+  - first:
+      213: -1324828635583756631
+    second: tile_gatbal_41
+  - first:
+      213: -4152800139965130591
+    second: tile_gatbal_42
+  - first:
+      213: -1780414599956987126
+    second: tile_gatbal_43
+  - first:
+      213: 9049792910974650527
+    second: tile_gatbal_44
+  - first:
+      213: 6364288277922861702
+    second: tile_gatbal_45
+  - first:
+      213: -1651434688475158571
+    second: tile_gatbal_46
+  - first:
+      213: 1415503456628814527
+    second: tile_gatbal_47
+  - first:
+      213: 8990204946696462665
+    second: tile_gatbal_48
+  - first:
+      213: 6981339313239619909
+    second: tile_gatbal_49
+  - first:
+      213: -2127199380960559993
+    second: tile_gatbal_50
+  - first:
+      213: -4421667320007347628
+    second: tile_gatbal_51
+  - first:
+      213: -4383380665677217763
+    second: tile_gatbal_52
+  - first:
+      213: -1851559450866684808
+    second: tile_gatbal_53
+  - first:
+      213: -6006429407016964224
+    second: tile_gatbal_54
+  - first:
+      213: -7298552526046342881
+    second: tile_gatbal_55
+  - first:
+      213: -5057503155049917411
+    second: tile_gatbal_56
+  - first:
+      213: 5612896741013007782
+    second: tile_gatbal_57
+  - first:
+      213: 7057573522235931002
+    second: tile_gatbal_58
+  - first:
+      213: 7849339312509619822
+    second: tile_gatbal_59
+  - first:
+      213: 5698212454025814264
+    second: tile_gatbal_60
+  - first:
+      213: -1471898483085185141
+    second: tile_gatbal_61
+  - first:
+      213: -1654701365907114419
+    second: tile_gatbal_62
+  - first:
+      213: 6349571323052543968
+    second: tile_gatbal_63
+  - first:
+      213: -2046540374772394202
+    second: tile_gatbal_64
+  - first:
+      213: -2820041647978942451
+    second: tile_gatbal_65
+  - first:
+      213: -5584583581109975364
+    second: tile_gatbal_66
+  - first:
+      213: -7979858103106125468
+    second: tile_gatbal_67
+  - first:
+      213: 7196911086771214363
+    second: tile_gatbal_68
+  - first:
+      213: -5125213834661019031
+    second: tile_gatbal_69
+  - first:
+      213: -5910462481337009710
+    second: tile_gatbal_70
+  - first:
+      213: -5749144230780250666
+    second: tile_gatbal_71
+  - first:
+      213: -5910919532892570569
+    second: tile_gatbal_72
+  - first:
+      213: 1822928685587653488
+    second: tile_gatbal_73
+  - first:
+      213: 984581505839261992
+    second: tile_gatbal_74
+  - first:
+      213: -8114423358102849477
+    second: tile_gatbal_75
+  - first:
+      213: -788381524418611725
+    second: tile_gatbal_76
+  - first:
+      213: 6938195842034998871
+    second: tile_gatbal_77
+  - first:
+      213: 2317381261803595064
+    second: tile_gatbal_78
+  - first:
+      213: 3613042986749265605
+    second: tile_gatbal_79
+  - first:
+      213: -456658129033729270
+    second: tile_gatbal_80
+  - first:
+      213: -1225741789376354356
+    second: tile_gatbal_81
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tile_gatbal 1_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1344
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ea4827fa5d85d45933ebe0294a4bec
+      internalID: -957882348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1344
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b7ed5459ad768d4f9716471b038d566
+      internalID: 572094133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 1344
+        width: 97
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99daaebc51b26034e9acc9cf378ea2c5
+      internalID: 629532485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1344
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a9da966258cadd408307a1e57290dbc
+      internalID: -138879969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 1343
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7013e7b94271c364aafb97119c8cb253
+      internalID: 417082444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_5
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 1344
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b1bc0ac2935ed46ae05f2950fb261d
+      internalID: -451929794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_6
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1344
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 466c214674b059b4097c5d54eb77ee81
+      internalID: -1938922811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_7
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1408
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a03330387285cff4f8e4c6181619fcba
+      internalID: -1985296137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_8
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 1408
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bdd33a297fb4234d97ac7e8b2b8cc8e
+      internalID: -372732774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_9
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1344
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca773e4b78700a248919fd99d571f9c7
+      internalID: 1675869542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_10
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 1344
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31c665495fbc78a4ba75f8de102e7d88
+      internalID: -1404338692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df97020d8337626439f7b1beade98c4e
+      internalID: -835629508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_12
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d320c520ef0421a4c8dca100b784b69b
+      internalID: -2115399888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3bd9d25fa77fb1449a723299b9d2c5e
+      internalID: 416480667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_14
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb6d5798a497174f9cb9a0e69de3218
+      internalID: 783749033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_15
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304166e7b3069764c9e9d31e785aeec2
+      internalID: -1389621961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_16
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edb75d7d13ec5604db5417606940d3ee
+      internalID: 1964207912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_17
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c497c86ed4400eb47975c4aeec8b46bd
+      internalID: -1560291572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c75c7278c6591204ba011f27ed9ff642
+      internalID: 740019153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_19
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbab00a7bfd7c8f41bd367d408621221
+      internalID: 736187506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_20
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1152
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8394f243241c4674f819c00aa2daf831
+      internalID: 1566117907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_21
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 1152
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b18b36f34e07704f84552768303674d
+      internalID: 1580059577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_22
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1088
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d67923b2cfda3f94da554a28391c0a80
+      internalID: 14761535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_23
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1088
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a207d7519d02cf4d93388e4ce2aafed
+      internalID: 1311117177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_24
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1088
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c94583b4842b8e42a374cb5bbecd49e
+      internalID: 1434668348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 928
+        width: 482
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83a5e620eb2fa4f409af943450fe2360
+      internalID: 115623843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_26
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1024
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d69361420b914d4e995d82585d427e0
+      internalID: 1340356813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_27
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 1023
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64ce0a1c87e2f644a9355585b6c8c652
+      internalID: -598518273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_28
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 1024
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d551be96ec0936b41a43fa2a1252fc9f
+      internalID: -1997075837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_29
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1017
+        width: 101
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d90c557c4e1ead14987408cd9144355a
+      internalID: 33899049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_30
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 896
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bedd3e817c373144c91d9aef88c01257
+      internalID: 767933068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_31
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 896
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a51a2d2ccd093d440adb852cc410cbfa
+      internalID: -705585390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_32
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 896
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18399d48af086284fa1fbdde88b36a38
+      internalID: -1771151652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_33
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 787
+        width: 279
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c62015d9ecf028429c81a0ada1b1ef0
+      internalID: 1519623075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_34
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 675
+        width: 237
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d31d04e5dda200e41a307eac4450a81a
+      internalID: 1490030101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_35
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 799
+        width: 114
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de9ac858ec9f30488e3d6ec6127bde4
+      internalID: 624697256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_36
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 832
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3c02b1ae1caf864dad22290746c10ab
+      internalID: -346664647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_37
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 662
+        width: 169
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e00454effaf24dd48a55e06a47a6c6d8
+      internalID: 381139069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_38
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 729
+        width: 64
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12bcfda426c32b241858731efb07f76c
+      internalID: -1197009755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_39
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 693
+        width: 105
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6252f009e01df3848ba587729209978d
+      internalID: 1792014801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_40
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 737
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9965327463f72e041be9ba27f906111e
+      internalID: 1524362289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_41
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 704
+        width: 105
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c86166f2906923d449729833b8727aaa
+      internalID: 1751879242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_42
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 664
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 571f95e255fb79c409f16c52cbbcacd9
+      internalID: -1645946936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_43
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 631
+        width: 97
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07df7b3fded3455458fd98af89659580
+      internalID: -1362238188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_44
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 638
+        width: 104
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 311f551dfbccd034295a9361730edb1b
+      internalID: -1317520059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_45
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 510
+        width: 281
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d26a411320cd5704eb188554f92da66e
+      internalID: -1518597726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_46
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 545
+        width: 215
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e57d3771f4f6c8546aa2c7ba2b39f0b2
+      internalID: 899786629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_47
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 632
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dac04f426f2fc64ea78de5cbe99f089
+      internalID: -1401443035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_48
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 498
+        width: 203
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85ee95873f9bb545999ddef9306b7e4
+      internalID: 1229214670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_49
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 597
+        width: 39
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c650435303a9b74eafdce4c9c98a4b8
+      internalID: -1295588137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_50
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 559
+        width: 104
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd5016bcbfd221e45979a34fe265f80e
+      internalID: -966185129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_51
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 556
+        width: 109
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a30307c072873ff4da78c169d75f6f03
+      internalID: -560057423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_52
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 497fb754758cf864c95eb8f685f8406d
+      internalID: 2068722807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_53
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 288
+        width: 10
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb12fd8b75d15043aea21d4aa6953f4
+      internalID: 1573113498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_54
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 288
+        width: 9
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f9b8dc0b006c64b94917d47ba3c7d9
+      internalID: 761927428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_55
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 351
+        width: 7
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1d61f374b5fa8c43a95ae747b16dc64
+      internalID: -387464158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_56
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 351
+        width: 6
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67f364563b1494744b27c532c52d5b28
+      internalID: 498970085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_57
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 192
+        width: 305
+        height: 287
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eefadd46aabba2439908664906b0c1f
+      internalID: -1792737226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_58
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: addd088e6bf2d5b49b7d04ac687a92a9
+      internalID: 1514641167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_59
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8c247b33fb72e84fb1db7e633278a91
+      internalID: -1188739307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_60
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 288
+        width: 6
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 261e5b9ab83fd4a4a8248c39cf368c36
+      internalID: 399200311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_61
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 288
+        width: 7
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f281828896b7eb04c910b0e19050e326
+      internalID: -2111570929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_62
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 290
+        width: 16
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0acaae21bb9a2314b8109d594e5a0d59
+      internalID: -1254181600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_63
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 289
+        width: 26
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 737e136cf4287d3458954d0e7b53d846
+      internalID: -1258614070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_64
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 279
+        width: 182
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d87ec77d0913ed4da8e38d52210c566
+      internalID: -923050610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_65
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 113
+        width: 51
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac815940f9c4474aadffffbd7477df7
+      internalID: -1310732558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_66
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 123
+        width: 18
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f130d158ede720a4fb1dbd2eef413fb6
+      internalID: 1888204960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_67
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 160
+        width: 16
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 769226a7f83ec004bbd54cc0d3d23923
+      internalID: 1408561966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_68
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 168
+        width: 16
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2add894c2de6d4f87bd3e893de928c
+      internalID: 1093564412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_69
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 165
+        width: 15
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a230aa5b29e6af4f8e0b605265b5c6a
+      internalID: -1106206601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_70
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 152
+        width: 174
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4510ebd394a44d648baf5d16c864f158
+      internalID: -932002479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_71
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 34
+        width: 188
+        height: 202
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abe46e4456f510b4bbca8c142e08a676
+      internalID: -929366990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_72
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 113
+        width: 91
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38059dff9ad7c264d88c3ce3bdc76fe1
+      internalID: 1304741668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_73
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 116
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 070bca045f995ed4e9c7978009bfeefb
+      internalID: -771422717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_74
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 125
+        width: 12
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00c9854c93105bc4da1e841912c0c62c
+      internalID: -481019383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_75
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 97
+        width: 15
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 562c7c142b0ff3a43a1c6cfa357cdaa8
+      internalID: -1727812201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_76
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 94
+        width: 16
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b613871ea21a4747a705242907a6c14
+      internalID: -433167917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_77
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 117
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c715178ee9a6d85499a8fdfdbfb41d6f
+      internalID: 824634092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_78
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 99
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7527c9d8129d3aa4c8c4312cb347d4e8
+      internalID: 308989261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_79
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 32
+        width: 81
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8863db40a68446b4893fb863bf388919
+      internalID: -708309279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_80
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 32
+        width: 33
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 343293c89feba744d832119fea0c5179
+      internalID: 1397688993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_gatbal 1_81
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 31
+        width: 79
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11fcf8af1fce748419aaf9e4d28154cd
+      internalID: -1849272604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 532b2c57f9a2b8f4c862f5747c9b32c8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      tile_gatbal 1_0: -957882348
+      tile_gatbal 1_1: 572094133
+      tile_gatbal 1_10: -1404338692
+      tile_gatbal 1_11: -835629508
+      tile_gatbal 1_12: -2115399888
+      tile_gatbal 1_13: 416480667
+      tile_gatbal 1_14: 783749033
+      tile_gatbal 1_15: -1389621961
+      tile_gatbal 1_16: 1964207912
+      tile_gatbal 1_17: -1560291572
+      tile_gatbal 1_18: 740019153
+      tile_gatbal 1_19: 736187506
+      tile_gatbal 1_2: 629532485
+      tile_gatbal 1_20: 1566117907
+      tile_gatbal 1_21: 1580059577
+      tile_gatbal 1_22: 14761535
+      tile_gatbal 1_23: 1311117177
+      tile_gatbal 1_24: 1434668348
+      tile_gatbal 1_25: 115623843
+      tile_gatbal 1_26: 1340356813
+      tile_gatbal 1_27: -598518273
+      tile_gatbal 1_28: -1997075837
+      tile_gatbal 1_29: 33899049
+      tile_gatbal 1_3: -138879969
+      tile_gatbal 1_30: 767933068
+      tile_gatbal 1_31: -705585390
+      tile_gatbal 1_32: -1771151652
+      tile_gatbal 1_33: 1519623075
+      tile_gatbal 1_34: 1490030101
+      tile_gatbal 1_35: 624697256
+      tile_gatbal 1_36: -346664647
+      tile_gatbal 1_37: 381139069
+      tile_gatbal 1_38: -1197009755
+      tile_gatbal 1_39: 1792014801
+      tile_gatbal 1_4: 417082444
+      tile_gatbal 1_40: 1524362289
+      tile_gatbal 1_41: 1751879242
+      tile_gatbal 1_42: -1645946936
+      tile_gatbal 1_43: -1362238188
+      tile_gatbal 1_44: -1317520059
+      tile_gatbal 1_45: -1518597726
+      tile_gatbal 1_46: 899786629
+      tile_gatbal 1_47: -1401443035
+      tile_gatbal 1_48: 1229214670
+      tile_gatbal 1_49: -1295588137
+      tile_gatbal 1_5: -451929794
+      tile_gatbal 1_50: -966185129
+      tile_gatbal 1_51: -560057423
+      tile_gatbal 1_52: 2068722807
+      tile_gatbal 1_53: 1573113498
+      tile_gatbal 1_54: 761927428
+      tile_gatbal 1_55: -387464158
+      tile_gatbal 1_56: 498970085
+      tile_gatbal 1_57: -1792737226
+      tile_gatbal 1_58: 1514641167
+      tile_gatbal 1_59: -1188739307
+      tile_gatbal 1_6: -1938922811
+      tile_gatbal 1_60: 399200311
+      tile_gatbal 1_61: -2111570929
+      tile_gatbal 1_62: -1254181600
+      tile_gatbal 1_63: -1258614070
+      tile_gatbal 1_64: -923050610
+      tile_gatbal 1_65: -1310732558
+      tile_gatbal 1_66: 1888204960
+      tile_gatbal 1_67: 1408561966
+      tile_gatbal 1_68: 1093564412
+      tile_gatbal 1_69: -1106206601
+      tile_gatbal 1_7: -1985296137
+      tile_gatbal 1_70: -932002479
+      tile_gatbal 1_71: -929366990
+      tile_gatbal 1_72: 1304741668
+      tile_gatbal 1_73: -771422717
+      tile_gatbal 1_74: -481019383
+      tile_gatbal 1_75: -1727812201
+      tile_gatbal 1_76: -433167917
+      tile_gatbal 1_77: 824634092
+      tile_gatbal 1_78: 308989261
+      tile_gatbal 1_79: -708309279
+      tile_gatbal 1_8: -372732774
+      tile_gatbal 1_80: 1397688993
+      tile_gatbal 1_81: -1849272604
+      tile_gatbal 1_9: 1675869542
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

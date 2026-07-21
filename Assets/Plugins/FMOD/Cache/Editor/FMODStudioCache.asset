@@ -204,7 +204,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6033385355981452395}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
@@ -285,7 +285,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6033385355981452395}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -464,6 +464,8 @@ MonoBehaviour:
   - {fileID: 5336897166722871800}
   - {fileID: 1379229619430995201}
   - {fileID: 6971777344762114951}
+  - {fileID: 8910896654451064890}
+  - {fileID: 2795508855512337737}
   EditorParameters:
   - {fileID: -1067132194200994385}
   - {fileID: 52817568281317721}
@@ -473,7 +475,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 3153589877191176158}
   cacheVersion: 131860
-  cacheTime: 639201778213205842
+  cacheTime: 639202717451424951
   SerializableEventsDict:
   - key: event:/Hallucination-2
     index: 0
@@ -525,6 +527,10 @@ MonoBehaviour:
     index: 23
   - key: event:/Water-Footstep
     index: 24
+  - key: event:/Laughter
+    index: 25
+  - key: event:/Tide
+    index: 26
 --- !u!114 &52817568281317721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +638,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2795508855512337737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Tide
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Tide
+  Guid:
+    Data1: 328694780
+    Data2: 1234914940
+    Data3: -105462624
+    Data4: -1613668417
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &2859861068020172951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,10 +704,10 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639201778213205842
+  lastModified: 639202717451424951
   FileSizes:
   - Name: Desktop
-    Value: 2060
+    Value: 2156
   Exists: 1
 --- !u!114 &3433417034891031395
 MonoBehaviour:
@@ -851,10 +884,10 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639201778213175662
+  lastModified: 639202717451399913
   FileSizes:
   - Name: Desktop
-    Value: 2013088
+    Value: 2209824
   Exists: 1
 --- !u!114 &6971777344762114951
 MonoBehaviour:
@@ -933,6 +966,33 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8910896654451064890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Laughter
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Laughter
+  Guid:
+    Data1: 2077868386
+    Data2: 1212605935
+    Data3: -1779772020
+    Data4: -1387154733
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20

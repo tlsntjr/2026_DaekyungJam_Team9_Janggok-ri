@@ -5,7 +5,7 @@
 			<value>Mud-Footstep</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d55acdb2-d10e-46e4-aae5-98eeb7c56426}</destination>
@@ -96,7 +96,6 @@
 	<object class="MixerBusEffectChain" id="{103c02e6-ac09-452b-af51-7c78020224df}">
 		<relationship name="effects">
 			<destination>{ff8d6e92-5628-48b5-9f32-4aca6815f2c8}</destination>
-			<destination>{1d295345-abd3-4ace-a601-a53f4241390a}</destination>
 			<destination>{ee652db9-07d6-4658-a8da-244c0fa5eb64}</destination>
 			<destination>{535a21c5-d39e-4fbf-b6ad-60f40abff69b}</destination>
 		</relationship>
@@ -122,14 +121,13 @@
 			<value>-27.4137936</value>
 		</property>
 	</object>
-	<object class="SpatialiserEffect" id="{1d295345-abd3-4ace-a601-a53f4241390a}" />
 	<object class="MixerBusFader" id="{ee652db9-07d6-4658-a8da-244c0fa5eb64}" />
 	<object class="MixerSend" id="{535a21c5-d39e-4fbf-b6ad-60f40abff69b}">
 		<property name="level">
 			<value>0</value>
 		</property>
 		<property name="inputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="mixerReturn">
 			<destination>{d66c0c43-218e-4d07-a7c2-29af96cde16f}</destination>

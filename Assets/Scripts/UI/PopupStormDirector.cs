@@ -36,6 +36,13 @@ public class PopupStormDirector : MonoBehaviour
     [SerializeField] private float spawnIntervalMax = 0.22f;
     [SerializeField] private int maxAliveDummies = 30;   // 초과 시 가장 오래된 것부터 제거 (성능 가드)
 
+    [Header("Dummy 웨이브 모드 — 우르르 쌓였다 싹 사라지고, 랜덤 간격 후 반복 (시야 확보용)")]
+    [SerializeField] private int wavePopupCountMin = 4;      // 한 웨이브의 팝업 수
+    [SerializeField] private int wavePopupCountMax = 7;
+    [SerializeField] private float waveLingerDuration = 1.8f;   // 다 쌓인 뒤 화면에 남는 시간
+    [SerializeField] private float waveGapMin = 2.5f;        // 웨이브 사이 조용한 틈 (이때 시야 확보)
+    [SerializeField] private float waveGapMax = 5f;
+
     [Header("계단식 캐스케이드")]
     [SerializeField] private Vector2 cascadeStep = new Vector2(34f, -26f);   // 한 장마다 밀리는 오프셋 (우하단 계단)
     [SerializeField] private int cascadeCountMin = 3;    // 한 지점에서 연달아 나오는 장수
@@ -114,6 +121,83 @@ public class PopupStormDirector : MonoBehaviour
     {
         StopAllStormCoroutines();
         Cleanup();
+    }
+
+    /// <summary>
+    /// 더미 폭풍 (반복 웨이브 방식) — StopStorm 호출(탈출)까지 반복:
+    ///   더미 우르르 → 진짜 팝업 등장 → 플레이어가 버튼으로 닫음 → 전부 정리
+    ///   → 랜덤 간격의 조용한 틈 → 다음 웨이브.
+    /// 테스트툴에서의 "난사 → 진짜 팝업 → 닫기" 한 사이클이 곧 한 웨이브.
+    /// 닫는 동안 화면이 덮여 있으니 "달리다가 멈춰서 닫아야 하는" 조작 압박이 기믹이 된다.
+    /// 진짜 팝업의 버튼은 자동으로 "닫기"에 연결됨 — 호출자 배선 불필요. 제한시간·사망 없음 (그건 Full 모드).
+    /// finalPopupPrefab이 비어 있으면 닫기 단계 없이 유지시간 후 자동 정리로 폴백.
+    /// </summary>
+    public void StartDummyStorm(float rampDuration = 6f)
+    {
+        StopAllStormCoroutines();
+        Cleanup();
+
+        if (!string.IsNullOrEmpty(stormHuntId))
+            EventBus.RaiseThreatStateChanged(stormHuntId, 2);
+
+        stormCoroutine = StartCoroutine(DummyStormRoutine(rampDuration));
+        wobbleCoroutine = StartCoroutine(GlitchWobbleRoutine());
+    }
+
+    private IEnumerator DummyStormRoutine(float rampDuration)
+    {
+        float elapsed = 0f;
+        while (true)
+        {
+            // ── 웨이브: 새 앵커에서 계단식으로 우르르 ──
+            cascadeIndex = 0;
+            cascadeTarget = 0;   // 웨이브마다 새 위치에서 시작
+
+            int count = UnityEngine.Random.Range(wavePopupCountMin, wavePopupCountMax + 1);
+            for (int i = 0; i < count; i++)
+            {
+                stormProgress = rampDuration > 0f ? Mathf.Clamp01(elapsed / rampDuration) : 1f;
+                SpawnDummy();
+
+                float wait = UnityEngine.Random.Range(spawnIntervalMin, spawnIntervalMax);
+                elapsed += wait;
+                yield return new WaitForSeconds(wait);
+            }
+
+            // ── 진짜 팝업 등장 — 버튼으로 닫아야 이 웨이브가 끝남 ──
+            if (finalPopupPrefab != null)
+            {
+                bool waveClosed = false;
+                SpawnFinalPopupInternal(popup =>
+                {
+                    foreach (var button in popup.GetComponentsInChildren<UnityEngine.UI.Button>(true))
+                        button.onClick.AddListener(() => waveClosed = true);
+                });
+
+                yield return new WaitUntil(() => waveClosed);
+
+                if (finalPopup != null) { Destroy(finalPopup); finalPopup = null; }
+            }
+            else
+            {
+                // 진짜 팝업 프리팹 미지정 — 닫기 없이 유지시간 후 자동 정리 (폴백)
+                yield return new WaitForSeconds(waveLingerDuration);
+            }
+
+            ClearDummies();
+
+            // ── 조용한 틈 — 시야 확보 구간 (글리치 요동은 유지되어 긴장은 안 끊김) ──
+            float gap = UnityEngine.Random.Range(waveGapMin, waveGapMax);
+            elapsed += gap;
+            yield return new WaitForSeconds(gap);
+        }
+    }
+
+    private void ClearDummies()
+    {
+        foreach (var dummy in aliveDummies)
+            if (dummy != null) Destroy(dummy);
+        aliveDummies.Clear();
     }
 
     private void StopAllStormCoroutines()
@@ -226,19 +310,13 @@ public class PopupStormDirector : MonoBehaviour
     }
 
     /// <summary>
-    /// 진짜 팝업 — 화면 정중앙 최상단. 버튼 연결은 호출자 콜백 몫.
+    /// 진짜 팝업 생성 공용부 — 화면 정중앙 최상단, 등장음·글리치 강타 포함.
+    /// configure 콜백에서 버튼 배선 (Full = 호출자 몫, Dummy 웨이브 = 내부에서 닫기 연결).
     /// </summary>
-    private void SpawnFinalPopup(Action<GameObject> onFinalPopup)
+    private void SpawnFinalPopupInternal(Action<GameObject> configure)
     {
-        if (finalPopupPrefab == null)
-        {
-            Debug.LogWarning("[PopupStormDirector] finalPopupPrefab이 비어 있어 진짜 팝업 없이 종료합니다.");
-            StopStorm();
-            return;
-        }
-
         RectTransform parent = spawnArea != null ? spawnArea : transform as RectTransform;
-        if (parent == null) return;
+        if (parent == null || finalPopupPrefab == null) return;
 
         finalPopup = Instantiate(finalPopupPrefab, parent);
         finalPopup.SetActive(true);
@@ -257,7 +335,22 @@ public class PopupStormDirector : MonoBehaviour
         if (PanicGlitchDirector.Instance != null)
             PanicGlitchDirector.Instance.Pulse(finalGlitchPulse);   // 등장 순간 화면 강타
 
-        onFinalPopup?.Invoke(finalPopup);
+        configure?.Invoke(finalPopup);
+    }
+
+    /// <summary>
+    /// Full 모드의 진짜 팝업 — 버튼 연결은 호출자 콜백 몫, 제한시간 사망 타이머 포함.
+    /// </summary>
+    private void SpawnFinalPopup(Action<GameObject> onFinalPopup)
+    {
+        if (finalPopupPrefab == null)
+        {
+            Debug.LogWarning("[PopupStormDirector] finalPopupPrefab이 비어 있어 진짜 팝업 없이 종료합니다.");
+            StopStorm();
+            return;
+        }
+
+        SpawnFinalPopupInternal(onFinalPopup);
 
         // 제한시간 시작 — 호출자가 시간 내에 StopStorm()을 부르면 타이머도 함께 정지됨
         if (finalPopupTimeLimit > 0f)

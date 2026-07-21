@@ -82,6 +82,8 @@ public class HauntController : MonoBehaviour
 		EventBus.RaiseHauntPhaseAdvanced(definition.huntId, CurrentPhaseIndex);
 	}
 
+	private int emptyCounterWarnedPhase = -1;
+
 	private void Update()
 	{
 		if (State != HauntState.Threatened) return;
@@ -89,6 +91,17 @@ public class HauntController : MonoBehaviour
 		// 활성 위협 틱
 		foreach (var t in Current.Threats)
 			if (!t.IsNeutralized) t.Tick();
+
+		// 카운터가 0개면(미등록 or ICounterCondition 미구현 컴포넌트가 필터링됨) 빈 배열 All()==true 로
+		// 페이즈가 시작 즉시 자동 클리어되는 함정 — 진행을 멈추고 경고만 남김
+		if (Current.Counters.Length == 0)
+		{
+			if (emptyCounterWarnedPhase != CurrentPhaseIndex)
+			{
+				emptyCounterWarnedPhase = CurrentPhaseIndex;
+			}
+			return;
+		}
 
 		// 파훼 조건 폴링 — 전부 만족하면 자동으로 다음 단계
 		if (Current.Counters.All(c => c.IsSatisfied))

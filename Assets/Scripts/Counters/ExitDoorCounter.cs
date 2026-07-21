@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class ExitDoorCounter : MonoBehaviour, IInteractable, ICounterCondition
 {
-    [Header("Ã¶¹® ¼³Á¤")]
-    [SerializeField] private string promptMessage = "Ã¶¹®À» ¿­°í Å»Ãâ";
+    [Header("ì² ê±° ë¬¸êµ¬")]
+    [SerializeField] private string promptMessage = "ì² ê±°ëœ ë¬¸ì„ í†µí•´ íƒˆì¶œ";
+
+    [Header("ìƒí˜¸ìž‘ìš© ì‹œ ëŒ€ì‚¬ (í•œ ì¹¸ = í•œ ì¤„, ë¹„ìš°ë©´ ìŠ¤í‚µ)")]
+    [SerializeField, TextArea(2, 4)] private string[] resultLines = { "...ëë‚¬ë‹¤. ì´ì œ ì •ë§ ëë‚¬ë‚˜." };
+
+    [Header("ì™„ë£Œ ì‹œ ê´´ë‹´ ì¢…ë£Œ ì²˜ë¦¬ (Stateê°€ ObjectiveReadyì¼ ë•Œë§Œ ì‹¤ì œë¡œ ì”¬ ì „í™˜ë¨)")]
+    [SerializeField] private HauntController haunt;
 
     private bool isDoorOpened = false;
     public bool IsSatisfied => isDoorOpened;
 
-    public string Prompt => isDoorOpened ? "ÀÌ¹Ì ¿­¸° ¹®" : promptMessage;
+    public string Prompt => isDoorOpened ? "ì´ë¯¸ ì—´ë¦° ë¬¸" : promptMessage;
     public string InteractKey => "E";
 
     public void Interact()
@@ -17,12 +23,12 @@ public class ExitDoorCounter : MonoBehaviour, IInteractable, ICounterCondition
 
         isDoorOpened = true;
 
-        Debug.Log("<color=cyan>[3´Ü°è ¿Ï¼ö]</color> ÇÃ·¹ÀÌ¾î°¡ Ãâ±¸ Ã¶¹® »óÈ£ÀÛ¿ë ¼º°ø! IsSatisfied°¡ true·Î Àü¼ÛµË´Ï´Ù.");
+        Debug.Log("<color=cyan>[íƒˆì¶œ ì™„ë£Œ]</color> í”Œë ˆì´ì–´ê°€ ì¶œêµ¬ ì² ë¬¸ ìƒí˜¸ìž‘ìš© ì™„ë£Œ! IsSatisfiedê°€ trueë¡œ ì „í™˜ë©ë‹ˆë‹¤.");
 
-        if (DialogueSystem.Instance != null)
-        {
-            DialogueSystem.Instance.Show("Ã¶¹®ÀÌ ¿­·È´Ù! ¾ç½ÄÀåÀ» Å»ÃâÇÏ´Â µ¥ ¼º°øÇß½À´Ï´Ù!");
-        }
+        if (resultLines != null && resultLines.Length > 0 && DialogueSystem.Instance != null)
+            DialogueSystem.Instance.ShowSequence(resultLines, () => haunt?.CompleteHaunt());
+        else
+            haunt?.CompleteHaunt();
 
         gameObject.SetActive(false);
     }

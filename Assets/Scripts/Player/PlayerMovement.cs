@@ -16,6 +16,24 @@ public class PlayerMovement : MonoBehaviour
 	private float speedMultiplier = 1f;
 	private float backpedalFactor = 1f;
 
+	/// <summary>
+	/// 지형 이동 배율 (1 = 정상). 갯벌 진흙 위 감속 등 — MudTerrainSlow가 구동.
+	/// 오염 감속(speedMultiplier)과 별도 채널이라 서로 덮어쓰지 않고 곱으로 중첩됨.
+	/// </summary>
+	public float TerrainMultiplier { get; set; } = 1f;
+
+	/// <summary>
+	/// 이동 잠금 — 선택지 창 등 "손을 뗄 수 없는 순간"에 DialogueUI가 걸어줌.
+	/// 입력을 0으로 만들므로 IsMoving도 false가 되어 발소리·정적 감지 등에 안전.
+	/// </summary>
+	public bool MovementLocked { get; set; }
+
+	/// <summary>
+	/// 은신 잠금 — 은신처에 숨어 있는 동안 Concealment가 걸어줌.
+	/// MovementLocked(선택지)와 별도 채널: 숨은 채로 선택지가 떴다 닫혀도 은신 잠금이 풀리지 않게.
+	/// </summary>
+	public bool HiddenLock { get; set; }
+
 	// ===== 병합 시 유실 복구 =====
 	public bool IsMoving		=> input.sqrMagnitude > 0.0001f;	// PlayerAnimator가 Idle/Walk 판정에 사용
 	public Vector2 MoveInput	=> input;								// PlayerAnimator가 방향 판정에 사용
@@ -34,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
 	{
+		if (MovementLocked || HiddenLock)
+		{
+			input = Vector2.zero;   // IsMoving도 자연히 false — 발소리·정적 감지에 안 걸림
+			return;
+		}
+
 		input.x = Input.GetAxisRaw("Horizontal");
 		input.y = Input.GetAxisRaw("Vertical");
 		input = input.normalized;
@@ -60,6 +84,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + input * (moveSpeed * speedMultiplier * backpedalFactor) * Time.fixedDeltaTime);
+		rb.MovePosition(rb.position + input * (moveSpeed * speedMultiplier * backpedalFactor * TerrainMultiplier) * Time.fixedDeltaTime);
 	}
 }

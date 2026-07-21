@@ -14,7 +14,11 @@ public class RestartSaveModel : MonoBehaviour, ISaveModel
     /// <summary>
     /// 처음부터 재시작 (DeathDirector의 '메인으로' 버튼 등에서 호출)
     /// </summary>
-    public void RestoreOnDeath() => SceneFlow.Instance.FadeAndLoad(startSceneName);
+    public void RestoreOnDeath()
+    {
+        ObjectiveSystem.ClearAll();   // 스토리 플래그는 씬을 넘어 유지되므로, 처음부터 다시 갈 땐 명시적으로 초기화
+        SceneFlow.Instance.FadeAndLoad(startSceneName);
+    }
 
     public string GetCheckpoint() => startSceneName;
 }

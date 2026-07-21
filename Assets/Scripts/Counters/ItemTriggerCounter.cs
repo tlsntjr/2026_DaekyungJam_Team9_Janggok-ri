@@ -19,6 +19,5 @@ public class ItemTriggerCounter : MonoBehaviour, ICounterCondition
     {
         if (isSatisfied) return; // 중복 호출 방지
         isSatisfied = true;
-        Debug.Log("<color=green>[2단계 완료]</color> 녹음기 획득 감지됨! 3단계로 전환합니다.");
     }
 }

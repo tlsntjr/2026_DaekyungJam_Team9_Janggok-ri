@@ -5,15 +5,15 @@ public class GhostPatrol : MonoBehaviour
 {
     private enum GhostState { Patrol, Suspect, Wait }
 
-    [Header("¼øÂû ¼³Á¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private float speed = 2f;
     private int currentTargetIndex = 0;
     private GhostState currentState = GhostState.Patrol;
     private Coroutine waitCoroutine;
 
-    [Header("AI ¼³Á¤")]
-    [SerializeField] private float hearRadius = 10f; // ±Í½ÅÀÇ Ã»°¢ ¹üÀ§
+    [Header("AI ï¿½ï¿½ï¿½ï¿½")]
+    [SerializeField] private float hearRadius = 10f; // ï¿½Í½ï¿½ï¿½ï¿½ Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void OnEnable() => EventBus.OnNoiseEmitted += HandleNoise;
     private void OnDisable() => EventBus.OnNoiseEmitted -= HandleNoise;
@@ -41,21 +41,24 @@ public class GhostPatrol : MonoBehaviour
 
     private void HandleNoise(Vector2 noisePos, float radius)
     {
-        // 1. ±Í½Å°ú ¼ÒÀ½ ¹ß»ý ÁöÁ¡ »çÀÌÀÇ °Å¸® °è»ê
+        // 1. ï¿½Í½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½
         float distance = Vector2.Distance(transform.position, noisePos);
 
-        // 2. Ã»°¢ ¹üÀ§ ³»¿¡ ÀÖÀ» ¶§¸¸ ¹ÝÀÀ
-        if (distance <= hearRadius)
+        // 2. ì†Œë¦¬ì˜ ë„ë‹¬ ë°˜ê²½(ì´ë²¤íŠ¸ radius)ê³¼ ìœ ë ¹ ì²­ê° ë°˜ê²½ ì¤‘ ì¢ì€ ìª½ìœ¼ë¡œ íŒì • â€”
+        //    ì´ë²¤íŠ¸ ë°˜ê²½ì„ ë¬´ì‹œí•˜ë©´ "ì¡°ê°œ ì†Œë¦¬ëŠ” ë°˜ê²½ 5ê¹Œì§€"ë¼ëŠ” ì„¤ê³„ê°€ ê¹¨ì ¸ì„œ
+        //    ë¡œê·¸(ë¬´ì‹œ)ì™€ ì‹¤ì œ í–‰ë™(ë°˜ì‘)ì´ ì–´ê¸‹ë‚˜ëŠ” ë¬¸ì œê°€ ìƒê¹€
+        float effectiveRadius = Mathf.Min(radius, hearRadius);
+        if (distance <= effectiveRadius)
         {
-            Debug.Log($"<color=cyan>[Ghost]</color> ¼ÒÀ½ °¨Áö! °Å¸®: {distance:F2}");
+            Debug.Log($"<color=cyan>[Ghost]</color> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½! ï¿½Å¸ï¿½: {distance:F2}");
 
             if (waitCoroutine != null) StopCoroutine(waitCoroutine);
             waitCoroutine = StartCoroutine(DistractionRoutine(noisePos));
         }
         else
         {
-            // ¹üÀ§ ¹ÛÀÌ¸é ¹«½Ã
-            Debug.Log($"<color=gray>[Ghost]</color> ³Ê¹« ¸Õ ¼Ò¸®¶ó ¹«½ÃÇÔ. °Å¸®: {distance:F2}");
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+            Debug.Log($"<color=gray>[Ghost]</color> ï¿½Ê¹ï¿½ ï¿½ï¿½ ï¿½Ò¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½Å¸ï¿½: {distance:F2}");
         }
     }
 
@@ -63,18 +66,18 @@ public class GhostPatrol : MonoBehaviour
     {
         currentState = GhostState.Suspect;
 
-        // 1. ¼ÒÀ½ ÁöÁ¡À¸·Î ÀÌµ¿
+        // 1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         while (Vector2.Distance(transform.position, targetPos) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             yield return null;
         }
 
-        // 2. 7ÃÊ°£ ´ë±â
+        // 2. 7ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½
         currentState = GhostState.Wait;
         yield return new WaitForSeconds(7.0f);
 
-        // 3. ¼øÂû º¹±Í
+        // 3. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         currentState = GhostState.Patrol;
     }
 }

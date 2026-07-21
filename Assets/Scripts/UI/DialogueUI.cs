@@ -15,8 +15,12 @@ public class DialogueUI : MonoBehaviour
     [Header("타이핑 이펙트")]
 	[SerializeField] private float charInterval = 0.03f;   // 한 글자당 간격(초)
 
+	[Header("자동 진행 — 타이핑 완료 후 이 시간이 지나면 자동으로 다음 줄/닫기 (0 = 수동 클릭만)")]
+	[SerializeField] private float autoAdvanceDelay = 2.2f;
+
 	[Header("선택지")]
 	[SerializeField] private GameObject choicePanel;
+	[SerializeField] private TMP_Text choiceQuestionText;   // 선택지 위에 표시할 질문/직전 대사 (비우면 스킵)
 	[SerializeField] private Button[] choiceButtons;   // 인스펙터에 최대 개수만큼 미리 배치
 	[SerializeField] private TMP_Text[] choiceLabels;
 
@@ -25,7 +29,11 @@ public class DialogueUI : MonoBehaviour
 	[SerializeField] private Image rapidPromptTimerFill;  // Image Type = Filled 로 설정
 	[SerializeField] private KeyCode cancelKey = KeyCode.Space;
 
+	[Header("Player")]
+	[SerializeField] private PlayerMovement playerMovement;
+
 	private Coroutine typingCoroutine;
+	private Coroutine autoAdvanceCoroutine;
 	private bool isTyping;
 	private string currentFullLine;
 
@@ -34,13 +42,26 @@ public class DialogueUI : MonoBehaviour
 	// 연속 대사(시퀀스) 상태
 	private readonly Queue<string> sequenceLines = new();
 	private Action sequenceCallback;
+	private Action<int> sequenceLineCallback;   // 각 줄 표시 순간 알림 (연출 훅)
+	private int sequenceLineIndex;
 
 	// 연속 팝업 발생 시 Queue로 처리
 	private readonly Queue<(float timeout, Action onSurvive, Action onFail)> rapidQueue = new();
 	private bool rapidRunning;
 
-	private void OnEnable()
+	private bool subscribed;
+
+	// 씬 로드 중 오브젝트별 Awake/OnEnable 순서는 보장되지 않아서,
+	// DialogueSystem.Instance가 아직 없을 때 OnEnable이 먼저 돌면 구독이 통째로 유실됨(대사 안 나옴) —
+	// OnEnable과 Start 양쪽에서 시도해 어느 순서로 로드되든 구독이 성립하게 함
+	private void OnEnable() => TrySubscribe();
+	private void Start() => TrySubscribe();
+
+	private void TrySubscribe()
 	{
+		if (subscribed || DialogueSystem.Instance == null) return;
+		subscribed = true;
+
 		DialogueSystem.Instance.OnShowLine				+= HandleShowLine;
 		DialogueSystem.Instance.OnShowSequence			+= HandleShowSequence;
 		DialogueSystem.Instance.OnShowChoice			+= HandleShowChoice;
@@ -50,10 +71,16 @@ public class DialogueUI : MonoBehaviour
 
 	private void OnDisable()
 	{
-		DialogueSystem.Instance.OnShowLine				-= HandleShowLine;
-		DialogueSystem.Instance.OnShowSequence			-= HandleShowSequence;
-		DialogueSystem.Instance.OnShowChoice			-= HandleShowChoice;
-		DialogueSystem.Instance.OnShowRapidPrompt	-= HandleShowRapidPrompt;
+		if (!subscribed) return;
+		subscribed = false;
+
+		if (DialogueSystem.Instance != null)
+		{
+			DialogueSystem.Instance.OnShowLine				-= HandleShowLine;
+			DialogueSystem.Instance.OnShowSequence			-= HandleShowSequence;
+			DialogueSystem.Instance.OnShowChoice			-= HandleShowChoice;
+			DialogueSystem.Instance.OnShowRapidPrompt	-= HandleShowRapidPrompt;
+		}
         lineClickCatcher.onClick.RemoveListener(AdvanceLine);
     }
 
@@ -66,6 +93,7 @@ public class DialogueUI : MonoBehaviour
 		linePanel.SetActive(true);
 		currentFullLine = line;
 
+		StopAutoAdvance();   // 새 줄이 시작되면 이전 자동 진행 타이머는 무효
 		if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 		typingCoroutine = StartCoroutine(TypeLine(line));
 	}
@@ -89,28 +117,43 @@ public class DialogueUI : MonoBehaviour
 
 		isTyping				= false;
 		typingCoroutine	= null;
+		StartAutoAdvance();   // 전체 출력 완료 — 자동 진행 타이머 시작
 	}
     
 	/// <summary>
 	/// 연속 대사 시작 — 첫 줄을 바로 출력하고, 이후 클릭마다 다음 줄로
 	/// </summary>
-	private void HandleShowSequence(string[] lines, Action onComplete)
+	private void HandleShowSequence(string[] lines, Action<int> onLineShown, Action onComplete)
 	{
 		sequenceLines.Clear();
 		if (lines != null)
 			foreach (var line in lines) sequenceLines.Enqueue(line);
 
 		sequenceCallback = onComplete;
+		sequenceLineCallback = onLineShown;
+		sequenceLineIndex = -1;
 
 		if (sequenceLines.Count > 0)
-			HandleShowLine(sequenceLines.Dequeue());
+		{
+			DialogueSystem.Instance.ReportSequenceActive(true);   // 기믹 안내 대사가 끼어들지 않게 표시
+			ShowNextSequenceLine();
+		}
 		else
 		{
 			// 빈 시퀀스 방어 — 콜백만 즉시 호출
 			var cb = sequenceCallback;
 			sequenceCallback = null;
+			sequenceLineCallback = null;
 			cb?.Invoke();
 		}
+	}
+
+	/// <summary>시퀀스의 다음 줄 표시 + 줄 번호 콜백 발화 (특정 줄 연출 훅)</summary>
+	private void ShowNextSequenceLine()
+	{
+		sequenceLineIndex++;
+		HandleShowLine(sequenceLines.Dequeue());
+		sequenceLineCallback?.Invoke(sequenceLineIndex);
 	}
 
 	/// <summary>
@@ -125,20 +168,53 @@ public class DialogueUI : MonoBehaviour
             typingCoroutine	= null;
             lineText.text			= currentFullLine;
             isTyping				= false;
+            StartAutoAdvance();   // 스킵으로 전체 출력된 경우에도 타이머 시작
         }
         else if (sequenceLines.Count > 0)
         {
-            HandleShowLine(sequenceLines.Dequeue());
+            StopAutoAdvance();
+            ShowNextSequenceLine();
         }
         else
         {
+            StopAutoAdvance();
             linePanel.SetActive(false);
+
+            DialogueSystem.Instance.ReportSequenceActive(false);
 
             var cb = sequenceCallback;
             sequenceCallback = null;
+            sequenceLineCallback = null;
             cb?.Invoke();
         }
     }
+
+	/// <summary>
+	/// 자동 진행 — 타이핑 완료 후 autoAdvanceDelay가 지나면 클릭 없이도 다음 줄/닫기.
+	/// 대사 종료 타이밍이 플레이어 손에 있으면 기믹 타이밍을 조작할 수 있어서(대사 띄워둔 채 이동 등) 도입.
+	/// </summary>
+	private void StartAutoAdvance()
+	{
+		if (autoAdvanceDelay <= 0f) return;
+		StopAutoAdvance();
+		autoAdvanceCoroutine = StartCoroutine(AutoAdvanceRoutine());
+	}
+
+	private void StopAutoAdvance()
+	{
+		if (autoAdvanceCoroutine != null)
+		{
+			StopCoroutine(autoAdvanceCoroutine);
+			autoAdvanceCoroutine = null;
+		}
+	}
+
+	private IEnumerator AutoAdvanceRoutine()
+	{
+		yield return new WaitForSeconds(autoAdvanceDelay);
+		autoAdvanceCoroutine = null;
+		AdvanceLine();
+	}
 
 
 	/// <summary>
@@ -146,10 +222,19 @@ public class DialogueUI : MonoBehaviour
 	/// </summary>
 	/// <param name="options">선택지 문장</param>
 	/// <param name="onSelect">클릭 시 콜백 함수 작성 필요</param>
-    private void HandleShowChoice(string[] options, Action<int> onSelect)
+    private void HandleShowChoice(string question, string[] options, Action<int> onSelect)
 	{
 		choicePanel.SetActive(true);
 		pendingChoiceCallback = onSelect;
+		SetMovementLocked(true);   // 선택하는 동안 이동 정지 — 선택이 끝나면 해제
+
+		// 질문/직전 대사 — 전달된 텍스트가 있으면 표시, 없으면 질문 칸 숨김 (기본값이 남는 문제 방지)
+		if (choiceQuestionText != null)
+		{
+			bool hasQuestion = !string.IsNullOrEmpty(question);
+			choiceQuestionText.gameObject.SetActive(hasQuestion);
+			if (hasQuestion) choiceQuestionText.text = question;
+		}
 
 		for (int i = 0; i < choiceButtons.Length; i++)
 		{
@@ -172,9 +257,31 @@ public class DialogueUI : MonoBehaviour
 	private void SelectChoice(int index)
 	{
 		choicePanel.SetActive(false);
+		SetMovementLocked(false);
+
 		var callback					= pendingChoiceCallback;
 		pendingChoiceCallback	= null;
 		callback?.Invoke(index);
+	}
+
+	/// <summary>
+	/// 선택지 동안 플레이어 이동 잠금/해제 — PlayerMovement는 Player 태그로 1회 탐색 후 캐시
+	/// </summary>
+	private void SetMovementLocked(bool locked)
+	{
+		if (playerMovement == null)
+		{
+			GameObject player = GameObject.FindWithTag("Player");
+			if (player != null) playerMovement = player.GetComponent<PlayerMovement>();
+			if (playerMovement == null)
+			{
+				Debug.LogWarning("[DialogueUI] Player 태그의 PlayerMovement를 찾지 못해 이동 잠금 실패");
+				return;
+			}
+		}
+
+		playerMovement.MovementLocked = locked;
+		Debug.Log($"<color=cyan>[DialogueUI]</color> 이동 잠금: {locked}");
 	}
 
 	/// <summary>

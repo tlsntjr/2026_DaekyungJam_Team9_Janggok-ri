@@ -1,18 +1,23 @@
 using UnityEngine;
 using System.Collections;
 
-// ÇÑ ¸öÀ¸·Î ÇÕÃ¼! IThreatBehavior¸¦ Á÷Á¢ ±¸ÇöÇÕ´Ï´Ù.
+// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼! IThreatBehaviorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 public class StalkerGhost : MonoBehaviour, IThreatBehavior
 {
-    [Header("ÀÌµ¿ ¹× ÃßÀû")]
+    [Header("ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public float speed = 3f;
+
+    [Header("ì²­ê° (ì†ŒìŒ ìœ ì¸ â€” ì¡°ê°œ íˆ¬ì²™ì˜ ëŒ€ìƒ)")]
+    [SerializeField] private float hearRadius = 12f;      // ì´ ìœ ë ¹ì´ ë“¤ì„ ìˆ˜ ìˆëŠ” ìµœëŒ€ ê±°ë¦¬
+    [SerializeField] private float lureDuration = 7f;     // ìœ ì¸ ì§€ì ì— ë¨¸ë¬´ëŠ” ì‹œê°„
+
     private Transform player;
     private Vector3? lureTarget = null;
     private Coroutine lureCoroutine;
     private bool isAtLure = false;
     private bool isActivated = false;
 
-    // ÀÎÅÍÆäÀÌ½º ±¸Çö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool IsNeutralized { get; private set; } = false;
 
     private void Start()
@@ -20,9 +25,30 @@ public class StalkerGhost : MonoBehaviour, IThreatBehavior
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
+    // ì†ŒìŒ ì´ë²¤íŠ¸ êµ¬ë… â€” ì´ê²Œ ì—†ìœ¼ë©´ OnNoiseDetectedë¥¼ ì•„ë¬´ë„ í˜¸ì¶œí•˜ì§€ ì•Šì•„
+    // ì¡°ê°œë¥¼ ë˜ì ¸ë„ ìœ ì¸ë˜ì§€ ì•Šê³  í”Œë ˆì´ì–´ë§Œ ì˜ì›íˆ ì«“ì•„ì˜¤ëŠ” ë²„ê·¸ê°€ ë¨
+    private void OnEnable()  => EventBus.OnNoiseEmitted += HandleNoise;
+    private void OnDisable() => EventBus.OnNoiseEmitted -= HandleNoise;
+
+    private void HandleNoise(Vector2 noisePos, float radius)
+    {
+        if (!isActivated || IsNeutralized) return;
+
+        // ì†Œë¦¬ì˜ ë„ë‹¬ ë°˜ê²½(ì´ë²¤íŠ¸)ê³¼ ìœ ë ¹ì˜ ì²­ê° ë°˜ê²½ ì¤‘ ì¢ì€ ìª½ìœ¼ë¡œ íŒì • â€”
+        // "ì¡°ê°œ ì†Œë¦¬ëŠ” ë°˜ê²½ 5ê¹Œì§€"ë¼ëŠ” ì†ŒìŒ ì„¤ê³„ê°€ ìœ ë ¹ì—ê²Œë„ ê·¸ëŒ€ë¡œ ì ìš©ë˜ê²Œ
+        float effectiveRadius = Mathf.Min(radius, hearRadius);
+        float distance = Vector2.Distance((Vector2)transform.position, noisePos);
+
+        if (distance <= effectiveRadius)
+        {
+            Debug.Log($"<color=cyan>[StalkerGhost]</color> ì†ŒìŒì— ìœ ì¸ë¨! ê±°ë¦¬: {distance:F1}");
+            OnNoiseDetected(noisePos);
+        }
+    }
+
     private void Update()
     {
-        // È°¼ºÈ­µÇÁö ¾Ê¾Ò°Å³ª ÆÄÈÑµÇ¾úÀ¸¸é ÀÌµ¿ÇÏÁö ¾ÊÀ½
+        // È°ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò°Å³ï¿½ ï¿½ï¿½ï¿½ÑµÇ¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (!isActivated || IsNeutralized) return;
 
         Vector3 destination = lureTarget ?? player.position;
@@ -45,29 +71,29 @@ public class StalkerGhost : MonoBehaviour, IThreatBehavior
         }
     }
 
-    // IThreatBehavior ÀÎÅÍÆäÀÌ½º ÇÊ¼ö ±¸Çö
+    // IThreatBehavior ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½Ê¼ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void Activate()
     {
         isActivated = true;
-        Debug.Log("<color=green>[GhostAI]</color> °¹¹ú ÆäÀÌÁî ½ÃÀÛ! ÃßÀû °³½Ã.");
+        Debug.Log("<color=green>[GhostAI]</color> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½! ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
     }
 
     public void Neutralize()
     {
         IsNeutralized = true;
-        Debug.Log("<color=yellow>[GhostAI]</color> ÆÄÈÑµÊ! Á¤Áö.");
+        Debug.Log("<color=yellow>[GhostAI]</color> ï¿½ï¿½ï¿½Ñµï¿½! ï¿½ï¿½ï¿½ï¿½.");
     }
 
     public void Tick() { }
     public void SetProgress(float t) { }
 
-    // ¼ÒÀ½ °¨Áö ÇÔ¼ö (¿ÜºÎ¿¡¼­ È£Ãâ)
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ (ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
     public void OnNoiseDetected(Vector3 noisePosition)
     {
         if (lureCoroutine != null) StopCoroutine(lureCoroutine);
         lureTarget = noisePosition;
         isAtLure = false;
-        lureCoroutine = StartCoroutine(LureTimer(7f));
+        lureCoroutine = StartCoroutine(LureTimer(lureDuration));
     }
 
     private IEnumerator LureTimer(float duration)
