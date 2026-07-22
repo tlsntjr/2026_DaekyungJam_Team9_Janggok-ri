@@ -30,6 +30,10 @@ public class SceneIntroDirector : MonoBehaviour
     [Header("인트로 독백 (한 칸 = 한 줄, 클릭으로 다음 줄. 비우면 즉시 페이드인만)")]
     [SerializeField, TextArea(2, 4)] private string[] introLines;
 
+    [Header("독백 캐릭터 일러스트 (비우면 스킵 — 독백 동안만 표시, 줄 번호로 표정 전환)")]
+    [SerializeField] private MonologuePortrait portrait;
+    [SerializeField] private PortraitCue[] portraitCues;   // 예: lineIndex 2 → 놀람. 비우면 기본 표정 고정
+
     [Header("독백 동안 재생할 루프 사운드 (발소리 등 — 비우면 스킵, 2D 이벤트 권장)")]
     [SerializeField] private EventReference ambientLoopSfx;
 
@@ -75,13 +79,23 @@ public class SceneIntroDirector : MonoBehaviour
         }
 
         if (introLines != null && introLines.Length > 0)
-            DialogueSystem.Instance.ShowSequence(introLines, () => StartCoroutine(AfterMonologueRoutine()));
+        {
+            if (portrait != null) portrait.Show(PortraitEmotion.Default);   // 독백 시작과 함께 등장
+
+            DialogueSystem.Instance.ShowSequence(introLines,
+                lineIndex => { if (portrait != null) portrait.ApplyCue(portraitCues, lineIndex); },
+                () => StartCoroutine(AfterMonologueRoutine()));
+        }
         else
+        {
             StartCoroutine(AfterMonologueRoutine());
+        }
     }
 
     private IEnumerator AfterMonologueRoutine()
     {
+        if (portrait != null) portrait.Hide();   // 일러스트는 독백과 함께 퇴장 — 페이드인 화면을 가리지 않게
+
         // 발소리 등 루프는 독백과 함께 끝남
         if (loopPlaying)
         {

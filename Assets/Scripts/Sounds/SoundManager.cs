@@ -12,7 +12,8 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
+        // 중복이면 "이 컴포넌트만" 제거 — 같은 오브젝트의 씬-로컬 매니저들을 같이 죽이지 않게
+        if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

@@ -1,16 +1,20 @@
 using UnityEngine;
 
 /* 
-	* ÀÚ±â ¹Ý°æ ¾È¿¡¼­ ¼ÒÀ½ÀÌ ¸î ¹ø ³µ´ÂÁö ¼¼´Â ÆÄÈÑ Á¶°Ç
-	* ¼Ò¸® ¹ÝÀÀÇØ¼­ ¿òÁ÷ÀÌ´Â °Ç ¸ó½ºÅÍ AI¿¡¼­ ±¸Çö
+	* ï¿½Ú±ï¿½ ï¿½Ý°ï¿½ ï¿½È¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	* ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AIï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 */
 public class DistractionCounter : MonoBehaviour, ICounterCondition
 {
-	[Header("¹ÝÀÀ ¹üÀ§")]
+	[Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
 	[SerializeField] private float hearRadius = 2.5f;
 
-	[Header("ÀÌ ÆäÀÌÁî¿¡¼­ ¼öÇàÇØ¾ß ÇÏ´Â È½¼ö")]
-	[SerializeField] private int requiredCount = 1;		// ÆäÀÌÁî º° ÇÊ¿äÇÑ Ä«¿îÆ®
+	[Header("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï´ï¿½ È½ï¿½ï¿½")]
+	[SerializeField] private int requiredCount = 1;		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®
+
+	[Header("ìœ ì¸ ì„±ê³µ ëŒ€ì‚¬ (ë¹„ìš°ë©´ ìŠ¤í‚µ)")]
+	[SerializeField, TextArea(2, 3)] private string lureLine = "ì¢‹ì•„, ì œëŒ€ë¡œ ë”°ëŒë ¸ì–´.";
+	[SerializeField, TextArea(2, 3)] private string finalLine = "";   // í•„ìš” íšŸìˆ˜ë¥¼ ì „ë¶€ ì±„ìš´ ìˆœê°„ (ë¹„ìš°ë©´ lureLine ê·¸ëŒ€ë¡œ)
 
 	int count;
 	public bool IsSatisfied => count >= requiredCount;
@@ -19,25 +23,30 @@ public class DistractionCounter : MonoBehaviour, ICounterCondition
 	void OnDisable() => EventBus.OnNoiseEmitted -= HandleNoise;
 
 	/// <summary>
-	/// ³ëÀÌÁî¿¡ ¹ÝÀÀ
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½î¿¡ ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
-	/// <param name="pos">³ëÀÌÁî ¹ß»ý À§Ä¡</param>
+	/// <param name="pos">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡</param>
 	/// <param name="radius">/param>
 	void HandleNoise(Vector2 pos, float radius)
 	{
 		if (Vector2.Distance(transform.position, pos) > hearRadius) return;
 		count++;
 
-        Debug.Log($"<color=orange>[DistractionCounter]</color> {gameObject.name}°¡ ¼ÒÀ½À» °¨ÁöÇß½À´Ï´Ù! ÇöÀç Ä«¿îÆ®: {count}/{requiredCount}");
+		// ìœ ì¸ ì„±ê³µ í”¼ë“œë°± â€” íŒŒí›¼ê°€ í†µí–ˆë‹¤ëŠ” í™•ì¸ ëŒ€ì‚¬ (ìŠ¤í† ë¦¬ ì‹œí€€ìŠ¤ ì§„í–‰ ì¤‘ì´ë©´ ë®ì§€ ì•Šê³  ìŠ¤í‚µ)
+		string line = (count >= requiredCount && !string.IsNullOrEmpty(finalLine)) ? finalLine : lureLine;
+		if (!string.IsNullOrEmpty(line) && DialogueSystem.Instance != null && !DialogueSystem.Instance.IsSequenceActive)
+			DialogueSystem.Instance.Show(line);
+
+        Debug.Log($"<color=orange>[DistractionCounter]</color> {gameObject.name}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½! ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®: {count}/{requiredCount}");
 
         if (count >= requiredCount)
         {
-            Debug.Log($"<color=green>[DistractionCounter]</color> {gameObject.name} ÆÄÈÑ Á¶°Ç ÃæÁ· ¿Ï·á (IsSatisfied = true)!");
+            Debug.Log($"<color=green>[DistractionCounter]</color> {gameObject.name} ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ (IsSatisfied = true)!");
         }
     }
 
 	/// <summary>
-	/// Ä«¿îÆ® ¸®¼Â
+	/// Ä«ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
 	public void ResetCount() => count = 0;
 }

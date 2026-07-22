@@ -13,7 +13,9 @@ public class DialogueSystem : MonoBehaviour
 
 	void Awake()
 	{
-		if (Instance != null) { Destroy(gameObject); return; }
+		// 씬 전환 후 살아남은 옛 인스턴스(DDOL 루트에 얹힌 경우)는 컴포넌트만 제거하고 현재 씬 것이 승계 —
+		// 기존 "먼저 온 놈이 새 것을 파괴" 방식은 옛 씬 참조를 든 좀비가 남아 씬 기능이 죽는 원인이었음
+		if (Instance != null && Instance != this) Destroy(Instance);
 		Instance = this;
 	}
 
@@ -23,6 +25,13 @@ public class DialogueSystem : MonoBehaviour
 	/// </summary>
 	public bool IsSequenceActive { get; private set; }
 	public void ReportSequenceActive(bool active) => IsSequenceActive = active;   // DialogueUI 전용
+
+	/// <summary>
+	/// 대화 UI(대사창·선택지)가 화면에 떠 있는가 — 투척 등 좌클릭 액션이
+	/// "대사 넘기기 클릭"을 오작동으로 받지 않도록 잠그는 용도. DialogueUI가 갱신.
+	/// </summary>
+	public bool IsDialogueOpen { get; private set; }
+	public void ReportDialogueOpen(bool open) => IsDialogueOpen = open;   // DialogueUI 전용
 
 	/// <summary>
 	/// 단순 대사 출력

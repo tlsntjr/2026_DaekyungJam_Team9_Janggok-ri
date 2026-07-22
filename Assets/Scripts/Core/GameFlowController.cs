@@ -31,7 +31,9 @@ public class GameFlowController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
+        // 중복이면 "이 컴포넌트만" 제거 — 오브젝트째 파괴하면 같은 오브젝트에 탄
+        // 씬-로컬 매니저들(대사·오염 등)까지 같이 죽어 씬 기능이 전멸함
+        if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

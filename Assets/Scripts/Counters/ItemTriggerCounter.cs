@@ -5,19 +5,14 @@ public class ItemTriggerCounter : MonoBehaviour, ICounterCondition
     private bool isSatisfied = false;
     public bool IsSatisfied => isSatisfied;
 
-    // [¼öÁ¤] ¾ÆÀÌÅÛÀÌ ºñÈ°¼ºÈ­µÉ ¶§(Áï, ÁÖ¿öÁú ¶§) ÀÚµ¿À¸·Î È£ÃâµÇ°Ô ÇÕ´Ï´Ù.
-    private void OnDisable()
-    {
-        // ¾ÀÀÌ Á¾·áµÇ´Â »óÈ²ÀÌ ¾Æ´Ñ, ½ÇÁ¦·Î °ÔÀÓ Áß¿¡ ºñÈ°¼ºÈ­µÉ ¶§¸¸ Ã³¸®
-        if (gameObject.scene.isLoaded)
-        {
-            SetSatisfied();
-        }
-    }
+    // ì£¼ì˜: ì˜ˆì „ì—” OnDisableì—ì„œ ìë™ ì¶©ì¡±í–ˆì§€ë§Œ, í˜ì´ì¦ˆ ë°°ì„ (enableOnStart/disableOnStartÂ·í† ê¸€ëŸ¬)ì´
+    // ì˜¤ë¸Œì íŠ¸ë¥¼ ê»ë‹¤ ì¼œëŠ” ê²ƒë§Œìœ¼ë¡œ "ì£¼ìš´ ê²ƒ"ìœ¼ë¡œ ì˜¤ì¸ë¼ í˜ì´ì¦ˆê°€ í†µì§¸ë¡œ ìŠ¤í‚µë˜ëŠ” ì‚¬ê³ ê°€ ìˆì—ˆìŒ.
+    // ì´ì œ ì¶©ì¡±ì€ ì‹¤ì œ íšë“ ìˆœê°„ Pickup.FinishPickupì´ SetSatisfied()ë¥¼ ì§ì ‘ í˜¸ì¶œí•  ë•Œë§Œ ì¼ì–´ë‚œë‹¤.
 
     public void SetSatisfied()
     {
-        if (isSatisfied) return; // Áßº¹ È£Ãâ ¹æÁö
+        if (isSatisfied) return; // ì¤‘ë³µ í˜¸ì¶œ ë°©ì§€
         isSatisfied = true;
+        Debug.Log($"<color=green>[ItemTriggerCounter]</color> {gameObject.name} íšë“ ì²˜ë¦¬ â€” ì¹´ìš´í„° ì¶©ì¡±");
     }
 }

@@ -37,7 +37,13 @@ public class SceneAmbience : MonoBehaviour
 
         instance = SoundManager.Instance.PlayLoop(ambience, transform);
         playing = true;
+
+        // EventReference.Path는 에디터 전용 프로퍼티 — 빌드에선 컴파일 에러가 나므로 반드시 가드
+#if UNITY_EDITOR
         Debug.Log($"<color=green>[SceneAmbience]</color> {gameObject.name}: 루프 재생 시작 ({ambience.Path})");
+#else
+        Debug.Log($"<color=green>[SceneAmbience]</color> {gameObject.name}: 루프 재생 시작");
+#endif
     }
 
     private void OnDestroy()

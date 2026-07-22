@@ -37,6 +37,10 @@ public class Throwable : MonoBehaviour
         // UI(대화창·버튼 등) 위를 클릭한 경우 — UI 조작이지 투척이 아님
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
+        // 대화 UI(대사창·선택지)가 떠 있는 동안은 전면 잠금 — 포인터가 UI 밖(화면 중앙 등)에 있어도
+        // "대사 넘기려는 클릭"이 투척으로 새는 것 방지. 위의 포인터 검사만으론 UI 밖 클릭이 뚫림
+        if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsDialogueOpen) return;
+
         // 팝업 폭풍 중엔 투척 잠금 — 더미 팝업은 클릭을 통과시키는 구조라 위 검사만으론 새어 들어옴
         if (PopupStormDirector.Instance != null && PopupStormDirector.Instance.IsActive) return;
 

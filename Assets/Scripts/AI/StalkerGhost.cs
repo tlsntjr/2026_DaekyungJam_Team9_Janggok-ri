@@ -9,7 +9,10 @@ public class StalkerGhost : MonoBehaviour, IThreatBehavior
 
     [Header("청각 (소음 유인 — 조개 투척의 대상)")]
     [SerializeField] private float hearRadius = 12f;      // 이 유령이 들을 수 있는 최대 거리
-    [SerializeField] private float lureDuration = 7f;     // 유인 지점에 머무는 시간
+    [SerializeField] private float lureDuration = 7f;     // 유인 지점에 머무는 시간 (stayAtLure가 켜져 있으면 무시)
+
+    [Header("유인되면 그 자리에 눌러앉음 — 추적 복귀 안 함 (조개껍데기를 갖고 노는 원혼 컨셉)")]
+    [SerializeField] private bool stayAtLure = false;
 
     private Transform player;
     private Vector3? lureTarget = null;
@@ -93,6 +96,11 @@ public class StalkerGhost : MonoBehaviour, IThreatBehavior
         if (lureCoroutine != null) StopCoroutine(lureCoroutine);
         lureTarget = noisePosition;
         isAtLure = false;
+
+        // 눌러앉기 모드 — 복귀 타이머를 걸지 않음. 유인 지점에 도착하면 영원히 머묾
+        // (새 소음이 나면 그쪽으로 다시 이동 — 조개를 쫓아다니는 그림 자체는 유지)
+        if (stayAtLure) return;
+
         lureCoroutine = StartCoroutine(LureTimer(lureDuration));
     }
 

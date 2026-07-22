@@ -27,7 +27,8 @@ public class PanicGlitchDirector : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
+        // 씬 전환 후 살아남은 옛 인스턴스는 컴포넌트만 제거하고 현재 씬 것이 승계 (DDOL 좀비 방지)
+        if (Instance != null && Instance != this) Destroy(Instance);
         Instance = this;
 
         Apply(0f);   // 에디터에서 머티리얼 에셋에 남은 이전 실행 값 청소

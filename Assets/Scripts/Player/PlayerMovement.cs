@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private Camera cam;								// 마우스 방향 계산용 (비우면 감속 비활성)
 
 	private Rigidbody2D rb;
+	private TerrainBarrier terrainBarrier;   // 통행 불가 지형(바다 등) 차단 — 없는 씬에서는 null로 무시됨
 	private Vector2 input;
 	private float speedMultiplier = 1f;
 	private float backpedalFactor = 1f;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		terrainBarrier = GetComponent<TerrainBarrier>();
 	}
 	private void OnEnable()	=> EventBus.OnContaminationStageChanged		+= HandleStage;
     private void OnDisable()	=> EventBus.OnContaminationStageChanged		-= HandleStage;
@@ -84,6 +86,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + input * (moveSpeed * speedMultiplier * backpedalFactor * TerrainMultiplier) * Time.fixedDeltaTime);
+		Vector2 delta = input * (moveSpeed * speedMultiplier * backpedalFactor * TerrainMultiplier) * Time.fixedDeltaTime;
+
+		// 통행 불가 지형(바다 등) 차단 — 물리 벽 대신 목적지 검사로 막는다 (밀려남·끼임 없음).
+		// 축을 따로 검사해서 물가에 비스듬히 밀어도 가능한 축으로는 미끄러지듯 계속 걸을 수 있다.
+		if (terrainBarrier != null && delta.sqrMagnitude > 0f)
+		{
+			Vector2 pos = rb.position;
+			if (delta.x != 0f && !terrainBarrier.CanStandAt(pos + new Vector2(delta.x, 0f))) delta.x = 0f;
+			if (delta.y != 0f && !terrainBarrier.CanStandAt(pos + new Vector2(0f, delta.y))) delta.y = 0f;
+			if (delta.x != 0f && delta.y != 0f && !terrainBarrier.CanStandAt(pos + delta)) delta.y = 0f;   // 모서리 대각 통과 방지
+		}
+
+		rb.MovePosition(rb.position + delta);
 	}
 }
