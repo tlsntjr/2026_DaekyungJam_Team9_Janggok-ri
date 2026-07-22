@@ -59,6 +59,13 @@ public class SoundManager : MonoBehaviour
     public void SetInstanceParam(EventInstance instance, string name, float value)
         => instance.setParameterByName(name, value);
 
+    // ---- 마스터 볼륨: 옵션 메뉴 전용 ----
+    public void SetMasterVolume(float volume)
+    {
+        RuntimeManager.StudioSystem.getBus("bus:/", out Bus masterBus);
+        masterBus.setVolume(Mathf.Clamp01(volume));
+    }
+
     // ---- ������: ���� ������, ContaminationHaze, Death �� ----
     public void SetSnapshot(EventReference snapshotEvt, bool on)
     {
