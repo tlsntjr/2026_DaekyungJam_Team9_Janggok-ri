@@ -25,6 +25,8 @@ public class PanicGlitchDirector : MonoBehaviour
     private float pulseDecaySpeed; // 단발 감쇠 속도 (강도/시간)
     private float appliedValue = -1f;   // 마지막으로 머티리얼에 쓴 값 (불필요한 SetFloat 방지)
 
+
+    private void OnEnable() => EventBus.OnContaminationStageChanged += HandleStageChanged;
     private void Awake()
     {
         // 씬 전환 후 살아남은 옛 인스턴스는 컴포넌트만 제거하고 현재 씬 것이 승계 (DDOL 좀비 방지)
@@ -39,7 +41,17 @@ public class PanicGlitchDirector : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
-    private void OnDisable() => Apply(0f);   // SetFloat 값은 에디터에서 에셋에 영구 저장되므로 원복
+    private void OnDisable()
+    {
+        EventBus.OnContaminationStageChanged -= HandleStageChanged;
+        Apply(0f);   // SetFloat 값은 에디터에서 에셋에 영구 저장되므로 원복
+    }
+   
+    private void HandleStageChanged(int level)
+    {
+        // 레벨이 높을 수록 더 강한 펄스
+        Pulse(0.1f * level);
+    }
 
     private void Update()
     {

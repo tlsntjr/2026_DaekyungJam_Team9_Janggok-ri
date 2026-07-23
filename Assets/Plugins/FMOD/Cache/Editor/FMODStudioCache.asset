@@ -527,6 +527,7 @@ MonoBehaviour:
   - {fileID: 8221880088370748768}
   - {fileID: -7761999152872484515}
   - {fileID: 7945431279678996701}
+  - {fileID: 1383650161790807203}
   EditorParameters:
   - {fileID: -1067132194200994385}
   - {fileID: 52817568281317721}
@@ -536,7 +537,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 3153589877191176158}
   cacheVersion: 131860
-  cacheTime: 639204287684524958
+  cacheTime: 639204371461648871
   SerializableEventsDict:
   - key: event:/Hallucination-2
     index: 0
@@ -606,6 +607,8 @@ MonoBehaviour:
     index: 32
   - key: event:/Generator-explode
     index: 33
+  - key: event:/Ghost-Movement
+    index: 34
 --- !u!114 &52817568281317721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,6 +707,33 @@ MonoBehaviour:
     Data2: 1225519174
     Data3: 92576669
     Data4: -520728336
+  Banks:
+  - {fileID: 6033385355981452395}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1383650161790807203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ghost-Movement
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ghost-Movement
+  Guid:
+    Data1: -949128119
+    Data2: 1222776420
+    Data3: -844429430
+    Data4: -604521264
   Banks:
   - {fileID: 6033385355981452395}
   IsStream: 0
@@ -833,10 +863,10 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639204287684524958
+  lastModified: 639204371461648871
   FileSizes:
   - Name: Desktop
-    Value: 2486
+    Value: 2538
   Exists: 1
 --- !u!114 &3433417034891031395
 MonoBehaviour:
@@ -1013,10 +1043,10 @@ MonoBehaviour:
   Path: Assets/Sounds/Footsteps/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639204287684524958
+  lastModified: 639204371461613719
   FileSizes:
   - Name: Desktop
-    Value: 3105984
+    Value: 3227424
   Exists: 1
 --- !u!114 &6283637051810307556
 MonoBehaviour:
