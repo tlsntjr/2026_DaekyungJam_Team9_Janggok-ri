@@ -13,10 +13,17 @@ public class HauntPhase
 	[Header("페이즈 카운터 조건 (페이즈 클리어)")]
 	public MonoBehaviour[] counterConditions;					// 위와 마찬가지, MonoBehaviour 이후 Convert
 
+	[Header("페이즈 시작 시 켜기 / 끄기 — 컨트롤러가 진입 순간 무조건 적용 (트리거·픽업에 기대지 않는 확정 배선)")]
+	public GameObject[] enableOnStart;		// 이 페이즈부터 존재해야 하는 것들 (씬에는 비활성으로 저장)
+	public GameObject[] disableOnStart;		// 이 페이즈부터 치울 것들 (이전 페이즈 전용 배치물 등)
+
 	[Header("옵션")]
 	public bool useDeadline;				// 타이머 사용 여부
 	public float deadlineDuration;		// 타이머 시간
 	public float contaminationPerSecondDuringDeadline;		// 시간 당 지속 피해량
+
+	[Header("상시 오염 — 데드라인과 무관하게 이 페이즈 동안 계속 상승 (0 = 없음. 요약서 '1분에 2%' = 0.00033)")]
+	public float passiveContaminationPerSecond;
 
 	// ===== 런타임 캐싱 =====
 	IThreatBehavior[] threats;
@@ -65,7 +72,19 @@ public class HauntController : MonoBehaviour
 	{
 		State = HauntState.Threatened;
 
-		foreach (var t in Current.Threats)
+        Debug.Log($"<color=magenta>[HauntController]</color> <b>====== {CurrentPhaseIndex + 1} 페이즈 (인덱스: {CurrentPhaseIndex}) 시작! ======</b>");
+
+		// 페이즈 확정 배선 — 진입 순간 무조건 적용. 앞 페이즈가 순식간에 넘어가도(조건 선충족 등)
+		// 모든 페이즈의 켜기/끄기가 순서대로 반드시 실행되므로 진행 오브젝트가 유실되지 않음
+		if (Current.enableOnStart != null)
+			foreach (var go in Current.enableOnStart)
+				if (go != null) go.SetActive(true);
+
+		if (Current.disableOnStart != null)
+			foreach (var go in Current.disableOnStart)
+				if (go != null) go.SetActive(false);
+
+        foreach (var t in Current.Threats)
 			t.Activate();
 
 		// 타이머 페이즈 -> 타이머 가동
@@ -80,6 +99,8 @@ public class HauntController : MonoBehaviour
 		EventBus.RaiseHauntPhaseAdvanced(definition.huntId, CurrentPhaseIndex);
 	}
 
+	private int emptyCounterWarnedPhase = -1;
+
 	private void Update()
 	{
 		if (State != HauntState.Threatened) return;
@@ -87,6 +108,21 @@ public class HauntController : MonoBehaviour
 		// 활성 위협 틱
 		foreach (var t in Current.Threats)
 			if (!t.IsNeutralized) t.Tick();
+
+		// 상시 오염 — "이 구역에 머무는 것 자체가 위험하다" (갯벌 등). 데드라인 타이머와 독립
+		if (Current.passiveContaminationPerSecond > 0f && ContaminationSystem.Instance != null)
+			ContaminationSystem.Instance.Add(Current.passiveContaminationPerSecond * Time.deltaTime);
+
+		// 카운터가 0개면(미등록 or ICounterCondition 미구현 컴포넌트가 필터링됨) 빈 배열 All()==true 로
+		// 페이즈가 시작 즉시 자동 클리어되는 함정 — 진행을 멈추고 경고만 남김
+		if (Current.Counters.Length == 0)
+		{
+			if (emptyCounterWarnedPhase != CurrentPhaseIndex)
+			{
+				emptyCounterWarnedPhase = CurrentPhaseIndex;
+			}
+			return;
+		}
 
 		// 파훼 조건 폴링 — 전부 만족하면 자동으로 다음 단계
 		if (Current.Counters.All(c => c.IsSatisfied))

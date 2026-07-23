@@ -12,12 +12,13 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
+        // ì¤‘ë³µì´ë©´ "ì´ ì»´í¬ë„ŒíŠ¸ë§Œ" ì œê±° â€” ê°™ì€ ì˜¤ë¸Œì íŠ¸ì˜ ì”¬-ë¡œì»¬ ë§¤ë‹ˆì €ë“¤ì„ ê°™ì´ ì£½ì´ì§€ ì•Šê²Œ
+        if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    // ---- ¿ø¼¦: ¹ß¼Ò¸®, ´øÁö±â, ÁÝ±â, Á¡ÇÁ½ºÄÉ¾î ½ºÆÃ µî ----
+    // ---- ï¿½ï¿½ï¿½ï¿½: ï¿½ß¼Ò¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ý±ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ----
     public void PlayOneShot(EventReference evt, Vector3 worldPos,
                              string localParam = null, float paramValue = 0f)
     {
@@ -26,14 +27,14 @@ public class SoundManager : MonoBehaviour
             instance.setParameterByName(localParam, paramValue); // ex) "Surface"
         instance.set3DAttributes(RuntimeUtils.To3DAttributes(worldPos));
         instance.start();
-        instance.release(); // Àç»ý ³¡³ª¸é ¾Ë¾Æ¼­ Á¤¸®µÊ
+        instance.release(); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
-    // ---- ·çÇÁ: ¾Úºñ¾ð½º, ±«¹° ±×¸£·· µî Áö¼ÓÀ½ ----
+    // ---- ï¿½ï¿½ï¿½ï¿½: ï¿½Úºï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ----
     public EventInstance PlayLoop(EventReference evt, Transform followTarget)
     {
         EventInstance instance = RuntimeManager.CreateInstance(evt);
-        RuntimeManager.AttachInstanceToGameObject(instance, followTarget); // À§Ä¡ ÀÚµ¿ ÃßÀû
+        RuntimeManager.AttachInstanceToGameObject(instance, followTarget); // ï¿½ï¿½Ä¡ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
         instance.start();
         activeLoops.Add(instance);
         return instance;
@@ -41,20 +42,31 @@ public class SoundManager : MonoBehaviour
 
     public void StopLoop(EventInstance instance, bool immediate = false)
     {
+        // ë¶€ì°©ëœ GameObjectê°€ íŒŒê´´(ì”¬ ì „í™˜ ë“±)ë˜ì–´ë„ íŽ˜ì´ë“œì•„ì›ƒì´ ëê¹Œì§€ ìž¬ìƒë˜ë„ë¡
+        // ì •ì§€ ì „ì— ë¶„ë¦¬ â€” ì•ˆ í•˜ë©´ ëŸ°íƒ€ìž„ì´ ë¶€ì°© ì •ë¦¬ ê³¼ì •ì—ì„œ íŽ˜ì´ë“œë¥¼ ìž˜ë¼ë²„ë¦´ ìˆ˜ ìžˆìŒ
+        RuntimeManager.DetachInstanceFromGameObject(instance);
+
         instance.stop(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         instance.release();
         activeLoops.Remove(instance);
     }
 
-    // ---- Àü¿ª ÆÄ¶ó¹ÌÅÍ: Contamination ¡¤ Region ¡¤ ThreatState ¡¤ RoomSize ----
+    // ---- ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½: Contamination ï¿½ï¿½ Region ï¿½ï¿½ ThreatState ï¿½ï¿½ RoomSize ----
     public void SetGlobalParam(string name, float value)
         => RuntimeManager.StudioSystem.setParameterByName(name, value);
 
-    // ---- ÀÎ½ºÅÏ½º ÆÄ¶ó¹ÌÅÍ: Occlusion (·çÇÁº°·Î µ¶¸³µÈ °ª) ----
+    // ---- ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½: Occlusion (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½) ----
     public void SetInstanceParam(EventInstance instance, string name, float value)
         => instance.setParameterByName(name, value);
 
-    // ---- ½º³À¼¦: ±¸¿ª ¸®¹öºê, ContaminationHaze, Death µî ----
+    // ---- ë§ˆìŠ¤í„° ë³¼ë¥¨: ì˜µì…˜ ë©”ë‰´ ì „ìš© ----
+    public void SetMasterVolume(float volume)
+    {
+        RuntimeManager.StudioSystem.getBus("bus:/", out Bus masterBus);
+        masterBus.setVolume(Mathf.Clamp01(volume));
+    }
+
+    // ---- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ContaminationHaze, Death ï¿½ï¿½ ----
     public void SetSnapshot(EventReference snapshotEvt, bool on)
     {
         string key = snapshotEvt.Guid.ToString();

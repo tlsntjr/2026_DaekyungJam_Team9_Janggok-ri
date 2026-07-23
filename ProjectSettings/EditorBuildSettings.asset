@@ -6,7 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/SCENE_TITLE.unity
+    guid: 0771ca5faaca9de44beafdd835a65f45
+  - enabled: 1
+    path: Assets/Scenes/SCENE_HOME.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/SCENE_MUDFLAT.unity
+    guid: b898fd5bdd800db419a2d528a61352bc
+  - enabled: 1
+    path: Assets/Scenes/SCENE_FISH_FARM.unity
+    guid: 370258c1b821d834bab508dc07e17abe
+  - enabled: 1
+    path: Assets/Scenes/SCENE_END.unity
+    guid: 970eda211f4aac744b19309e787926f3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -1,19 +1,19 @@
 using UnityEngine;
 
 /// <summary>
-/// ¿À¿°µµ °ü·Ã ½Ã½ºÅÛ ÃÑ°ıÇÏ´Â Å¬·¡½º
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class ContaminationSystem : MonoBehaviour
 {
     public static ContaminationSystem Instance { get; private set; }
 
-    [Header("´Ü°èº° ÀÓ°è°ª")]
-    [SerializeField] private float stage1 = 0.3f;   // ½Ã¾ß Á¦ÇÑ
-    [SerializeField] private float stage2 = 0.6f;   // È¯°¢¡¤Á¡ÇÁ½ºÄÉ¾î
-    [SerializeField] private float stage3 = 0.9f;   // ÀÌµ¿ ÀúÇÏ¡¤¿ÜÇü º¯È­
+    [Header("ï¿½Ü°èº° ï¿½Ó°è°ª")]
+    [SerializeField] private float stage1 = 0.3f;   // ï¿½Ã¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float stage2 = 0.6f;   // È¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½
+    [SerializeField] private float stage3 = 0.9f;   // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­
 
-    [Header("ÀÚ¿¬ »ó½Â")]
-    [SerializeField] private float passiveGainPerSecond = 0.001f;     // ½Ã°£ ´©Àû
+    [Header("ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½")]
+    [SerializeField] private float passiveGainPerSecond = 0.001f;     // ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private float value;
     private int currentStage;
@@ -23,7 +23,8 @@ public class ContaminationSystem : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
+        // ì”¬ ì „í™˜ í›„ ì‚´ì•„ë‚¨ì€ ì˜› ì¸ìŠ¤í„´ìŠ¤ëŠ” ì»´í¬ë„ŒíŠ¸ë§Œ ì œê±°í•˜ê³  í˜„ì¬ ì”¬ ê²ƒì´ ìŠ¹ê³„ (DDOL ì¢€ë¹„ ë°©ì§€)
+        if (Instance != null && Instance != this) Destroy(Instance);
         Instance = this;
     }
 
@@ -34,9 +35,9 @@ public class ContaminationSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿À¿°µµ ¿¬»ê ÇÔ¼ö
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     /// </summary>
-    /// <param name="amount">¿À¿°µµ, À½¼ö Çã¿ë</param>
+    /// <param name="amount">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½</param>
     public void Add(float amount)
     {
         float before = value;
@@ -57,9 +58,21 @@ public class ContaminationSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇöÀç ¿À¿°µµ ´Ü°è ¹İÈ¯
+    /// ì˜¤ì—¼ë„ ì™„ì „ ì´ˆê¸°í™” â€” ì‚¬ë§ í›„ ì¬ì‹œì‘/ë©”ì¸ ë³µê·€ ì‹œ í˜¸ì¶œ.
+    /// (ì´ ì‹œìŠ¤í…œì€ ì”¬ì„ ë„˜ì–´ ìœ ì§€ë˜ë¯€ë¡œ, ë¦¬ì…‹ ì—†ì´ ì”¬ë§Œ ë¦¬ë¡œë“œí•˜ë©´ ì˜¤ì—¼ 100%ì¸ ì±„ ì‹œì‘í•´ ì¦‰ì‹œ ë˜ ì‚¬ë§í•¨)
     /// </summary>
-    /// <param name="v">ÇöÀç ¿À¿°µµ</param>
+    public void ResetAll()
+    {
+        value = 0f;
+        currentStage = 0;
+        EventBus.RaiseContaminationChanged(value);
+        EventBus.RaiseContaminationStageChanged(currentStage);
+    }
+
+    /// <summary>
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½ï¿½È¯
+    /// </summary>
+    /// <param name="v">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
     /// <returns></returns>
     private int CalculateStage(float v)
     {

@@ -1,31 +1,24 @@
 using UnityEngine;
 
-/// ¸Ç Ã³À½À¸·Î µ¹¸®±â
+/// <summary>
+/// ì €ì¥ ëª¨ë¸: ë§¨ ì²˜ìŒë¶€í„° ë‹¤ì‹œ.
+/// â€» ì‚¬ë§ ì‹œ ìë™ ë¦¬ë¡œë“œëŠ” DeathDirectorê°€ ì£¼ë„í•˜ëŠ” ê²ƒìœ¼ë¡œ ë³€ê²½ë¨ â€”
+///   ì—¬ê¸°ì„œ OnPlayerDeathë¥¼ ì§ì ‘ êµ¬ë…í•˜ë©´ ì‚¬ë§ ëª¨ì…˜/UIê°€ ë‚˜ì˜¤ê¸° ì „ì— ì”¬ì´ ë¦¬ë¡œë“œë˜ë¯€ë¡œ ì œê±°.
+/// </summary>
 public class RestartSaveModel : MonoBehaviour, ISaveModel
 {
-    [SerializeField] string startSceneName = "Main";
+    [SerializeField] string startSceneName = "SCENE_INTRO";
 
-    void OnEnable()     => EventBus.OnPlayerDeath   += HandleDeath;
-    void OnDisable()    => EventBus.OnPlayerDeath   -= HandleDeath;
-
-    /// <summary>
-    /// »ç¸Á½Ã Ã³¸®
-    /// </summary>
-    private void HandleDeath() => RestoreOnDeath();
-
-    /// <summary>
-    /// Progress ÀúÀå X, ¸¸¾à ³ªÁß¿¡ ¼öÁ¤µÉ °æ¿ì ´ëºñ Interface ¿ì¼± ±¸Çö
-    /// </summary>
     public void SaveProgress() { }
 
     /// <summary>
-    /// »ç¸Á ÀÌÈÄ Àç½ÃÀÛ
+    /// ì²˜ìŒë¶€í„° ì¬ì‹œì‘ (DeathDirectorì˜ 'ë©”ì¸ìœ¼ë¡œ' ë²„íŠ¼ ë“±ì—ì„œ í˜¸ì¶œ)
     /// </summary>
-    public void RestoreOnDeath() => SceneFlow.Instance.FadeAndLoad(startSceneName);
+    public void RestoreOnDeath()
+    {
+        ObjectiveSystem.ClearAll();   // ìŠ¤í† ë¦¬ í”Œë˜ê·¸ëŠ” ì”¬ì„ ë„˜ì–´ ìœ ì§€ë˜ë¯€ë¡œ, ì²˜ìŒë¶€í„° ë‹¤ì‹œ ê°ˆ ë• ëª…ì‹œì ìœ¼ë¡œ ì´ˆê¸°í™”
+        SceneFlow.Instance.FadeAndLoad(startSceneName);
+    }
 
-    /// <summary>
-    /// ÇöÀç Ã¼Å©Æ÷ÀÎÆ® Scene ÀÌ¸§
-    /// </summary>
-    /// <returns></returns>
     public string GetCheckpoint() => startSceneName;
 }

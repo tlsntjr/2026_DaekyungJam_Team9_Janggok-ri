@@ -14,6 +14,7 @@ public static class EventBus
 	// ===== AI 및 소음 =====
 	public static event Action<string, int> OnThreatStateChanged;			// 플레이어 위험 상태 체크 (string -> 괴담 id, int -> 경계 레벨 0/1/2)
 	public static event Action<Vector2, float> OnNoiseEmitted;				// 던지기, 뛰기, 발전기 발동 등 소음 발생 (Vector2 -> 발생 위치, float -> radius)
+	public static event Action<Vector2, bool> OnMonsterScreamed;			// 크리쳐 괴성 (Vector2 -> 발원지, bool -> 대형 괴성 여부: 광폭 진입 등 1회성 연출)
 
 	// ===== 목표 진행 =====
 	public static event Action<string> OnObjectiveFlagSet;						// 목표 달성을 위한 오브젝트 획득 (string -> 목표 id)
@@ -21,17 +22,19 @@ public static class EventBus
 	// ===== 플레이어 사망 =====
 	public static event Action OnPlayerDeath;										// 플레이어 사망
 
-    /* 
+
+	/* 
 	 * Raise 호출 선언부 
 	 * 액션 호출은 하기 Raise문을 이용하여 호출해주세요 !!
 	 */
 
-    public static void RaiseContaminationChanged(float v)			=> OnContaminationChanged?.Invoke(v);
-    public static void RaiseContaminationStageChanged(int s)		=> OnContaminationStageChanged?.Invoke(s);
-    public static void RaiseHauntPhaseAdvanced(string id, int p)	=> OnHauntPhaseAdvanced?.Invoke(id, p);
-    public static void RaiseHauntCleared(string id)						=> OnHauntCleared?.Invoke(id);
-    public static void RaiseThreatStateChanged(string id, int s)		=> OnThreatStateChanged?.Invoke(id, s);
-    public static void RaiseNoiseEmitted(Vector2 pos, float r)		=> OnNoiseEmitted?.Invoke(pos, r);
-    public static void RaiseObjectiveFlagSet(string id)					=> OnObjectiveFlagSet?.Invoke(id);
-    public static void RaisePlayerDeath()									=> OnPlayerDeath?.Invoke();
+	public static void RaiseContaminationChanged(float v)			=> OnContaminationChanged?.Invoke(v);
+	public static void RaiseContaminationStageChanged(int s)		=> OnContaminationStageChanged?.Invoke(s);
+	public static void RaiseHauntPhaseAdvanced(string id, int p)	=> OnHauntPhaseAdvanced?.Invoke(id, p);
+	public static void RaiseHauntCleared(string id)						=> OnHauntCleared?.Invoke(id);
+	public static void RaiseThreatStateChanged(string id, int s)		=> OnThreatStateChanged?.Invoke(id, s);
+	public static void RaiseNoiseEmitted(Vector2 pos, float r)		=> OnNoiseEmitted?.Invoke(pos, r);
+	public static void RaiseObjectiveFlagSet(string id)					=> OnObjectiveFlagSet?.Invoke(id);
+	public static void RaisePlayerDeath()									=> OnPlayerDeath?.Invoke();
+	public static void RaiseMonsterScreamed(Vector2 pos, bool isMajor = false)	=> OnMonsterScreamed?.Invoke(pos, isMajor);	// 기본값 false — 기존 호출부(매 돌진 텔레그래프)는 그대로 동작
 }
