@@ -313,6 +313,16 @@ MonoBehaviour:
         Data3: 254921400
         Data4: -1411546845
       Path: event:/Mud-Footstep
+  - layer:
+      serializedVersion: 2
+      m_Bits: 67108864
+    footstepEvent:
+      Guid:
+        Data1: -892242576
+        Data2: 1092066524
+        Data3: -1558596480
+        Data4: 1195148486
+      Path: event:/Pipe-walk
   floorMask:
     serializedVersion: 2
     m_Bits: 1572864

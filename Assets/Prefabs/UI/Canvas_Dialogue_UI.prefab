@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4714308018322292870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 0.68235296}
+  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1153,6 +1153,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1194790118599907736}
+  - {fileID: 3013719707909127741}
   - {fileID: 4714308018322292870}
   - {fileID: 5832909429316447397}
   - {fileID: 4542621337527260403}
@@ -1243,7 +1244,9 @@ MonoBehaviour:
   lineText: {fileID: 3648628140441284556}
   lineClickCatcher: {fileID: 6438344913879563103}
   charInterval: 0.03
+  autoAdvanceDelay: 2.2
   choicePanel: {fileID: 1766886466668797751}
+  choiceQuestionText: {fileID: 0}
   choiceButtons:
   - {fileID: 8017394930054230750}
   - {fileID: 3634900420932405099}
@@ -1255,6 +1258,7 @@ MonoBehaviour:
   rapidPromptPanel: {fileID: 7968363505974320160}
   rapidPromptTimerFill: {fileID: 0}
   cancelKey: 32
+  playerMovement: {fileID: 0}
 --- !u!114 &3518059819713335883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,6 +1518,115 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &6710217792346000757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3013719707909127741}
+  - component: {fileID: 4555152242581605541}
+  - component: {fileID: 437093652442497078}
+  - component: {fileID: 2981826420503111371}
+  - component: {fileID: 3654246017747431543}
+  m_Layer: 0
+  m_Name: Portrait
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3013719707909127741
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710217792346000757}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9083657396648860076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 491, y: -3}
+  m_SizeDelta: {x: 600, y: 800}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4555152242581605541
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710217792346000757}
+  m_CullTransparentMesh: 1
+--- !u!114 &437093652442497078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710217792346000757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5202587090557462837, guid: 47a2de292d189c248abd26ee42ae2938, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2981826420503111371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710217792346000757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37e7b20a8fa7e544be5c735618c4297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonologuePortrait
+  image: {fileID: 437093652442497078}
+  group: {fileID: 3654246017747431543}
+  defaultSprite: {fileID: 2284639639805891294, guid: 0e3ad72c32ff7ca48890aad6452057a0, type: 3}
+  surprisedSprite: {fileID: -8803772983354058290, guid: 21fe5899ed272b24c93b141412097594, type: 3}
+  dizzySprite: {fileID: -5202587090557462837, guid: 47a2de292d189c248abd26ee42ae2938, type: 3}
+  fadeDuration: 0.35
+  punchScale: 1.05
+  punchDuration: 0.18
+--- !u!225 &3654246017747431543
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710217792346000757}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7870455080489678564
 GameObject:
   m_ObjectHideFlags: 0

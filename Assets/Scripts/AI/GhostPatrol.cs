@@ -15,6 +15,9 @@ public class GhostPatrol : MonoBehaviour
     [Header("AI ����")]
     [SerializeField] private float hearRadius = 10f; // �ͽ��� û�� ����
 
+    [Header("유인되면 그 자리에 눌러앉음 — 순찰 복귀 안 함 (조개껍데기를 갖고 노는 원혼 컨셉)")]
+    [SerializeField] private bool stayAtLure = false;
+
     private void OnEnable() => EventBus.OnNoiseEmitted += HandleNoise;
     private void OnDisable() => EventBus.OnNoiseEmitted -= HandleNoise;
 
@@ -73,11 +76,17 @@ public class GhostPatrol : MonoBehaviour
             yield return null;
         }
 
-        // 2. 7�ʰ� ���
         currentState = GhostState.Wait;
-        yield return new WaitForSeconds(7.0f);
 
-        // 3. ���� ����
+        // 눌러앉기 모드 — 유인된 자리에서 영원히 머묾 (조개껍데기 공기놀이에 정신이 팔린 원혼)
+        if (stayAtLure)
+        {
+            Debug.Log("<color=cyan>[Ghost]</color> 유인 지점에 눌러앉음 — 순찰 복귀 안 함");
+            yield break;
+        }
+
+        // 7초 머문 뒤 순찰 복귀 (기본 동작)
+        yield return new WaitForSeconds(7.0f);
         currentState = GhostState.Patrol;
     }
 }

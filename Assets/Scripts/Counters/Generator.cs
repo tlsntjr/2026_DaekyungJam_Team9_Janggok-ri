@@ -11,7 +11,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
 	private bool isPowerOn = false;
 	public bool IsSatisfied => isPowerOn;
-	public string Prompt => isPowerOn ? "�̹� ������" : "������ ����";
+	public string Prompt => isPowerOn ? "이미 활성화됨" : "발전기 가동";
 	public string InteractKey => "E";
 
 	[Header("������ ����")]
@@ -23,6 +23,9 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 	[SerializeField] private EventReference generatorSuccess;
 	[SerializeField] private EventReference generatorLoop;
 	[SerializeField] private EventReference generatorFailed;
+
+	[Header("시동 성공 대사 (비우면 스킵 — 발전기마다 다르게: 1번 '하나로는 부족한가...', 2번 '안테나가 살아났다...')")]
+	[SerializeField, TextArea(2, 3)] private string poweredOnLine;
 
 	[Header("2�� ������ ���� ���")]
 	[SerializeField] private float hideTimeRequired = 5f;
@@ -47,9 +50,7 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 
 		if (timingMinigame != null)
 		{
-			timingMinigame.OnMinigameComplete		+= StartGeneratorSequence;
-			timingMinigame.OnFailurePenalty			+= HandleFailurePenalty;
-			int requiredCount									= (generatorID == 1) ? 2 : 4;
+			int requiredCount = (generatorID == 1) ? 2 : 4;
 			timingMinigame.SetTargetSuccessCount(requiredCount);
 		}
 
@@ -58,6 +59,18 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 			GameObject playerObj = GameObject.FindWithTag("Player");
 			if (playerObj != null)
 				playerMovement = playerObj.GetComponent<PlayerMovement>();
+		}
+	}
+
+	// 구독은 OnEnable에서 — Awake 구독은 페이즈 배선(enableOnStart 등)으로 오브젝트가
+	// 껐다 켜질 때 OnDisable이 해제한 구독이 영영 복구되지 않아,
+	// 미니게임 4/4 완료가 허공에 발사되는(시동·대사 무반응) 문제가 있었음
+	private void OnEnable()
+	{
+		if (timingMinigame != null)
+		{
+			timingMinigame.OnMinigameComplete	+= StartGeneratorSequence;
+			timingMinigame.OnFailurePenalty		+= HandleFailurePenalty;
 		}
 	}
 
@@ -90,7 +103,6 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 	{
 		if (isPowerOn || isWorking || isInterrupted)
 		{
-			Debug.LogWarning($"[Generator] ��ȣ�ۿ� �Ұ� ����. PowerOn:{isPowerOn}, Working:{isWorking}, Interrupted:{isInterrupted}");
 			return;
 		}
 
@@ -125,7 +137,6 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 			}
 
 			isInterrupted = false;
-			Debug.Log("<color=green>[Generator 2 ���� ����]</color> �θ� ����(Patrol) ������ ���� Ȯ�εǾ� ���� ���� �����ϰ� �����մϴ�.");
 
 			if (DialogueSystem.Instance != null)
 			{
@@ -222,6 +233,16 @@ public class Generator : MonoBehaviour, IInteractable, ICounterCondition
 			SoundManager.Instance.PlayOneShot(generatorSuccess, transform.position);
 
 		EventBus.RaiseNoiseEmitted((Vector2)transform.position, noiseRadius);
+
+		// 시동 성공 대사 — 발전기별로 스토리 비트를 실어 나름 (스토리 시퀀스 진행 중이면 덮지 않고 스킵)
+		if (!string.IsNullOrEmpty(poweredOnLine) && DialogueSystem.Instance != null)
+		{
+			if (DialogueSystem.Instance.IsSequenceActive)
+				Debug.LogWarning($"[Generator {generatorID}] 시동 대사 스킵 — IsSequenceActive가 켜져 있음. " +
+					"시퀀스가 안 도는데도 이 경고가 나오면 플래그가 꼬인 것 (어떤 시퀀스가 닫히지 않았는지 추적 필요)");
+			else
+				DialogueSystem.Instance.Show(poweredOnLine);
+		}
 
 		// 시동 이후로는 계속 웅웅거리는 루프 — 추가 Noise 방출 없이 배경음으로만 재생
 		if (!generatorLoop.IsNull)

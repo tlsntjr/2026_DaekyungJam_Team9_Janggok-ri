@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf06214a9658c6459a54ff91905faa8, type: 3}
   m_Name: Recorder
   m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
-  itemId: Recorder
+  itemId: recorder
   displayName: 
   description: 
   icon: {fileID: 0}

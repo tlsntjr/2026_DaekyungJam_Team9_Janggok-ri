@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{b6f868c8-5b82-4cfe-a482-526ed211d699}">
+		<property name="assetPath">
+			<value>metal-walk-2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.76800000000000002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{47760c97-4d07-429b-a251-1c7a78593d1a}</destination>
+		</relationship>
+	</object>
+</objects>

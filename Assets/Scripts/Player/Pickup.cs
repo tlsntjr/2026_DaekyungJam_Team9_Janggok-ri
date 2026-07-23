@@ -72,6 +72,11 @@ public class Pickup : MonoBehaviour, IInteractable
     /// </summary>
     private void FinishPickup()
     {
+        // 획득 카운터 명시 충족 — 비활성화(OnDisable)에 기대면 페이즈 배선이 오브젝트를 껐다 켤 때도
+        // 획득으로 오인되므로, 실제 획득 순간에만 직접 호출 (hideAfterPickup=false 유지형도 커버됨)
+        var counter = GetComponent<ItemTriggerCounter>();
+        if (counter != null) counter.SetSatisfied();
+
         foreach (var target in activateOnPickup)
             if (target != null) target.SetActive(true);
 

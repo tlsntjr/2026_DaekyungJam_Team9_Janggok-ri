@@ -54,7 +54,12 @@ public class DialogueUI : MonoBehaviour
 	// 씬 로드 중 오브젝트별 Awake/OnEnable 순서는 보장되지 않아서,
 	// DialogueSystem.Instance가 아직 없을 때 OnEnable이 먼저 돌면 구독이 통째로 유실됨(대사 안 나옴) —
 	// OnEnable과 Start 양쪽에서 시도해 어느 순서로 로드되든 구독이 성립하게 함
-	private void OnEnable() => TrySubscribe();
+	private void OnEnable()
+	{
+		TrySubscribe();
+		EventBus.OnPlayerDeath += HandlePlayerDeath;
+	}
+
 	private void Start() => TrySubscribe();
 
 	private void TrySubscribe()
@@ -71,6 +76,8 @@ public class DialogueUI : MonoBehaviour
 
 	private void OnDisable()
 	{
+		EventBus.OnPlayerDeath -= HandlePlayerDeath;
+
 		if (!subscribed) return;
 		subscribed = false;
 
@@ -88,9 +95,18 @@ public class DialogueUI : MonoBehaviour
 	/// 단순 대사 출력
 	/// </summary>
 	/// <param name="line">대사 출력</param>
+	/// <summary>대사창/선택지 표시 상태를 DialogueSystem에 보고 — 투척 등 좌클릭 액션 잠금용</summary>
+	private void ReportOpenState()
+	{
+		if (DialogueSystem.Instance != null)
+			DialogueSystem.Instance.ReportDialogueOpen(
+				(linePanel != null && linePanel.activeSelf) || (choicePanel != null && choicePanel.activeSelf));
+	}
+
 	private void HandleShowLine(string line)
 	{
 		linePanel.SetActive(true);
+		ReportOpenState();
 		currentFullLine = line;
 
 		StopAutoAdvance();   // 새 줄이 시작되면 이전 자동 진행 타이머는 무효
@@ -109,9 +125,24 @@ public class DialogueUI : MonoBehaviour
 		isTyping			= true;
 		lineText.text		= "";
 
-		foreach (char c in line)
+		int i = 0;
+		while (i < line.Length)
 		{
-			lineText.text += c;
+			// 리치 텍스트 태그(<color=...>, </color> 등)는 통째로 한 번에 붙임 —
+			// 한 글자씩 찍으면 미완성 태그("<colo")가 파싱되지 못하고 그대로 화면에 보임
+			if (line[i] == '<')
+			{
+				int close = line.IndexOf('>', i);
+				if (close >= 0)
+				{
+					lineText.text += line.Substring(i, close - i + 1);
+					i = close + 1;
+					continue;   // 태그는 타이핑 간격을 소비하지 않음 (보이지 않는 글자니까)
+				}
+			}
+
+			lineText.text += line[i];
+			i++;
 			yield return new WaitForSeconds(charInterval);
 		}
 
@@ -125,6 +156,17 @@ public class DialogueUI : MonoBehaviour
 	/// </summary>
 	private void HandleShowSequence(string[] lines, Action<int> onLineShown, Action onComplete)
 	{
+		// 진행 중이던 시퀀스를 새 시퀀스가 덮을 때 — 이전 완료 콜백을 유실하지 않고 먼저 발화.
+		// 콜백에 페이즈 진행(FinishPickup·CompleteHaunt 등)이 걸려 있으면 유실 시 진행이 영구 정지됨
+		if (sequenceCallback != null)
+		{
+			Debug.LogWarning("[DialogueUI] 시퀀스가 끝나기 전에 새 시퀀스가 시작됨 — 이전 완료 콜백을 먼저 발화하고 교체");
+			var orphaned = sequenceCallback;
+			sequenceCallback = null;
+			sequenceLineCallback = null;
+			orphaned.Invoke();
+		}
+
 		sequenceLines.Clear();
 		if (lines != null)
 			foreach (var line in lines) sequenceLines.Enqueue(line);
@@ -179,6 +221,7 @@ public class DialogueUI : MonoBehaviour
         {
             StopAutoAdvance();
             linePanel.SetActive(false);
+            ReportOpenState();
 
             DialogueSystem.Instance.ReportSequenceActive(false);
 
@@ -188,6 +231,37 @@ public class DialogueUI : MonoBehaviour
             cb?.Invoke();
         }
     }
+
+	/// <summary>
+	/// 사망 시 대화 UI 전체 강제 종료 — 대사창(전면 클릭 캐처)·선택지·연속 팝업이 남아 있으면
+	/// 사망 화면의 버튼 클릭을 가로채는 문제 방지.
+	/// 진행 중이던 시퀀스 완료 콜백은 발화하지 않고 폐기 — 사망 후 페이즈 진행이 이어지면 안 됨
+	/// (재시작 시 RestartSaveModel이 상태를 복원하므로 여기서 흐름을 이을 이유가 없다).
+	/// </summary>
+	private void HandlePlayerDeath()
+	{
+		StopAllCoroutines();   // 타이핑·자동 진행·연속 팝업 코루틴 전부 정지
+		typingCoroutine = null;
+		autoAdvanceCoroutine = null;
+		isTyping = false;
+		rapidRunning = false;
+		rapidQueue.Clear();
+
+		sequenceLines.Clear();
+		sequenceCallback = null;
+		sequenceLineCallback = null;
+		pendingChoiceCallback = null;
+
+		if (linePanel != null) linePanel.SetActive(false);
+		if (choicePanel != null) choicePanel.SetActive(false);
+		if (rapidPromptPanel != null) rapidPromptPanel.SetActive(false);
+		ReportOpenState();
+
+		if (DialogueSystem.Instance != null)
+			DialogueSystem.Instance.ReportSequenceActive(false);
+
+		SetMovementLocked(false);   // 선택지 도중 사망 시 이동 잠금이 유령처럼 남지 않게
+	}
 
 	/// <summary>
 	/// 자동 진행 — 타이핑 완료 후 autoAdvanceDelay가 지나면 클릭 없이도 다음 줄/닫기.
@@ -225,6 +299,7 @@ public class DialogueUI : MonoBehaviour
     private void HandleShowChoice(string question, string[] options, Action<int> onSelect)
 	{
 		choicePanel.SetActive(true);
+		ReportOpenState();
 		pendingChoiceCallback = onSelect;
 		SetMovementLocked(true);   // 선택하는 동안 이동 정지 — 선택이 끝나면 해제
 
@@ -257,6 +332,7 @@ public class DialogueUI : MonoBehaviour
 	private void SelectChoice(int index)
 	{
 		choicePanel.SetActive(false);
+		ReportOpenState();
 		SetMovementLocked(false);
 
 		var callback					= pendingChoiceCallback;

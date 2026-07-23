@@ -12,7 +12,8 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
+        // 중복이면 "이 컴포넌트만" 제거 — 같은 오브젝트의 씬-로컬 매니저들을 같이 죽이지 않게
+        if (Instance != null && Instance != this) { Destroy(this); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -57,6 +58,13 @@ public class SoundManager : MonoBehaviour
     // ---- �ν��Ͻ� �Ķ����: Occlusion (�������� ������ ��) ----
     public void SetInstanceParam(EventInstance instance, string name, float value)
         => instance.setParameterByName(name, value);
+
+    // ---- 마스터 볼륨: 옵션 메뉴 전용 ----
+    public void SetMasterVolume(float volume)
+    {
+        RuntimeManager.StudioSystem.getBus("bus:/", out Bus masterBus);
+        masterBus.setVolume(Mathf.Clamp01(volume));
+    }
 
     // ---- ������: ���� ������, ContaminationHaze, Death �� ----
     public void SetSnapshot(EventReference snapshotEvt, bool on)
