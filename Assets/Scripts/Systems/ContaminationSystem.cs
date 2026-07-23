@@ -54,7 +54,14 @@ public class ContaminationSystem : MonoBehaviour
         }
 
         if (value >= 1f)
+        {
+            // 녹음기 보유 중 오염도 100% 도달 — 인면어 전용 사망 연출(RecorderFishDeathScare)이
+            // OnPlayerDeath보다 먼저 준비할 수 있도록 먼저 발화
+            if (InventorySystem.Instance != null && InventorySystem.Instance.Has("recorder"))
+                EventBus.RaiseKilledByFish();
+
             EventBus.RaisePlayerDeath();
+        }
     }
 
     /// <summary>

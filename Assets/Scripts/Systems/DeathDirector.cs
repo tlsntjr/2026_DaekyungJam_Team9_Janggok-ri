@@ -38,6 +38,13 @@ public class DeathDirector : MonoBehaviour
 	[SerializeField] private float uiDelay						= 2f;						// 사망 모션을 보여줄 시간
 
 	private bool handled;   // 중복 사망 이벤트 가드
+	private float? panelDelayOverride;   // 설정되면 uiDelay 대신 이 값을 사용 (특정 사망 연출 재생시간에 정확히 맞출 때)
+
+	/// <summary>
+	/// 사망 UI를 uiDelay 대신 정확히 이 시간(초) 후에 띄움 — 다른 사망 연출(예: 인면어 클로즈업)의
+	/// 재생시간에 맞춰 딱 끝나고 바로 UI가 뜨게 할 때 사용. HandleDeath보다 먼저 호출돼야 함.
+	/// </summary>
+	public void OverridePanelDelay(float seconds) => panelDelayOverride = seconds;
 
 	private void OnEnable()
 	{
@@ -91,7 +98,8 @@ public class DeathDirector : MonoBehaviour
 			yield return null;
 		}
 
-		yield return new WaitForSeconds(Mathf.Max(0f, uiDelay - lightFadeDuration));
+		float delay = panelDelayOverride ?? uiDelay;
+		yield return new WaitForSeconds(Mathf.Max(0f, delay - lightFadeDuration));
 		if (deathPanel != null) deathPanel.SetActive(true);
 	}
 

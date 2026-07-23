@@ -44,6 +44,11 @@ public class HideAndSeekCall : MonoBehaviour, IThreatBehavior
     [SerializeField] private EventReference callSfx;     // 부름 (아이들 목소리 — 3D, 원혼 위치감)
     [SerializeField] private EventReference caughtSfx;   // 들켰을 때 스팅
 
+    [Header("처벌 연출 — 규칙 위반(대답함) / 들킴 공통")]
+    [SerializeField] private float penaltyShakeDuration = 0.3f;
+    [SerializeField] private float penaltyShakeMagnitude = 0.25f;
+    [SerializeField, Range(0f, 1f)] private float penaltyGlitchStrength = 0.6f;
+
     [Header("수색 동안 위협 레벨 — 심장박동(ThreatState 파라미터)·추격 BGM 연동 (huntId 비우면 스킵)")]
     [SerializeField] private string huntId = "mudflat_call";   // 실제 몬스터 huntId와 겹치지만 않으면 됨
     [SerializeField] private int seekThreatLevel = 2;          // 2 이상이면 심장박동·추격 BGM 발동
@@ -124,6 +129,7 @@ public class HideAndSeekCall : MonoBehaviour, IThreatBehavior
         if (!choseSafe)
         {
             ContaminationSystem.Instance.Add(answeredPenalty);
+            PlayPenaltyEffect();
             if (!caughtSfx.IsNull)
                 SoundManager.Instance.PlayOneShot(caughtSfx, transform.position);
             Debug.Log("<color=red>[HideAndSeekCall]</color> 대답함 — 오염 스파이크");
@@ -153,6 +159,7 @@ public class HideAndSeekCall : MonoBehaviour, IThreatBehavior
         else
         {
             ContaminationSystem.Instance.Add(caughtPenalty);
+            PlayPenaltyEffect();
             if (!caughtSfx.IsNull)
                 SoundManager.Instance.PlayOneShot(caughtSfx, transform.position);
             if (!string.IsNullOrEmpty(caughtLine))
@@ -162,6 +169,13 @@ public class HideAndSeekCall : MonoBehaviour, IThreatBehavior
 
         // 수색 종료 — 위협 해제 (심장이 잦아듦, FMOD 파라미터 Seek Speed가 잔향을 만듦)
         SetSeekThreat(false);
+    }
+
+    /// <summary>처벌 순간 화면 흔들림 + 글리치 펄스 — 규칙 위반/들킴 둘 다 공통으로 사용</summary>
+    private void PlayPenaltyEffect()
+    {
+        CameraShake.Instance.Shake(penaltyShakeDuration, penaltyShakeMagnitude);
+        PanicGlitchDirector.Instance.Pulse(penaltyGlitchStrength);
     }
 
     /// <summary>수색 구간 위협 레벨 on/off — 중복 발화 방지 가드 포함</summary>

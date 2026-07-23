@@ -21,6 +21,7 @@ public static class EventBus
 
 	// ===== 플레이어 사망 =====
 	public static event Action OnPlayerDeath;										// 플레이어 사망
+	public static event Action OnKilledByFish;										// 녹음기 보유 중 오염도 100% 도달로 사망 — 인면어 전용 사망 연출용 (OnPlayerDeath 직전에 발화됨)
 
 
 	/* 
@@ -36,5 +37,6 @@ public static class EventBus
 	public static void RaiseNoiseEmitted(Vector2 pos, float r)		=> OnNoiseEmitted?.Invoke(pos, r);
 	public static void RaiseObjectiveFlagSet(string id)					=> OnObjectiveFlagSet?.Invoke(id);
 	public static void RaisePlayerDeath()									=> OnPlayerDeath?.Invoke();
+	public static void RaiseKilledByFish()									=> OnKilledByFish?.Invoke();
 	public static void RaiseMonsterScreamed(Vector2 pos, bool isMajor = false)	=> OnMonsterScreamed?.Invoke(pos, isMajor);	// 기본값 false — 기존 호출부(매 돌진 텔레그래프)는 그대로 동작
 }
