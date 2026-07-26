@@ -107,7 +107,7 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 # 문서는 Notion에서 관리 — 로컬엔 남기되 git 추적 안 함
-*.md
+# *.md
 
 # FMOD Studio project — 순수 캐시만 무시. Build/(뱅크 산출물)는 팀원이 FMOD Studio 없이도
 # 소리를 듣게 하려고 일부러 추적함(git pull만으로 재생 가능해야 함)
