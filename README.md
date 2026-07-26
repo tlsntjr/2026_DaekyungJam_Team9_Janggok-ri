@@ -1,7 +1,6 @@
 # 2026 대경잼 9팀 <장곡리>
 > 팀원들과 함께 진행한 팀 프로젝트에서 **본인이 직접 개발하고 기여한 핵심 기능**을 정리한 페이지입니다.
-> - **[게임 빌드 파일]** https://github.com/tlsntjr/2026_DaekyungJam_Team9_Janggok-ri/releases/download/v1.0/Janggok-
-ri_Build.zip
+> - **[게임 빌드 파일]** https://github.com/tlsntjr/2026_DaekyungJam_Team9_Janggok-ri/releases/download/v1.0/Janggok-ri_Build.zip
 > - **[게임 플레이 영상]** https://youtu.be/4SbFuzi69AM
 ---
 
